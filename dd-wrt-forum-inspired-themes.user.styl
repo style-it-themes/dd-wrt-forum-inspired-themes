@@ -1,0 +1,1076 @@
+/* ==UserStyle==
+@name           DD-WRT Forum Inspired Themes
+@namespace      github.com/style-it-themes/dd-wrt-forum-inspired-themes
+@description    Customizable dark themes for the DD-WRT phpBB forums
+@author         Style-it Themes: the-j0k3r
+@homepageURL    https://github.com/style-it-themes/dd-wrt-forum-inspired-themes
+@supportURL     https://github.com/style-it-themes/dd-wrt-forum-inspired-themes/issues/new/choose
+@updateURL      https://github.com/style-it-themes/dd-wrt-forum-inspired-themes/raw/main/dd-wrt-forum-inspired-themes.user.styl
+@version        0.0.0
+@license        MIT
+@preprocessor stylus
+
+@var checkbox sdetails     'Show style details'     0
+
+@var select   cg_theme     'Preset themes toggle'   {
+
+    'Custom colors   *' :  'custom-style'  ,
+    'Dracula          ' :  'dracula'       ,
+    'Duo Cocoa        ' :  'duo-cocoa'     ,
+    'Material         ' :  'material'      ,
+    'Material Darker  ' :  'material-dkr'  ,
+    'Solarized Dark   ' :  'solarized-dark',
+    'Twilight         ' :  'twilight'      ,
+    'The Matrix       ' :  'the-matrix'    ,
+    'Ubuntu           ' :  'ubuntu'        ,
+}
+
+@var color    cg_bg        'Custom background       ' #111a22
+@var color    cg_fg        'Custom foreground       ' #f2f4ff
+@var color    cg_ac        'Custom accent           ' #4f74e3
+
+@var range    cg_sat       'Saturation of RGB colors' [0, -50, 40, 0.01]
+@var range    cg_lig       'Lightness of gray colors' [0, -30, 30, 0.01]
+
+@var checkbox custom_font  'Enable  font overrides  ' 0
+@var checkbox avatar_soh   'Avatar on hover scale   ' 1
+@var checkbox hide_hsl     'Show hotspot logos      ' 1
+
+@var text     f_ui         'UI font                 ' ''font_name''
+@var text     f_mono       'Monospace font          ' ''font_name''
+@var text     b_hgwd       'Checkbox width/height   ' '.88rem'
+@var text     transition   'Define transition value ' 'all 0.2s cubic-bezier( 0.3, 0, 0.5, 1)'
+
+==/UserStyle== */
+// Helpers.
+rq        = unquote
+stinfo    = 'DD-WRT Forum Inspired Themes v0.0.0'
+copyright = '© 2021 Style-it-themes: the-j0k3r'
+license   = 'MIT'
+homeURL   = 'https://github.com/style-it-themes/dd-wrt-inspired-themes'
+t         = transparent
+i         = !important
+vendors   = official
+
+// Convert colors to HSLA format.
+// NOTE: This is done just for consistency of generated colors.
+to_hsla(input) {
+  $h = {}
+  $h.hue = rq(split('deg', '%s' % ceil(hue(input), 2))[0])
+  $h.saturation = ceil(saturation(input), 2)
+  $h.lightness = ceil(lightness(input), 2)
+  s('hsla(%s,%s,%s,1)', $h.hue, $h.saturation, $h.lightness)
+}
+
+// SVG-friendly colors mixin.
+// NOTE: Compiler does not like HSLA format, so we convert back to HEX.
+to_svg(input) {
+  s('\%23%s', rq(substr(s('%s', convert(input)), 1, 6)))
+}
+
+// Color mixin.
+// All colors: `c: fg bd bg`
+// Only border-color: `c: 0 bd`
+c(x, y = 0, z = 0, xi = 1, yi = 1, zi = 1) {
+  if x != 0 && x != '_' {            color: xi is 0 ? x : x i }
+  if y != 0 && y != '_' {     border-color: yi is 0 ? y : y i }
+  if z != 0 && z != '_' { background-color: zi is 0 ? z : z i }
+}
+
+// SVG colors.
+g(x, y = 0, xi = 1, yi = 1) {
+  if x != 0 && x != '_' {   fill: xi is 0 ? x : x i }
+  if y != 0 && y != '_' { stroke: yi is 0 ? y : y i }
+}
+
+// Border radius mixin.
+r() { border-radius: arguments }
+
+// Box-shadow mixin.
+b() { box-shadow: arguments }
+
+// Color generator.
+// NOTE: Fix the scope to avoid conflicts.
+/{
+  // Generator -> Color-schemes.
+  ColorSchemes = {
+    'custom-style'   : { BG:   cg_bg, FG:   cg_fg, AC:   cg_ac }
+    'dracula'        : { BG: #282A36, FG: #f8f8f2, AC: #bd93f9 }
+    'duo-cocoa'      : { BG: #28231f, FG: #ffdac2, AC: #dfb249 }
+    'material'       : { BG: #263238, FG: #eeffff, AC: #82aaff }
+    'material-dkr'   : { BG: #212121, FG: #eeffff, AC: #82aaff }
+    'solarized-dark' : { BG: #002b36, FG: #fdf6e3, AC: #268bd2 }
+    'twilight'       : { BG: #141414, FG: #f7f7f7, AC: #8f9d6a }
+    'the-matrix'     : { BG: #000000, FG: #ffffff, AC: #00ff00 }
+    'ubuntu'         : { BG: #2c071a, FG: #f2f1ef, AC: #ef7847 }
+  }
+
+  // Select active color-scheme.
+  for color-scheme in ColorSchemes {
+    if (color-scheme == cg_theme) {
+      define('BG', ColorSchemes[color-scheme].BG, global)
+      define('FG', ColorSchemes[color-scheme].FG, global)
+      define('AC', ColorSchemes[color-scheme].AC, global)
+    }
+  }
+
+  // Color values and hues.
+  // NOTE: List with anonymous hashes.
+  colors = (
+    { key: bg, color:   BG } \
+    { key: fg, color:   FG } \
+    { key: v0, color:   AC } \
+    { key: v1, hue:   0deg } \
+    { key: v2, hue:  30deg } \
+    { key: v3, hue:  60deg } \
+    { key: v4, hue: 120deg } \
+    { key: v5, hue: 180deg } \
+    { key: v6, hue: 210deg } \
+    { key: v7, hue: 270deg } \
+    { key: v8, hue: 300deg } \
+    { key: v9, hue:   0deg } \
+  )
+
+  // Alias colors.
+  $bg = colors[0]
+  $fg = colors[1]
+
+  // Generate background colors.
+  for num in 0..5 {
+    $color = $bg.color
+    if num == 1 {} // Skip base BG color.
+    else if num == 0 { $color = darken($color, 10%) }
+    else { $color = lighten($color, (num + 2) * num / 2%) }
+    $color = to_hsla($color)
+
+    $key = s('%s%s', $bg.key, num)
+    $val = 'var(--%s-%s)' % (($bg.key) (num))
+    define('$' + $key, $color, global)
+    define('' + $key, $val, global)
+  }
+
+  // Generate foreground colors.
+  for num in 0..5 {
+    $color = $fg.color
+    if num == 1 {} // Skip base FG color.
+    else if num == 0 { $color = lighten($color, 10%) }
+    else { $color = darken($color, (num + num / 1.25) * 5%) }
+
+    $color = to_hsla($color)
+
+    $key = s('%s%s', $fg.key, num)
+    $val = 'var(--%s-%s)' % (($fg.key) (num))
+    define('$' + $key, $color, global)
+    define('' + $key, $val, global)
+  }
+
+  // Generate all other colors.
+  for c, i in colors[2..length(colors)] {
+    $sel  = colors[i + 2]
+
+    for num in 0..9 {
+      // Case for accent colors.
+      if ($sel.key == v0) {
+        $color = darken($sel.color, (80% - ((num + num / 3) * 7.5)))
+        $color = darken($sel.color, (100% - (num + 3) * 7.5))
+        $color = lightness($color, lightness($color) + num)
+      }
+
+      // Case for gray colors.
+      else if ($sel.key == v9) {
+        $color = hsl($sel.hue, 0%, 50% + cg_lig)
+        $color = darken($color, (100% - (num + 2) * 17))
+      }
+
+      // Case for RGB colors.
+      else {
+        $hue   = $sel.hue
+        $color = hsl($hue, 60% + cg_sat, 60% + cg_lig)
+        $color = darken($color, (100% - (num + 2) * 7.5))
+        $color = lightness($color, lightness($color) + num)
+      }
+
+      // Convert to HSLA format.
+      $color = to_hsla($color)
+
+      $key = s('%s%s', $sel.key, num)
+      $val = 'var(--%s-%s)' % (($sel.key) (num))
+      define('$' + $key, $color, global)
+      define(''  + $key, $val, global)
+    }
+  }
+}
+@-moz-document regexp('https?://forum.dd-wrt.com.*(/.*)?') {
+  // global section triggers and variables
+  :root {
+    // show style name/version/copyright
+    // when inspecting the code or using compiled CSS this info is auto added now.
+    --style-name: rq(stinfo)
+    --copyright: rq(copyright)
+    --license: rq(license)
+    --home-url : rq(homeURL)
+
+    // Generate CSS color variables.
+    colors = (bg fg v0 v1 v2 v3 v4 v5 v6 v7 v8 v9)
+    for color in colors[0..1] {
+      for tone in 0..5 {
+        { '--%s-%s' % ((color) (tone)) }: $ + color + tone
+      }
+    }
+    for color in colors[2..length(colors)] {
+      for tone in 0..9 {
+        { '--%s-%s' % ((color) (tone)) }: $ + color + tone
+      }
+    }
+    // remap generated accent colors + keep v09 as 1:1 AC
+    shade = (dark(BG)) ? darken : lighten
+
+    --v0-0: mix(shade(BG,  0%), AC, 90%)
+    --v0-1: mix(shade(BG, 40%), AC, 80%)
+    --v0-2: mix(shade(BG, 40%), AC, 70%)
+    --v0-3: mix(shade(BG, 40%), AC, 60%)
+    --v0-4: mix(shade(BG, 65%), AC, 50%)
+    --v0-5: mix(shade(BG, 50%), AC, 40%)
+    --v0-6: mix(shade(BG, 50%), AC, 30%)
+    --v0-7: mix(shade(BG, 50%), AC, 20%)
+    --v0-8: mix(shade(BG, 50%), AC, 10%)
+    --v0-9: mix(shade(BG, 50%), AC, 0%)
+
+    // rgba BG/AC vars
+    --rgba-bg-03: rgba(convert($bg1), .3)
+
+    $font_family_1 = Arial, Verdana, 'Bitstream Vera Sans', Helvetica, sans-serif
+    $font_family_2 = inherit
+    $font_family_3 = sans-serif
+    $font_family_4 = monospace
+    $font_family_5 = Verdana, Arial, 'Bitstream Vera Sans', Helvetica, sans-serif
+  }
+  #menu_sub a {
+    transition: background .2s ease-in
+  }
+
+  input[name="add_attachment_box"] {
+    margin-left: -6rem
+  }
+  /form {
+      &[action*="profile_sec"] {
+      // hide broken shit theres no avatars provided.
+      .block > table > tbody > tr:nth-child(41) > td > span:last-child,
+      input[name="avatargallery"] {
+        display: none
+      }
+      // fix avatar delete checkbox align and tweak margins
+      input[type="checkbox"][name="avatardel"] {
+        vertical-align: middle
+      }
+      img[src*="images/avatars/"] {
+        margin-bottom: .4rem
+        &:hover {
+          margin-bottom: 2rem
+        }
+      }
+      // end
+      textarea[name="signature"] {
+        max-width: 500px i
+        width: 500px i
+        height: 200%
+        resize: vertical i
+        margin-left: .3rem
+      }
+      &[action*="privmsg"], &[action*="posting_sec"] {
+        /input.liteoption[name="add_attachment"] {
+          margin-top: 4.3rem
+          margin-left: -17.06rem
+          position: absolute
+        }
+      }
+      &[action="posting_sec.php"] {
+        table[width="450"] {
+          /tr[valign="middle"][align="center"] {
+            text-align: left
+          }
+          /textarea[rows="15"][style*="width"][wrap="virtual"] {
+            width: 770px i
+            max-width: @width
+            resize: vertical
+          }
+        }
+      }
+    }
+  }
+  #footer {
+    border-top: 1px solid bg5
+    div:first-of-type::after {
+      content: '- Styled with: ' + stinfo i
+      text-shadow: 3px solid v98 i
+      color: v68
+    }
+  }
+  //style pm's
+  form[action="privmsg.php?folder=inbox"] {
+    table[width="100%"][cellspacing="1"][cellpadding="4"] td.row1[colspan="3"][valign="top"] {
+      c: 0 0 bg0
+      padding: .3rem
+    }
+  }
+  .info {
+    td[width="100%"] {
+      background: bg1 i
+      padding: .4rem .1rem i
+    }
+    td[valign="top"][nowrap="nowrap"] {
+      background: bg1 i
+      padding: .6rem .4rem i
+    }
+  }
+}
+@-moz-document regexp('https?://forum.dd-wrt.com.*(/.*)?') {
+  body {
+    background: bg0
+    color: v98
+    box-sizing: border-box
+  }
+  // fix image in forums flying out of bounds
+  // efing ff fix it upstream too
+  .attachtable[width="95%"] img[src*="files"] {
+    width: 95% i
+  }
+  #content {
+    font-size: 12px
+    line-height: 1.4em
+    table[width="928"] {
+      width: 970px
+    }
+    #menu_forum {
+      // when not sicky make it same bg color
+      padding: 8px 0
+      background: bg2
+      border-color: bg4
+      border-top-left-radius: 4px
+      border-top-right-radius: 4px
+      li a {
+        color: v98
+        border-radius: 4px;
+        border: solid 1px v04
+        background: v02
+        span { color: v98 }
+        &:hover {
+          background-image: linear-gradient(v05, v06)
+          border-color: v08
+        }
+      }
+      .active {
+        background-image: linear-gradient(v05, v06)
+        border-color: v08
+      }
+    }
+    .infolink a {
+      color: v98
+      line-height: 1.4em
+      transition: .1s ease-in-out
+      background: 0
+      font-size: 14px
+      // hide login top link in quicklinks because thisgoes to some ancient dumb page
+      // e.g. https://forum.dd-wrt.com/phpBB2/login.php
+      &[href*="login"] {
+        display: none
+      }
+      &::before {
+        content: '\27B2\00A0'
+        color: v99
+        font-size: 12px
+        margin-left: -.2rem
+      }
+      &:hover {
+        color: v09
+        text-decoration: none
+      }
+    }
+    fieldset {
+      .row1 { background: bg1 }
+      .row2 {
+        background: bg2
+        td[bgcolor="#FFFFFF"] {
+          background: v44
+          border-color: v03
+        }
+      }
+      th {
+        background: bg3
+        border: 1px solid bg0
+        border-bottom-color: bg5
+        padding: .5rem .8rem
+      }
+      td {
+        &[width="40%"][valign="top"][nowrap="nowrap"][align="left"] {
+          .gensmall a[href*="watch=topic"] {
+            font-size: 12px
+            position: absolute
+            background: v04
+            color: v98
+            padding: .2rem .5rem
+            r: 4px
+            text-decoration: none
+            &:hover {
+              background: v05
+              color: v99
+            }
+          }
+          .gensmall a[href*="unwatch=topic"] {
+            font-size: 12px
+            position: absolute
+            background: v14
+            color: v98
+            padding: .2rem .5rem
+            r: 4px
+            text-decoration: none
+            &:hover {
+              background: v15
+              color: v99
+            }
+          }
+        }
+      }
+    }
+    h2 {
+      a {
+        color: v98
+        padding-top: 1rem
+        &:hover {
+          color: v09
+        }
+      }
+    }
+    #forum_content {
+      /iframe[width="930"] {
+        width: 967px
+        margin: auto 0
+        border-color: v05
+        r: 4px
+      }
+      td {
+        a[href*="viewtopic"] {
+          img[src*="latest_reply"] {
+            height: 10px
+            width: 22px
+
+          }
+        }
+      }
+    }
+    // https://forum.dd-wrt.com/phpBB2/login.php
+    #menu_forum {
+      .active span {
+          background: none
+          background-image: linear-gradient(v05, v06)
+          border-color: v08
+          color: v98
+          padding: 2px 20px 4px 0
+      }
+      li a {
+        &:hover span {
+          background: none
+          background-image: linear-gradient(v05, v06)
+          border-color: v08
+          color: v98
+        }
+        span { padding: 2px 20px 4px 0 }
+      }
+    }
+  }
+  #header_wrap {
+    background-color: bg0
+  }
+
+  // https://forum.dd-wrt.com/phpBB2/login.php
+  #header  {
+    #logo {
+      filter: invert(1) hue-rotate(180deg) brightness(.9)
+      mix-blend-mode: lighten
+    }
+    #menu_main {
+      // hide for now.
+      display: none
+      .active a {
+        background: t
+        span {
+          background: t
+        }
+      }
+      a:hover {
+        background: none
+        span {
+            background: none
+        }
+      }
+    }
+  }
+  // https://forum.dd-wrt.com/phpBB2/login.php
+  .forum {
+    #header {
+      background: bg0
+      #header_ads {
+        margin: 0
+        height: 0
+        border: 0
+      }
+      #menu_areas {
+        // hide in // https://forum.dd-wrt.com/phpBB2/login.php
+        display: none
+        li a {
+          color: v98
+          &:hover span { background: #f07100 }
+        }
+        .active a {
+          background: #f07100
+          border: solid 1px #efa03b
+          border-radius: 4px
+          color: v99
+          padding: 0px 2px 0px 2px
+          span {
+            background: #f07100
+          padding: 0px 2px 0px 2px
+          }
+        }
+      }
+    }
+    // https://forum.dd-wrt.com/phpBB2/login.php
+    #content:not([style]) {
+      #quick_links {
+        position: absolute
+        top: 285px
+        z-index: 1
+      }
+    }
+  }
+  .forum #content {
+    h2 {
+      color: v97
+      border-bottom: solid 1px bg4
+    }
+    .catHead a {
+      color: v97
+    }
+    #quick_links {
+      // wider quicklinks so checkbox doesnt wrap
+      // we also need the sapce to make this not look so sucky
+      width: 260px
+      #toggle a {
+        color: v99 i
+        font-weight: 600
+        &::after {
+          content: '\00A0\01F897'
+          font-size: 30px
+          margin-top: .4rem
+          position: absolute
+        }
+        &:hover {
+          color: v09 i
+          text-decoration: none
+        }
+      }
+      .frame_bottom, .frame_top {
+        background-image: linear-gradient(v02, v02)
+        border-color: v06
+      }
+      .frame_bottom {
+        r: 0 0 4px 4px
+        height: 12px
+      }
+      .frame_top {
+        r: 4px 4px 0 0
+        height: 12px
+      }
+      #quick_link_infos {
+        padding: 20px 4px 0 10px
+        border-color: v06
+        background: v02
+        h2 {
+          margin-top: -1rem
+          margin-left: .1rem
+          color: v99
+        }
+        // tweak quicklinks login fields + align
+        form.forum_login {
+          input {
+            margin: .3rem .3rem
+            &[class="text"][name="autologin"] {
+              vertical-align: middle
+            }
+            &[type="password"],
+            &[type="text"][name="username"] {
+              border: 1px solid v08
+              width: 64%
+              r: 4px
+              padding: .2rem .1rem
+            }
+          }
+          label {
+            margin: .3rem .1rem
+          }
+        }
+      }
+    }
+    .posting {
+      th {
+        padding: 8px 4px
+        background: bg4
+        border-bottom: solid 1px bg5
+        border-top-left-radius: 4px
+        border-top-right-radius: 4px
+      }
+      .info td { border-bottom: 2px dotted bg5 }
+      table[width="928"] {
+        width: 970px i
+      }
+    }
+    .block th {
+      padding: 8px 4px
+      border-top-left-radius: 4px
+      border-top-right-radius: 4px
+      background: bg3
+      border-bottom: solid 1px bg5
+    }
+    .row1 td, .row2 td, .block td, .row1 .col2 {
+      padding: 3px 6px
+      background: bg2
+    }
+    .row1 {
+      font-size: 108%
+    }
+    // https://forum.dd-wrt.com/phpBB2/login.php
+    .four_columns .frame_top, .corner_left, .corner_right {
+      background: t
+
+      r: 10px
+    }
+    // https://forum.dd-wrt.com/phpBB2/login.php checkbox align
+    .four_columns {
+      input[type="checkbox"][name="autologin"] {
+        vertical-align: middle
+      }
+    }
+  }
+  textarea {
+    appearance: none
+    c: v98 bg4 bg0
+    border: 1px solid
+    r: 2px
+    &:focus, &:focus-visible {
+      outline: 2px solid v07
+      r: 2px
+    }
+  }
+  .forum #content .posting .navigation td,
+  .forum #content .block .row1 td {
+    border-top: solid 1px bg4
+  }
+  .forum #content .posting,
+  .forum #content .block {
+    border: 0
+    background: bg2
+    padding: 3px
+  }
+  .forum #content .content {
+    padding: 0 11px 11px 11px
+    background: bg2
+    border-color: bg4
+    border-bottom-left-radius: 4px
+    border-bottom-right-radius: 4px
+  }
+  .posting td.code,
+  #content [class*='row'] td.code {
+    border: 1px solid bg4
+    border-radius: 4px
+    background: #141414
+    color: #f7f7f7
+    font-family: $font_family_4
+    padding: .6rem .5rem
+    r: 4px
+  }
+  .forum #content fieldset {
+    c: 0 bg4 var(--rgba-bg-03)
+    r: 4px
+    // realign this shite bad UX design
+    .setting td[align="right"] {
+      text-align: left
+    }
+  }
+  .catBottom {
+    tbody tr {
+      td[align="center"] { padding-top: 0rem; padding-bottom: 1rem }
+      .gensmall { margin-right: -14rem }
+      td[width="25%"] { width: 23.33333% }
+    }
+    input[type="submit"][value="Search"] {
+      margin-top: 1rem
+      margin-bottom: -1.5rem
+    }
+  }
+  form[action="search.php?mode=results"] {
+    table[width="928"] {
+      width: 930px
+      input {
+        vertical-align: middle
+        margin: .1rem .1rem
+      }
+      .genmed {
+        vertical-align: middle
+      }
+    }
+  }
+  td.attachheader {
+    font: normal 11px Verdana, Arial, Helvetica, sans-serif;
+    color: v97
+    border-color: bg4
+    background-color: bg1
+  }
+  table.attachtable {
+    color: v97
+    border-color: bg4
+  }
+  td.attachrow {
+    color: v97
+    border-color: bg4
+  }
+  hr {
+    color: bg5
+  }
+  * {
+    text-shadow: none
+    box-shadow: none
+    font-family: $font_family_1
+  }
+  [style="color: #88171A"] {
+    c: v18 0 0
+  }
+  [style="color: #505050"] {
+    c: v97 0 0
+  }
+  [style="color: navy"], [style="color: blue"] {
+    c: v69
+  }
+  [style="color: #EA7E20"] {
+    c: v29
+  }
+  [style="color: #1A3867"] {
+    c: v65
+  }
+  [color='blue'] {
+    c: v65
+  }
+  [color='black'] {
+    c: v99
+  }
+  [style="color: darkred"] {
+    c: #ff3e3e
+  }
+  [style="color: red"] {
+    c:
+  }
+  [style="color: black"] {
+    c: v99
+  }
+  [style="color: purple"]  {
+    c: v89
+  }
+  [style="color: brown"] {
+    c: v29
+  }
+  [style="color:#006600"] {
+    c: v46
+  }
+  [style="color:#FFA34F"] {
+    c: v29
+  }
+  [style="color: darkblue"] {
+    c: v65
+  }
+  a {
+    color: v09
+    transition: .2s ease-in-out
+    &:hover {
+      color: v08
+    }
+  }
+  #header_wrap > #header #logo {
+    // remove filter due to https://forum.dd-wrt.com/phpBB2/login.php stoopid page
+    filter: none
+    mix-blend-mode: lighten
+  }
+  /img[src*="image"]:not([src*="avatars"]):not([src*="smiles"]):not([src*="clip"]):not([onload*="SMR_resize"]) {
+    filter: invert(.9) hue-rotate(180deg) brightness(1.3)
+    mix-blend-mode: lighten
+    image-rendering: crispy-edges
+    transition: .13333s ease-in-out
+    &:hover {
+      scale: 1.08
+    }
+  }
+  /img {
+    &[src*="clip.gif"] {
+      filter: invert(.9)
+      &:hover {
+        scale: 1.6
+        mix-blend-mode: lighten
+        image-rendering: crisp-edges
+      }
+    }
+    &[src*="voting_bar"] {
+      scale: 1.12
+      filter: none
+      &:hover {
+        scale: 1.12 i
+      }
+    }
+  }
+  .spaceRow {
+    background: bg4
+  }
+  // KP69 avatar is black NOK with this, lets make exception
+  /img[src*="avatars/1516946736133b68f67b73"] {
+    filter: invert(.9)
+  }
+  // tweak avatars and margins a bit
+  /img[src*="avatars"] {
+    border-radius: 3px
+    margin-bottom: -.7rem
+    margin-top: .3rem
+  }
+  if (avatar_soh) {
+    /img[src*="avatars"] {
+      transition: .33333s ease-in-out
+      &:hover {
+        scale: 1.8
+        margin-left: 1.63333rem
+        margin-top: 2.2rem
+        margin-bottom: 1.1rem
+        image-rendering: smooth
+        cursor: help
+      }
+    }
+  }
+  .forum #content .posting .quote {
+    border: 0
+    background: bg0
+    padding: 2px 14px
+    border-left: 5px solid bg5
+    r: 1px 4px 4px 1px
+  }
+
+  tr.info td[width="100%"] {
+    font-size: 70% i
+    img[alt="Post"] {
+      height: 14px
+      width: 20px
+      filter: hue-rotate(180deg) invert(.9) i
+    }
+  }
+  #content #forum_content {
+    td, th {
+      font-size: 12px
+      line-height: 1.4em
+    }
+    td .genmed {
+      font-size: 12px
+    }
+    .postbody {
+      font-size: 14px
+      line-height: 1.4em
+    }
+  }
+  // Better checkbox/radio inputs.
+  input {
+    r       = unquote
+    prefix  = 'data:image/svg+xml;utf8,'
+    prefix += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">'
+
+    &[type='radio'],
+    &[type='checkbox'] {
+    &, &:focus, &:hover:active {
+      -webkit-appearance: none
+      -moz-appearance: none
+      appearance: none
+      cursor: pointer
+      height: b_hgwd
+      width: b_hgwd
+      border: 1px solid bg5
+      background-size: cover
+      transition: all 0.2s cubic-bezier( 0.3, 0, 0.5, 1)
+      c: v08 0 bg1
+    }
+    &:disabled, &:hover:active:disabled, &:disabled:hover {
+      c: v94 bg5 bg4
+      cursor: default
+      }
+    }
+    &[type='radio'] {
+      // fix border radius at https://github.com/settings/profile Emoji color
+      border-radius: 50%
+      // align with checked state
+      padding: 7px
+    &:checked {
+      path = '<circle cx="256" cy="256" r="128" fill="' + to_svg($v99) + '"/>'
+      background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
+      c: 0 v08 v09
+      }
+    &:focus, &:hover { c: 0 v09 bg2 }
+    }
+
+    &[type='checkbox'] {
+    border-radius: 2px
+    &:checked {
+      path ='<path fill="' + to_svg($v99) + '" d="M99 213l-1 89 104 102 205-201v-91L203 315 99 213z"/>'
+      background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
+      c: 0 v08 v09
+      rad: 2px
+    }
+    &:focus, &:hover { c: 0 v09 bg2 }
+    &:indeterminate {
+      path = '<rect x="128" y="128" width="256" height="256" fill="' + to_svg($v99) + '"/>'
+      background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
+      c: 0 v08 v09
+      &:hover { c: 0 v09 bg2 }
+      }
+    }
+
+    &[type='file'] {
+      &::file-selector-button {
+        background-color: bg5
+        border: 2px solid bg5
+        color: v98
+
+        border-radius: 0.25em
+        padding: .2rem .4rem
+        cursor: pointer
+      &:hover {
+          background-color: v09
+          border: 2px solid v09
+          color: v98
+        }
+      }
+      &::-webkit-file-upload-button {
+        background-color: bg5
+        border: 2px solid bg5
+        color: v98
+
+        border-radius: 0.25em
+        padding: .2rem .4rem
+        cursor: pointer
+        &:hover {
+          background-color: v09
+          border: 2px solid v09
+          color: v98
+        }
+      }
+    }
+    // audit log export inut fields
+    &[id="start-time"], &[id="end-time" i] {
+      -webkit-appearance: none
+      -moz-appearance: none
+      appearance: none
+      background: bg0
+      border: 1px solid bg5
+      color: v99
+      &:active, &:focus-visible {
+        border-color: v08
+        outline: none
+      }
+    }
+    &[type='text'], &[type="password"] {
+      border-radius: 4px
+      border: 1px solid bg5
+      c: v98 0 bg1
+      margin: .2rem .3rem
+      padding: .1rem .1rem
+      &:active, &:focus-visible {
+        border: 1px solid v08
+        outline: 0
+        box-shadow: 0 0 3px 0 v09
+      }
+    }
+    &[type='text'].helpline {
+      border-radius: 2px
+      border: 1px solid bg5
+      c: v98 0 bg2
+      margin: .2rem .3rem
+      padding: .3rem .1rem
+      font-size: 12px i
+      &:active, &:focus-visible {
+        border: 1px solid v08
+        outline: 0
+        box-shadow: 0 0 3px 0 v09
+      }
+    }
+    &[type="submit"], &[type="reset"] {
+      vertical-align: middle
+      border-radius: 4px
+      border: 1px solid v05
+      c: v98 0 v05
+      padding: .19rem .6rem
+      &:active, &:focus-visible, &:hover {
+        border: 1px solid v08
+        outline: 0
+        box-shadow: 0 0 3px 0 v09
+      }
+    }
+    &[type="submit"][value="Go"] {
+      vertical-align: sub
+      height: 28px
+      width: 50px
+    }
+    &[type="button"] {
+      border-radius: 4px
+      border: 1px solid v05
+
+      c: v98 0 v05
+      padding: .1rem .1rem
+      &:active, &:focus-visible, &:hover {
+        border: 1px solid v08
+        outline: 0
+        box-shadow: 0 0 3px 0 v09
+      }
+    }
+  }
+
+  // Better select element styles.
+  /select {
+    // Custom icon.
+    r       = unquote
+    prefix  = 'data:image/svg+xml;utf8,'
+    prefix += '<svg width="16" height="16" fill="' + to_svg($v95) + '" '
+    prefix += 'xmlns="http://www.w3.org/2000/svg">'
+    path    = '<path d="M4.427 9.427l3.396 3.396a.251.251 0 00.354 '
+    path   += '0l3.396-3.396A.25.25 0 0011.396 9H4.604a.25.25 0 '
+    path   += '00-.177.427zM4.423 6.47L7.82 3.072a.25.25 0 01.354 0L11.57 '
+    path   += '6.47a.25.25 0 01-.177.427H4.6a.25.25 0 01-.177-.427z"/>'
+
+    & {
+      //background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
+      //background-position: right 8px center
+      //background-size: 16px
+      // Override default colors.
+      vertical-align: middle
+      &:not([disabled]) {
+        c: v97 0 bg0
+        border: 1px solid bg5
+        padding: .243333rem .2rem
+        border-radius: 4px
+
+        &:hover { c: 0 0 bg3 }
+        &:active { c: 0 0 bg4 }
+      }
+      option, option[style="color:black; background-color: #FAFAFA"] {
+        background: bg1 i
+        &[selected] {
+          background: v05
+        }
+        &:hover { background-color: v02 i }
+        &:checked {
+          background-color: v05 i
+          box-shadow: 0 0 10px 100px v06 inset
+        }
+      }
+    }
+  }
+}
