@@ -10,7 +10,7 @@
 @license        MIT
 @preprocessor stylus
 
-@var checkbox sdetails     'Show style details'     0
+@var checkbox sdetails     'Show style details'     1
 
 @var select   cg_theme     'Preset themes toggle'   {
 
@@ -32,12 +32,8 @@
 @var range    cg_sat       'Saturation of RGB colors' [0, -50, 40, 0.01]
 @var range    cg_lig       'Lightness of gray colors' [0, -30, 30, 0.01]
 
-@var checkbox custom_font  'Enable  font overrides  ' 0
 @var checkbox avatar_soh   'Avatar on hover scale   ' 1
-@var checkbox hide_hsl     'Show hotspot logos      ' 1
 
-@var text     f_ui         'UI font                 ' ''font_name''
-@var text     f_mono       'Monospace font          ' ''font_name''
 @var text     b_hgwd       'Checkbox width/height   ' '.88rem'
 @var text     transition   'Define transition value ' 'all 0.2s cubic-bezier( 0.3, 0, 0.5, 1)'
 
@@ -238,23 +234,19 @@ b() { box-shadow: arguments }
 
     // rgba BG/AC vars
     --rgba-bg-03: rgba(convert($bg1), .3)
-
-    $font_family_1 = Arial, Verdana, 'Bitstream Vera Sans', Helvetica, sans-serif
-    $font_family_2 = inherit
-    $font_family_3 = sans-serif
-    $font_family_4 = monospace
-    $font_family_5 = Verdana, Arial, 'Bitstream Vera Sans', Helvetica, sans-serif
+    // Code areas
+    --code-bg: darken(BG, 20%)
   }
+
+  // the on hover orange dd-wrt buttons that dont belong to the forums
+  // Because adding transitions to forums touched this and it cant handle anything else.
   #menu_sub a {
     transition: background .2s ease-in
   }
 
-  input[name="add_attachment_box"] {
-    margin-left: -6rem
-  }
   /form {
       &[action*="profile_sec"] {
-      // hide broken shit theres no avatars provided.
+      // hide broken shit theres no avatars provided in this forum
       .block > table > tbody > tr:nth-child(41) > td > span:last-child,
       input[name="avatargallery"] {
         display: none
@@ -277,13 +269,6 @@ b() { box-shadow: arguments }
         resize: vertical i
         margin-left: .3rem
       }
-      &[action*="privmsg"], &[action*="posting_sec"] {
-        /input.liteoption[name="add_attachment"] {
-          margin-top: 4.3rem
-          margin-left: -17.06rem
-          position: absolute
-        }
-      }
       &[action="posting_sec.php"] {
         table[width="450"] {
           /tr[valign="middle"][align="center"] {
@@ -298,12 +283,14 @@ b() { box-shadow: arguments }
       }
     }
   }
-  #footer {
-    border-top: 1px solid bg5
-    div:first-of-type::after {
-      content: '- Styled with: ' + stinfo i
-      text-shadow: 3px solid v98 i
-      color: v68
+  if (sdetails) {
+    #footer {
+      border-top: 1px solid bg5
+      div:first-of-type::after {
+        content: '- Styled with: ' + stinfo i
+        text-shadow: -3px solid v98 i
+        color: v68
+      }
     }
   }
   //style pm's
@@ -325,6 +312,10 @@ b() { box-shadow: arguments }
   }
 }
 @-moz-document regexp('https?://forum.dd-wrt.com.*(/.*)?') {
+  * {
+    text-shadow: none
+    box-shadow: none
+  }
   body {
     background: bg0
     color: v98
@@ -332,8 +323,8 @@ b() { box-shadow: arguments }
   }
   // fix image in forums flying out of bounds
   // efing ff fix it upstream too
-  .attachtable[width="95%"] img[src*="files"] {
-    width: 95% i
+  .attachtable[width="95%"] {
+    width: 60% i
   }
   #content {
     font-size: 12px
@@ -364,26 +355,28 @@ b() { box-shadow: arguments }
         border-color: v08
       }
     }
-    .infolink a {
-      color: v98
-      line-height: 1.4em
-      transition: .1s ease-in-out
-      background: 0
-      font-size: 14px
-      // hide login top link in quicklinks because thisgoes to some ancient dumb page
-      // e.g. https://forum.dd-wrt.com/phpBB2/login.php
-      &[href*="login"] {
-        display: none
-      }
-      &::before {
-        content: '\27B2\00A0'
-        color: v99
-        font-size: 12px
-        margin-left: -.2rem
-      }
-      &:hover {
-        color: v09
-        text-decoration: none
+    .infolink {
+      a {
+        color: v98
+        line-height: 1.4em
+        transition: transition
+        background: 0
+        font-size: 14px
+        // hide login top link in quicklinks because this goes to some ancient dumb page
+        // e.g. https://forum.dd-wrt.com/phpBB2/login.php
+        &[href*="login"]:not([href*='logout=true']) {
+          display: none
+        }
+        &::before {
+          content: '\27B2\00A0'
+          color: v99
+          font-size: 12px
+          margin-left: -.2rem
+        }
+        &:hover {
+          color: v09
+          text-decoration: none
+        }
       }
     }
     fieldset {
@@ -461,11 +454,11 @@ b() { box-shadow: arguments }
     // https://forum.dd-wrt.com/phpBB2/login.php
     #menu_forum {
       .active span {
-          background: none
-          background-image: linear-gradient(v05, v06)
-          border-color: v08
-          color: v98
-          padding: 2px 20px 4px 0
+        background: none
+        background-image: linear-gradient(v05, v06)
+        border-color: v08
+        color: v98
+        padding: 2px 20px 4px 0
       }
       li a {
         &:hover span {
@@ -510,7 +503,8 @@ b() { box-shadow: arguments }
     #header {
       background: bg0
       #header_ads {
-        margin: 0
+        //fix privacy policy/inprint align on scroll
+        margin-left: 3rem
         height: 0
         border: 0
       }
@@ -529,7 +523,7 @@ b() { box-shadow: arguments }
           padding: 0px 2px 0px 2px
           span {
             background: #f07100
-          padding: 0px 2px 0px 2px
+            padding: 0px 2px 0px 2px
           }
         }
       }
@@ -640,7 +634,7 @@ b() { box-shadow: arguments }
     }
     // https://forum.dd-wrt.com/phpBB2/login.php
     .four_columns .frame_top, .corner_left, .corner_right {
-      background: t
+      display: none
 
       r: 10px
     }
@@ -649,8 +643,15 @@ b() { box-shadow: arguments }
       input[type="checkbox"][name="autologin"] {
         vertical-align: middle
       }
+      // stoopid old login page, go away.
+      table[width="928"] {
+        width: 928px i
+      }
     }
   }
+  // https://forum.dd-wrt.com/phpBB2/login.php palce menu a little left
+  .forum #content:not([style]) #quick_links { left: 700px }
+
   textarea {
     appearance: none
     c: v98 bg4 bg0
@@ -681,10 +682,8 @@ b() { box-shadow: arguments }
   .posting td.code,
   #content [class*='row'] td.code {
     border: 1px solid bg4
-    border-radius: 4px
-    background: #141414
-    color: #f7f7f7
-    font-family: $font_family_4
+    background: var(--code-bg)
+    color: v99
     padding: .6rem .5rem
     r: 4px
   }
@@ -736,11 +735,6 @@ b() { box-shadow: arguments }
   hr {
     color: bg5
   }
-  * {
-    text-shadow: none
-    box-shadow: none
-    font-family: $font_family_1
-  }
   [style="color: #88171A"] {
     c: v18 0 0
   }
@@ -788,7 +782,7 @@ b() { box-shadow: arguments }
   }
   a {
     color: v09
-    transition: .2s ease-in-out
+    transition: transition
     &:hover {
       color: v08
     }
@@ -878,12 +872,18 @@ b() { box-shadow: arguments }
       font-size: 14px
       line-height: 1.4em
     }
+    &.four_columns {
+      table[width="928"] {
+        width: 970px i
+      }
+    }
   }
   // Better checkbox/radio inputs.
   input {
     r       = unquote
     prefix  = 'data:image/svg+xml;utf8,'
     prefix += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">'
+    transition: transition
 
     &[type='radio'],
     &[type='checkbox'] {
@@ -896,12 +896,11 @@ b() { box-shadow: arguments }
       width: b_hgwd
       border: 1px solid bg5
       background-size: cover
-      transition: all 0.2s cubic-bezier( 0.3, 0, 0.5, 1)
       c: v08 0 bg1
     }
     &:disabled, &:hover:active:disabled, &:disabled:hover {
-      c: v94 bg5 bg4
-      cursor: default
+        c: v94 bg5 bg4
+        cursor: default
       }
     }
     &[type='radio'] {
@@ -909,12 +908,12 @@ b() { box-shadow: arguments }
       border-radius: 50%
       // align with checked state
       padding: 7px
-    &:checked {
-      path = '<circle cx="256" cy="256" r="128" fill="' + to_svg($v99) + '"/>'
-      background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
-      c: 0 v08 v09
+      &:checked {
+        path = '<circle cx="256" cy="256" r="128" fill="' + to_svg($v99) + '"/>'
+        background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
+        c: 0 v08 v09
       }
-    &:focus, &:hover { c: 0 v09 bg2 }
+      &:focus, &:hover { c: 0 v09 bg2 }
     }
 
     &[type='checkbox'] {
@@ -923,7 +922,8 @@ b() { box-shadow: arguments }
       path ='<path fill="' + to_svg($v99) + '" d="M99 213l-1 89 104 102 205-201v-91L203 315 99 213z"/>'
       background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
       c: 0 v08 v09
-      rad: 2px
+
+      border-radius: 2px
     }
     &:focus, &:hover { c: 0 v09 bg2 }
     &:indeterminate {
@@ -943,7 +943,7 @@ b() { box-shadow: arguments }
         border-radius: 0.25em
         padding: .2rem .4rem
         cursor: pointer
-      &:hover {
+        &:hover {
           background-color: v09
           border: 2px solid v09
           color: v98
@@ -977,7 +977,7 @@ b() { box-shadow: arguments }
         outline: none
       }
     }
-    &[type='text'], &[type="password"] {
+    &[type='text'], &[type='password'] {
       border-radius: 4px
       border: 1px solid bg5
       c: v98 0 bg1
@@ -988,6 +988,12 @@ b() { box-shadow: arguments }
         outline: 0
         box-shadow: 0 0 3px 0 v09
       }
+    }
+    &[type='password'][name*='password'] {
+      padding: .243333rem .2rem
+    }
+    &[type='text'][name] {
+      padding: .243333rem .2rem
     }
     &[type='text'].helpline {
       border-radius: 2px
@@ -1014,10 +1020,24 @@ b() { box-shadow: arguments }
         box-shadow: 0 0 3px 0 v09
       }
     }
-    &[type="submit"][value="Go"] {
+    &[type='submit'][value='Go'] {
       vertical-align: sub
       height: 28px
       width: 50px
+    }
+    // bottom add attach by submit/preview buttons
+    &[type="submit"].liteoption[name="add_attachment"] {
+      margin-top: 4.3rem
+      margin-left: -17.06rem
+      position: absolute
+    }
+    // preview and post buttons down a bit
+    &[type='submit'][name='preview'],
+    &[type='submit'][name='post'] {
+      margin-top: 1.8rem
+    }
+    &[type="submit"][name="usersubmit"].liteoption {
+      vertical-align: unset
     }
     &[type="button"] {
       border-radius: 4px
@@ -1046,10 +1066,7 @@ b() { box-shadow: arguments }
     path   += '6.47a.25.25 0 01-.177.427H4.6a.25.25 0 01-.177-.427z"/>'
 
     & {
-      //background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
-      //background-position: right 8px center
-      //background-size: 16px
-      // Override default colors.
+      transition: transition
       vertical-align: middle
       &:not([disabled]) {
         c: v97 0 bg0
