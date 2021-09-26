@@ -653,10 +653,6 @@ b() { box-shadow: arguments }
       input[type="checkbox"][name="autologin"] {
         vertical-align: middle
       }
-      // stoopid old login page, go away.
-      table[width="928"] {
-        width: 928px i
-      }
     }
   }
   // https://forum.dd-wrt.com/phpBB2/login.php palce menu a little left
@@ -838,7 +834,6 @@ b() { box-shadow: arguments }
   // tweak avatars and margins a bit
   /img[src*="avatars"] {
     border-radius: 3px
-    margin-bottom: -.7rem
     margin-top: .3rem
   }
   if (avatar_soh) {
@@ -848,7 +843,7 @@ b() { box-shadow: arguments }
         scale: 1.8
         margin-left: 1.63333rem
         margin-top: 2.2rem
-        margin-bottom: 1.1rem
+        margin-bottom: 1rem
         image-rendering: smooth
         cursor: help
       }
@@ -860,6 +855,7 @@ b() { box-shadow: arguments }
     padding: 2px 14px
     border-left: 5px solid bg5
     r: 1px 4px 4px 1px
+    margin-left: -2rem
   }
 
   tr.info td[width="100%"] {
@@ -1002,20 +998,25 @@ b() { box-shadow: arguments }
     &[type='password'][name*='password'] {
       padding: .243333rem .2rem
     }
-    &[type='text'][name] {
-      padding: .243333rem .2rem
-    }
-    &[type='text'].helpline {
-      border-radius: 2px
-      border: 1px solid bg5
-      c: v98 0 bg2
-      margin: .2rem .3rem
-      padding: .3rem .1rem
-      font-size: 12px i
-      &:active, &:focus-visible {
-        border: 1px solid v08
-        outline: 0
-        box-shadow: 0 0 3px 0 v09
+    &[type='text'] {
+      &[name] {
+        padding: .243333rem .2rem
+      }
+      &[name="bday_day"], &[name="bday_year"] {
+      vertical-align: middle
+      }
+      &.helpline {
+        border-radius: 2px
+        border: 1px solid bg5
+        c: v98 0 bg2
+        margin: .2rem .3rem
+        padding: .3rem .1rem
+        font-size: 12px i
+        &:active, &:focus-visible {
+          border: 1px solid v08
+          outline: 0
+          box-shadow: 0 0 3px 0 v09
+        }
       }
     }
     &[type="submit"], &[type="reset"] {
