@@ -77,8 +77,8 @@ if you wish to view complete list click below.
 
  ### Inverted gif buttons
   
-  The post/reply and such buttons had to be inverted so the poor quality of the gifs edges dont assault my retinas.
-  There is no simple way to replace the bad quality buttons with better quality, phpbb at least this old version looks like spaghetti.
+  The post/reply and such buttons had to be inverted so the poor quality of the gifs edges don't assault my retinas.
+  There is no simple way to replace the bad quality buttons with better quality, phpBB at least this old version looks like spaghetti.
   This job would best be done directly into the source code.
  
 </details> 
@@ -91,35 +91,37 @@ if you wish to view complete list click below.
 
 ### Install This Style
 
-[![CLICK TO INSTALL WITH - STYLUS](https://img.shields.io/badge/Install_directly_with-Stylus-21d1d0.svg?longCache=true&style=for-the-badge)](https://github.com/style-it-themes/dd-wrt-inspired-themes/raw/main/dd-wrt-inspired-themes.user.styl)  
+[![CLICK TO INSTALL WITH - STYLUS](https://img.shields.io/badge/Install_directly_with-Stylus-21d1d0.svg?longCache=true&style=for-the-badge)](https://github.com/style-it-themes/dd-wrt-forum-inspired-themes/raw/main/dd-wrt-forum-inspired-themes.user.styl)  
 *Click to install directly from this repository*.
 
 ### Limitations of this Project
 
- Some areas like moderator areas and admin areas are likely showing old styles and broken,
- if you want these fixed, there are two options:
+Some areas like moderator areas and admin areas are likely showing old styles and broken,
+if you want these fixed, there are two options:
  
- 1) Report bugs on via GitHub issues with inpected stylesheets and show me what they are.
-    Read below [I Found a Bug](#i-found-a-bug).
+1) Report bugs on via GitHub issues with inspected stylesheets and show me what they are.
+  Read below [I Found a Bug](#i-found-a-bug).
  
- 2) Give me moderator/higher access so I can do this work myself. This wont happen (I dont really want it) anyway so GOTO 1) 
+2) Give me moderator/higher access so I can do this work myself. This won't happen (I don't really want it) anyway so GOTO 1) 
 
- *Regarding text colors:*
- phpBB uses many colors users/mods/admins can select from drop down menu when making posts,
- these ARE NOT dark style friendly so they are essentially overriden in style for something that has better contrast, however given anyone can add whatever colors they want, Im not going to hunt them down in 2 trillion posts.
+*Regarding text colors:*
+phpBB uses many colors users/mods/admins can select from drop down menu when making posts,
+these ARE NOT dark style friendly so they are essentially overridden in style for something that has better contrast, however given anyone an add whatever colors they want, I'm not going to hunt them down in 2 trillion posts.
  
- I have overriden the obvious colors found on most help text signatures by community helpers.<br>
- If you find something you cant read; read below [I Found a Bug](#i-found-a-bug).
+I have overridden the obvious colors found on most help text signatures by community helpers.<br>
+If you find something you cant read; read below [I Found a Bug](#i-found-a-bug).
 
 ### Additional Userstyles
 
-  Style-It Themes (and I) recommends *Stylus Wardrobe* and the *Global Overlay Scrollbars* can be used all together without issues.
-  These add unapparelled consistent experience and extend customizations options for other areas of your browsing live.
-  
-  Save your retinas from the burn!
+Style-It Themes (and I) recommend the additional styles below which can be used together without issues.
+These add unapparelled consistent experience and extend customizations options for other areas of your browsing life.
+   
+Save your retinas from the burn!
 
-* [Overlay Scrollbars](https://github.com/StylishThemes/Overlay-Scrollbars)
+* [DD-WRT Inspired Themes](https://github.com/style-it-themes/dd-wrt-inspired-themes)
+* [DD-WRT Trac Inspired Themes](https://github.com/style-it-themes/dd-wrt-trac-inspired-themes)
 * [Stylus Wardrobe](https://github.com/style-it-themes/stylus-wardrobe)
+* [Overlay Scrollbars](https://github.com/StylishThemes/Overlay-Scrollbars)
 
 ## I Found a Bug
 
