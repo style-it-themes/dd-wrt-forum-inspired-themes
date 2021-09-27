@@ -255,7 +255,7 @@ b() { box-shadow: arguments }
       input[type="checkbox"][name="avatardel"] {
         vertical-align: middle
       }
-      img[src*="images/avatars/"] {
+      img[src*="/avatars/"] {
         margin-bottom: .4rem
         &:hover {
           margin-bottom: 2rem
@@ -282,6 +282,16 @@ b() { box-shadow: arguments }
         }
       }
     }
+    // style pm's background/border
+    &[action="privmsg.php?folder=inbox"] {
+      table[width="100%"][cellspacing="1"][cellpadding="4"] td.row1[colspan="3"][valign="top"] {
+        background: bg0
+        padding: .3rem .5rem
+        border: 1px solid bg4
+        r: 4px
+      }
+    }
+    // external login page fixes due to increasing table width from 928px to 970px
     &[action="login.php"]:not(.forum_login) {
       .posting table[width="928"][cellspacing="1"]:not(#z) {
         width: 908px i
@@ -302,13 +312,6 @@ b() { box-shadow: arguments }
       }
     }
   }
-  //style pm's
-  form[action="privmsg.php?folder=inbox"] {
-    table[width="100%"][cellspacing="1"][cellpadding="4"] td.row1[colspan="3"][valign="top"] {
-      c: 0 0 bg0
-      padding: .3rem
-    }
-  }
   .info {
     td[width="100%"] {
       background: bg1 i
@@ -319,13 +322,17 @@ b() { box-shadow: arguments }
       padding: .6rem .4rem i
     }
   }
+  .mediawiki #gumax-header #ad_block {
+    //fix wiki ad block
+    border: 0
+  }
 }
 @-moz-document regexp('https?://forum.dd-wrt.com.*(/.*)?') {
   * {
     text-shadow: none
     box-shadow: none
   }
-  body {
+  body:not(.mediawiki) {
     background: bg0
     color: v98
     box-sizing: border-box
@@ -344,16 +351,20 @@ b() { box-shadow: arguments }
     #menu_forum {
       // when not sicky make it same bg color
       padding: 8px 0
-      background: bg2
+      background: bg1
       border-color: bg4
+      border-bottom: 1px solid bg4
       border-top-left-radius: 4px
       border-top-right-radius: 4px
       li a {
         color: v98
-        border-radius: 4px;
+        border-radius: 4px
         border: solid 1px v04
         background: v02
-        span { color: v98 }
+        span {
+          color: v98
+          padding: 4px 20px 4px 0
+        }
         &:hover {
           background-image: linear-gradient(v05, v06)
           border-color: v08
@@ -362,6 +373,10 @@ b() { box-shadow: arguments }
       .active {
         background-image: linear-gradient(v05, v06)
         border-color: v08
+        border-radius: 4px
+        span {
+          top: -.1rem
+        }
       }
     }
     .infolink {
@@ -371,11 +386,6 @@ b() { box-shadow: arguments }
         transition: transition
         background: 0
         font-size: 14px
-        // hide login top link in quicklinks because this goes to some ancient dumb page
-        // e.g. https://forum.dd-wrt.com/phpBB2/login.php
-        &[href*="login"]:not([href*='logout=true']) {
-          display: none
-        }
         &::before {
           content: '\27B2\00A0'
           color: v99
@@ -455,28 +465,50 @@ b() { box-shadow: arguments }
           img[src*="latest_reply"] {
             height: 10px
             width: 22px
-
           }
         }
       }
     }
-    // https://forum.dd-wrt.com/phpBB2/login.php
+  }
+  // https://forum.dd-wrt.com/phpBB2/login.php
+  .forum #content:not([style]) {
     #menu_forum {
+      background: bg2
+      border: 1px solid bg4
       .active span {
-        background: none
+        background: none i
         background-image: linear-gradient(v05, v06)
         border-color: v08
         color: v98
-        padding: 2px 20px 4px 0
+        padding: 4px 20px 4px 0
+        margin-top: -.1rem
       }
       li a {
         &:hover span {
-          background: none
+          background: none i
           background-image: linear-gradient(v05, v06)
           border-color: v08
           color: v98
         }
-        span { padding: 2px 20px 4px 0 }
+        span {
+          background: none
+          padding: 4px 20px 4px 0
+          margin-top: -.1rem
+        }
+      }
+    }
+    // fix quick links
+    // z-index ensure this displays ontop of the input boxes below.
+    #quick_links {
+      position: absolute
+      top: 285px
+      left: 700px
+      z-index: 1
+      #quick_link_infos {
+        border-left: 1px solid v04
+        border-right: 1px solid v04
+        background: v02
+        width: 246px
       }
     }
   }
@@ -502,7 +534,7 @@ b() { box-shadow: arguments }
       a:hover {
         background: none
         span {
-            background: none
+          background: none
         }
       }
     }
@@ -537,19 +569,12 @@ b() { box-shadow: arguments }
         }
       }
     }
-    // https://forum.dd-wrt.com/phpBB2/login.php
-    #content:not([style]) {
-      #quick_links {
-        position: absolute
-        top: 285px
-        z-index: 1
-      }
-    }
   }
   .forum #content {
     h2 {
       color: v97
-      border-bottom: solid 1px bg4
+      border-bottom: 1px solid bg4
+      padding-top: .2rem
     }
     .catHead a {
       color: v97
@@ -565,8 +590,6 @@ b() { box-shadow: arguments }
           content: '\00A0\23F7'
           font-size: 16px
           width: 30px
-          margin-top: -.1rem
-          position: absolute
         }
         &:hover {
           color: v09 i
@@ -575,19 +598,25 @@ b() { box-shadow: arguments }
       }
       .frame_bottom, .frame_top {
         background-image: linear-gradient(v02, v02)
-        border-color: v06
+        border-color: v04
       }
       .frame_bottom {
         r: 0 0 4px 4px
         height: 12px
+        border: 1px solid
+        border-color: v02 v04 v04 v04
       }
       .frame_top {
         r: 4px 4px 0 0
         height: 12px
+        border: 1px solid
+        border-color: v04 v04 v02 v04
+        margin-top: -.02rem
       }
       #quick_link_infos {
         padding: 20px 4px 0 10px
-        border-color: v06
+        border-left-color: v04
+        border-right-color: v04
         background: v02
         h2 {
           margin-top: -1rem
@@ -600,13 +629,18 @@ b() { box-shadow: arguments }
             margin: .3rem .3rem
             &[class="text"][name="autologin"] {
               vertical-align: middle
+              margin-left: .43333rem
             }
             &[type="password"],
             &[type="text"][name="username"] {
-              border: 1px solid v08
               width: 64%
               r: 4px
               padding: .2rem .1rem
+            }
+            &.mainoption {
+              margin-left: -.1rem
+              margin-top: .4rem
+              margin-bottom: -.1rem
             }
           }
           label {
@@ -620,8 +654,17 @@ b() { box-shadow: arguments }
         padding: 8px 4px
         background: bg4
         border-bottom: solid 1px bg5
-        border-top-left-radius: 4px
-        border-top-right-radius: 4px
+        border-bottom: 1px solid t
+        border-top: 1px solid bg4
+        r: 0
+        &:first-child {
+          border-left: 1px solid bg4
+          r: 4px 4px
+        }
+        &:last-child {
+          border-right: 1px solid bg4
+          r: 4px 4px
+        }
       }
       .info td { border-bottom: 2px dotted bg5 }
       table[width="928"] {
@@ -629,11 +672,21 @@ b() { box-shadow: arguments }
       }
     }
     .block th {
-      padding: 8px 4px
+      padding: 8px 8px
       border-top-left-radius: 4px
       border-top-right-radius: 4px
-      background: bg3
-      border-bottom: solid 1px bg5
+      background: bg4
+      border-bottom: 1px solid t
+      border-top: 1px solid bg4
+      r: 0
+      &:first-child {
+        border-left: 1px solid bg4
+        r: 4px 4px
+      }
+      &:last-child {
+        border-right: 1px solid bg4
+        r: 4px 4px
+      }
     }
     .row1 td, .row2 td, .block td, .row1 .col2 {
       padding: 3px 6px
@@ -655,8 +708,6 @@ b() { box-shadow: arguments }
       }
     }
   }
-  // https://forum.dd-wrt.com/phpBB2/login.php palce menu a little left
-  .forum #content:not([style]) #quick_links { left: 700px }
 
   textarea {
     appearance: none
@@ -798,7 +849,7 @@ b() { box-shadow: arguments }
     filter: none
     mix-blend-mode: lighten
   }
-  /img[src*="image"]:not([src*="avatars"]):not([src*="smiles"]):not([src*="clip"]):not([onload*="SMR_resize"]) {
+  /img[src*="image"]:not([src*="avatars"]):not([src*="smiles"]):not([src*="clip"]):not([onload*="_resize"]):not([src*="wiki"]) {
     filter: invert(.9) hue-rotate(180deg) brightness(1.3)
     mix-blend-mode: lighten
     image-rendering: crispy-edges
@@ -808,7 +859,7 @@ b() { box-shadow: arguments }
     }
   }
   /img {
-    &[src*="clip.gif"] {
+    &[src*="clip"] {
       filter: invert(.9)
       &:hover {
         scale: 1.6
@@ -816,12 +867,21 @@ b() { box-shadow: arguments }
         image-rendering: crisp-edges
       }
     }
-    &[src*="voting_bar"] {
-      scale: 1.12
-      filter: none
+    &[src*="voting"] {
+      scale: 1.03
+      margin-left: -.3rem
+      margin-right: -.3rem
       &:hover {
-        scale: 1.12 i
+        scale: 1.03
       }
+    }
+    &[src*="vote_lcap"] {
+      margin-right: -.2rem
+      filter: invert(.9) hue-rotate(180deg) brightness(1.3)
+    }
+    &[src*="vote_rcap"] {
+      margin-left: -.2rem
+      filter: none
     }
   }
   .spaceRow {
@@ -851,11 +911,10 @@ b() { box-shadow: arguments }
   }
   .forum #content .posting .quote {
     border: 0
-    background: bg0
-    padding: 2px 14px
+    background: bg1
+    padding: .1rem .3rem
     border-left: 5px solid bg5
     r: 1px 4px 4px 1px
-    margin-left: -2rem
   }
 
   tr.info td[width="100%"] {
@@ -983,12 +1042,13 @@ b() { box-shadow: arguments }
         outline: none
       }
     }
-    &[type='text'], &[type='password'] {
+    // exclude #searchInput from wiki
+    &[type='text']:not(#searchInput), &[type='password'] {
       border-radius: 4px
       border: 1px solid bg5
       c: v98 0 bg1
       margin: .2rem .3rem
-      padding: .1rem .1rem
+      padding: .243333rem .2rem
       &:active, &:focus-visible {
         border: 1px solid v08
         outline: 0
@@ -1019,7 +1079,7 @@ b() { box-shadow: arguments }
         }
       }
     }
-    &[type="submit"], &[type="reset"] {
+    &[type="submit"]:not(.searchButton), &[type="reset"] {
       vertical-align: middle
       border-radius: 4px
       border: 1px solid v05
@@ -1031,7 +1091,7 @@ b() { box-shadow: arguments }
         box-shadow: 0 0 3px 0 v09
       }
     }
-    &[type='submit'][value='Go'] {
+    &[type='submit'][value='Go']:not(#searchGoButton) {
       vertical-align: sub
       height: 28px
       width: 50px
