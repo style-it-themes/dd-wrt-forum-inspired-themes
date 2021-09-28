@@ -80,8 +80,7 @@ g(x, y = 0, xi = 1, yi = 1) {
 }
 
 // Border radius mixin.
-r() { border-radius: arguments }
-
+rad() { border-radius: arguments }
 // Box-shadow mixin.
 b() { box-shadow: arguments }
 
@@ -237,68 +236,16 @@ b() { box-shadow: arguments }
     // Code areas
     --code-bg: darken(BG, 20%)
   }
-
-  // the on hover orange dd-wrt buttons that dont belong to the forums
-  // Because adding transitions to forums touched this and it cant handle anything else.
-  #menu_sub a {
-    transition: background .2s ease-in
-  }
-
-  /form {
-      &[action*="profile_sec"] {
-      // hide broken shit theres no avatars provided in this forum
-      .block > table > tbody > tr:nth-child(41) > td > span:last-child,
-      input[name="avatargallery"] {
-        display: none
-      }
-      // fix avatar delete checkbox align and tweak margins
-      input[type="checkbox"][name="avatardel"] {
-        vertical-align: middle
-      }
-      img[src*="/avatars/"] {
-        margin-bottom: .4rem
-        &:hover {
-          margin-bottom: 2rem
-        }
-      }
-      // end
-      textarea[name="signature"] {
-        max-width: 500px i
-        width: 500px i
-        height: 200%
-        resize: vertical i
-        margin-left: .3rem
-      }
-      &[action="posting_sec.php"] {
-        table[width="450"] {
-          /tr[valign="middle"][align="center"] {
-            text-align: left
-          }
-          /textarea[rows="15"][style*="width"][wrap="virtual"] {
-            width: 770px i
-            max-width: @width
-            resize: vertical
-          }
-        }
-      }
-    }
-    // style pm's background/border
-    &[action="privmsg.php?folder=inbox"] {
-      table[width="100%"][cellspacing="1"][cellpadding="4"] td.row1[colspan="3"][valign="top"] {
-        background: bg0
-        padding: .3rem .5rem
-        border: 1px solid bg4
-        r: 4px
-      }
-    }
-    // external login page fixes due to increasing table width from 928px to 970px
-    &[action="login.php"]:not(.forum_login) {
-      .posting table[width="928"][cellspacing="1"]:not(#z) {
-        width: 908px i
-        max-width: @width
-      }
-      h2 {
-        margin: 10px 0 8px 0 i
+  if (avatar_soh) {
+    /img[src*="avatars"] {
+      transition: .33333s ease-in-out
+      &:hover {
+        scale: 1.8
+        margin-left: 1.63333rem
+        margin-top: 2.2rem
+        margin-bottom: 1rem
+        image-rendering: smooth
+        cursor: help
       }
     }
   }
@@ -312,26 +259,36 @@ b() { box-shadow: arguments }
       }
     }
   }
-  .info {
-    td[width="100%"] {
-      background: bg1 i
-      padding: .4rem .1rem i
-    }
-    td[valign="top"][nowrap="nowrap"] {
-      background: bg1 i
-      padding: .6rem .4rem i
-    }
+  // the on hover orange dd-wrt buttons that dont belong to the forums
+  // Because adding transitions to forums touched this and it cant handle anything else.
+  #menu_sub a {
+    transition: background .2s ease-in
   }
+
   .mediawiki #gumax-header #ad_block {
     //fix wiki ad block
     border: 0
   }
+
+  a[href*='mode=viewprofile'] {
+    img {
+      width: 0
+      &:after {
+        content: 'This profile'
+        font-size: 20px
+        width: 20px
+      }
+    }
+  }
 }
 @-moz-document regexp('https?://forum.dd-wrt.com.*(/.*)?') {
+  // Style selection bg/fg with accent color
+  ::selection { background-color: v06; color: v99 }
   * {
     text-shadow: none
     box-shadow: none
   }
+  // dont target mediawiki bg
   body:not(.mediawiki) {
     background: bg0
     color: v98
@@ -339,43 +296,55 @@ b() { box-shadow: arguments }
   }
   // fix image in forums flying out of bounds
   // efing ff fix it upstream too
-  .attachtable[width="95%"] img {
+  .attachtable[width='95%'] img {
     max-width: 95%
   }
   #content {
     font-size: 12px
     line-height: 1.4em
-    table[width="928"] {
-      width: 970px
+    table {
+      &[width='928'] {
+        width: 970px
+      }
+      &[cellspacing='2'][cellpadding='2'][align='center']:not([width]) {
+        margin-top: .1rem
+      }
     }
     #menu_forum {
       // when not sicky make it same bg color
       padding: 8px 0
-      background: bg1
+      background: bg3
       border-color: bg4
       border-bottom: 1px solid bg4
-      border-top-left-radius: 4px
-      border-top-right-radius: 4px
+      rad: .28em .28em 0 0
       li a {
         color: v98
-        border-radius: 4px
+        rad: .28em
         border: solid 1px v04
         background: v02
         span {
           color: v98
-          padding: 4px 20px 4px 0
+          padding: .28em 20px .28em 0
+          text-shadow: 0 1px 0 bg0
+          &:hover {
+            color: v99
+          }
         }
         &:hover {
-          background-image: linear-gradient(v05, v06)
+          background-image: linear-gradient(v08, v08)
           border-color: v08
+          text-shadow: 0 1px 0 bg0
+          b: 0 0 10px 0 v04
         }
       }
       .active {
-        background-image: linear-gradient(v05, v06)
+        background-image: linear-gradient(v08, v08)
         border-color: v08
-        border-radius: 4px
+        b: 0 0 10px 0 v04
+        rad: .28em
         span {
-          top: -.1rem
+          color: v99
+          text-shadow: 0 1px 0 bg0
         }
       }
     }
@@ -415,30 +384,39 @@ b() { box-shadow: arguments }
       }
       td {
         &[width="40%"][valign="top"][nowrap="nowrap"][align="left"] {
-          .gensmall a[href*="watch=topic"] {
-            font-size: 12px
-            position: absolute
-            background: v04
-            color: v98
-            padding: .2rem .5rem
-            r: 4px
-            text-decoration: none
-            &:hover {
-              background: v05
-              color: v99
+          .gensmall {
+              a[href*="watch=topic"] {
+              font-size: 12px
+              position: absolute
+              background: v06
+              border: 1px solid v06
+              color: v98
+              padding: .2rem .5rem
+              rad: .28em
+              text-shadow: 0 1px 0 bg0
+              text-decoration: none
+              &:hover {
+                background: v08
+                border-color: v08
+                b: 0 0 10px 0 v04
+                color: v99
+              }
             }
-          }
-          .gensmall a[href*="unwatch=topic"] {
-            font-size: 12px
-            position: absolute
-            background: v14
-            color: v98
-            padding: .2rem .5rem
-            r: 4px
-            text-decoration: none
-            &:hover {
-              background: v15
-              color: v99
+            a[href*="unwatch=topic"] {
+              font-size: 12px
+              position: absolute
+              background: v14
+              border-color: v15
+              color: v98
+              padding: .2rem .5rem
+              rad: .28em
+              text-decoration: none
+              &:hover {
+                background: v16
+                border-color: v17
+                color: v99
+                b: 0 0 10px 0 v16
+              }
             }
           }
         }
@@ -458,7 +436,7 @@ b() { box-shadow: arguments }
         width: 967px
         margin: auto 0
         border-color: v05
-        r: 4px
+        rad: .28em
       }
       td {
         a[href*="viewtopic"] {
@@ -515,7 +493,6 @@ b() { box-shadow: arguments }
   #header_wrap {
     background-color: bg0
   }
-
   // https://forum.dd-wrt.com/phpBB2/login.php
   #header  {
     #logo {
@@ -559,7 +536,7 @@ b() { box-shadow: arguments }
         .active a {
           background: #f07100
           border: solid 1px #efa03b
-          border-radius: 4px
+          rad: .28em
           color: v99
           padding: 0px 2px 0px 2px
           span {
@@ -571,13 +548,24 @@ b() { box-shadow: arguments }
     }
   }
   .forum #content {
+    .content {
+      padding: 0 11px 11px 11px
+      background: bg2
+      border-color: bg4
+      border-bottom-left-radius: .28em
+      border-bottom-right-radius: .28em
+    }
     h2 {
       color: v97
       border-bottom: 1px solid bg4
-      padding-top: .2rem
+      padding-top: .4rem
+      padding-bottom: .4rem
     }
     .catHead a {
       color: v97
+    }
+    .thHead, .thSides, .thLeft, .thRight  {
+      color: fg1
     }
     #quick_links {
       // wider quicklinks so checkbox doesnt wrap
@@ -601,13 +589,11 @@ b() { box-shadow: arguments }
         border-color: v04
       }
       .frame_bottom {
-        r: 0 0 4px 4px
         height: 12px
         border: 1px solid
         border-color: v02 v04 v04 v04
       }
       .frame_top {
-        r: 4px 4px 0 0
         height: 12px
         border: 1px solid
         border-color: v04 v04 v02 v04
@@ -629,12 +615,12 @@ b() { box-shadow: arguments }
             margin: .3rem .3rem
             &[class="text"][name="autologin"] {
               vertical-align: middle
-              margin-left: .43333rem
+              margin-left: .3rem
             }
             &[type="password"],
             &[type="text"][name="username"] {
               width: 64%
-              r: 4px
+              rad: .28em
               padding: .2rem .1rem
             }
             &.mainoption {
@@ -649,43 +635,85 @@ b() { box-shadow: arguments }
         }
       }
     }
+    fieldset {
+      c: 0 bg4 var(--rgba-bg-03)
+      rad: .28em
+      // realign this shite bad UX design
+      .setting td[align="right"] {
+        text-align: left
+      }
+    }
     .posting {
+      border: 0
+      background: bg2
+      padding: 3px
       th {
         padding: 8px 4px
         background: bg4
         border-bottom: solid 1px bg5
         border-bottom: 1px solid t
         border-top: 1px solid bg4
-        r: 0
+        color: fg1
         &:first-child {
           border-left: 1px solid bg4
-          r: 4px 4px
+          rad: .28em .28em
         }
         &:last-child {
           border-right: 1px solid bg4
-          r: 4px 4px
+          rad: .28em .28em
         }
       }
-      .info td { border-bottom: 2px dotted bg5 }
+      .info td {
+        background: bg1
+        border: 1px dashed bg5
+        padding: .6rem .6rem
+        rad: .28em
+        &:first-child {
+          border-right: 0
+        }
+        &[valign="top"][nowrap="nowrap"] {
+          background: bg1
+          border-left-color: t
+        }
+      }
       table[width="928"] {
         width: 970px i
       }
-    }
-    .block th {
-      padding: 8px 8px
-      border-top-left-radius: 4px
-      border-top-right-radius: 4px
-      background: bg4
-      border-bottom: 1px solid t
-      border-top: 1px solid bg4
-      r: 0
-      &:first-child {
-        border-left: 1px solid bg4
-        r: 4px 4px
+      .navigation td {
+        border-top: solid 1px bg4
       }
-      &:last-child {
-        border-right: 1px solid bg4
-        r: 4px 4px
+      .quote {
+        border: 0
+        background: bg1
+        padding: .1rem .3rem
+        border-left: 5px solid bg5
+        rad: 1px .28em .28em 1px
+      }
+    }
+    .block {
+      border: 0
+      background: bg2
+      padding: 3px
+      th {
+        padding: 8px 8px
+        border-top-left-radius: .28em
+        border-top-right-radius: .28em
+        background: bg4
+        border-bottom: 1px solid t
+        border-top: 1px solid bg4
+        color: fg1
+        rad: 0
+        &:first-child {
+          border-left: 1px solid bg4
+          rad: .28em .28em
+        }
+        &:last-child {
+          border-right: 1px solid bg4
+          rad: .28em .28em
+        }
+      }
+      .row1 td {
+        border-top: solid 1px bg4
       }
     }
     .row1 td, .row2 td, .block td, .row1 .col2 {
@@ -698,8 +726,6 @@ b() { box-shadow: arguments }
     // https://forum.dd-wrt.com/phpBB2/login.php
     .four_columns .frame_top, .corner_left, .corner_right {
       display: none
-
-      r: 10px
     }
     // https://forum.dd-wrt.com/phpBB2/login.php checkbox align
     .four_columns {
@@ -708,54 +734,30 @@ b() { box-shadow: arguments }
       }
     }
   }
-
   textarea {
     appearance: none
     c: v98 bg4 bg0
     border: 1px solid
-    r: 2px
+    rad: .28em
     &:focus, &:focus-visible {
-      outline: 2px solid v07
-      r: 2px
+      outline: 1px solid v08
+      b: 0 0 10px 0 v04
+      rad: .28em
     }
   }
-  .forum #content .posting .navigation td,
-  .forum #content .block .row1 td {
-    border-top: solid 1px bg4
-  }
-  .forum #content .posting,
-  .forum #content .block {
-    border: 0
-    background: bg2
-    padding: 3px
-  }
-  .forum #content .content {
-    padding: 0 11px 11px 11px
-    background: bg2
-    border-color: bg4
-    border-bottom-left-radius: 4px
-    border-bottom-right-radius: 4px
-  }
+  // style code blocks all over
   .posting td.code,
   #content [class*='row'] td.code {
     border: 1px solid bg4
     background: var(--code-bg)
     color: v99
     padding: .6rem .5rem
-    r: 4px
-  }
-  .forum #content fieldset {
-    c: 0 bg4 var(--rgba-bg-03)
-    r: 4px
-    // realign this shite bad UX design
-    .setting td[align="right"] {
-      text-align: left
-    }
+    rad: .28em
   }
   .catBottom {
     tbody tr {
-      td[align="center"] { padding-top: 0rem; padding-bottom: 1rem }
-      .gensmall { margin-right: -14rem }
+      td[align="center"] { padding-top: 1rem; padding-bottom: 1rem }
+      .gensmall { margin-right: -16rem }
       td[width="25%"] { width: 23.33333% }
     }
     input[type="submit"][value="Search"] {
@@ -763,31 +765,23 @@ b() { box-shadow: arguments }
       margin-bottom: -1.5rem
     }
   }
-  form[action="search.php?mode=results"] {
-    table[width="928"] {
-      width: 930px
-      input {
-        vertical-align: middle
-        margin: .1rem .1rem
-      }
-      .genmed {
-        vertical-align: middle
-      }
-    }
-  }
   td.attachheader {
+    background: bg1 i
     font: normal 11px Verdana, Arial, Helvetica, sans-serif;
+    border-color: bg5
+    border-right: 0
+    border-collapse: unset
     color: v97
-    border-color: bg4
-    background-color: bg1
+    rad: 0
   }
   table.attachtable {
+    background-color: bg0
+    border: 1px solid bg5 i
     color: v97
-    border-color: bg4
   }
   td.attachrow {
     color: v97
-    border-color: bg4
+    border-color: t
   }
   hr {
     color: bg5
@@ -817,7 +811,7 @@ b() { box-shadow: arguments }
     c: #ff3e3e
   }
   [style="color: red"] {
-    c:
+    c: v18
   }
   [style="color: black"] {
     c: v99
@@ -893,30 +887,9 @@ b() { box-shadow: arguments }
   }
   // tweak avatars and margins a bit
   /img[src*="avatars"] {
-    border-radius: 3px
+    rad: 3px
     margin-top: .3rem
   }
-  if (avatar_soh) {
-    /img[src*="avatars"] {
-      transition: .33333s ease-in-out
-      &:hover {
-        scale: 1.8
-        margin-left: 1.63333rem
-        margin-top: 2.2rem
-        margin-bottom: 1rem
-        image-rendering: smooth
-        cursor: help
-      }
-    }
-  }
-  .forum #content .posting .quote {
-    border: 0
-    background: bg1
-    padding: .1rem .3rem
-    border-left: 5px solid bg5
-    r: 1px 4px 4px 1px
-  }
-
   tr.info td[width="100%"] {
     font-size: 70% i
     img[alt="Post"] {
@@ -943,9 +916,78 @@ b() { box-shadow: arguments }
       }
     }
   }
+  /form {
+      &[action*="profile_sec"] {
+      // hide broken shit theres no avatars provided in this forum
+      .block > table > tbody > tr:nth-child(41) > td > span:last-child,
+      input[name="avatargallery"] {
+        display: none
+      }
+      // fix avatar delete checkbox align and tweak margins
+      input[type="checkbox"][name="avatardel"] {
+        vertical-align: middle
+      }
+      img[src*="/avatars/"] {
+        margin-bottom: .4rem
+        &:hover {
+          margin-bottom: 2rem
+        }
+      }
+      // end
+      textarea[name="signature"] {
+        max-width: 500px i
+        width: 500px i
+        height: 200%
+        resize: vertical i
+        margin-left: .3rem
+      }
+      &[action="posting_sec.php"] {
+        table[width="450"] {
+          /tr[valign="middle"][align="center"] {
+            text-align: left
+          }
+          /textarea[rows="15"][style*="width"][wrap="virtual"] {
+            width: 770px i
+            max-width: @width
+            resize: vertical
+          }
+        }
+      }
+    }
+    // style pm's background/border
+    &[action="privmsg.php?folder=inbox"] {
+      table[width="100%"][cellspacing="1"][cellpadding="4"] td.row1[colspan="3"][valign="top"] {
+        background: bg0
+        padding: .3rem .5rem
+        border: 1px solid bg4
+        rad: .28em
+      }
+    }
+    // external login page fixes due to increasing table width from 928px to 970px
+    &[action="login.php"]:not(.forum_login) {
+      .posting table[width="928"][cellspacing="1"]:not(#z) {
+        width: 908px i
+        max-width: @width
+      }
+      h2 {
+        margin: 10px 0 8px 0 i
+      }
+    }
+    &[action="search.php?mode=results"] {
+      table[width="928"] {
+        width: 930px
+        input {
+          vertical-align: middle
+          margin: .1rem .1rem
+        }
+        .genmed {
+          vertical-align: middle
+        }
+      }
+    }
+  }
   // Better checkbox/radio inputs.
   input {
-    r       = unquote
     prefix  = 'data:image/svg+xml;utf8,'
     prefix += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">'
     transition: transition
@@ -969,33 +1011,33 @@ b() { box-shadow: arguments }
       }
     }
     &[type='radio'] {
-      // fix border radius at https://github.com/settings/profile Emoji color
-      border-radius: 50%
+      // fix border radius for radios
+      rad: 50%
       // align with checked state
       padding: 7px
       &:checked {
         path = '<circle cx="256" cy="256" r="128" fill="' + to_svg($v99) + '"/>'
-        background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
-        c: 0 v08 v09
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
+        c: 0 v07 v07
       }
-      &:focus, &:hover { c: 0 v09 bg2 }
+      &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
     }
 
     &[type='checkbox'] {
-    border-radius: 2px
+    rad: 2px
     &:checked {
       path ='<path fill="' + to_svg($v99) + '" d="M99 213l-1 89 104 102 205-201v-91L203 315 99 213z"/>'
-      background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
-      c: 0 v08 v09
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
+      c: 0 v07 v07
 
-      border-radius: 2px
+      rad: 3px
     }
-    &:focus, &:hover { c: 0 v09 bg2 }
+    &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
     &:indeterminate {
       path = '<rect x="128" y="128" width="256" height="256" fill="' + to_svg($v99) + '"/>'
-      background-image: s("url('%s%s</svg>') %s", r(prefix), r(path), i)
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
       c: 0 v08 v09
-      &:hover { c: 0 v09 bg2 }
+      &:hover { c: 0 v09 bg2; b: 0 0 10px 0 v04 }
       }
     }
 
@@ -1004,47 +1046,40 @@ b() { box-shadow: arguments }
         background-color: bg5
         border: 2px solid bg5
         color: v98
-
-        border-radius: 0.25em
-        padding: .2rem .4rem
+        box-shadow: 0 1px 0 bg0
+        text-shadow: 0 1px 0 bg0
+        rad: .28em
+        padding: .1rem .4rem
         cursor: pointer
+        transition: transition
         &:hover {
-          background-color: v09
-          border: 2px solid v09
+          background-color: v08
+          border: 2px solid v08
           color: v98
+          b: 0 0 10px 0 v04
         }
       }
       &::-webkit-file-upload-button {
         background-color: bg5
         border: 2px solid bg5
         color: v98
-
-        border-radius: 0.25em
-        padding: .2rem .4rem
+        box-shadow: 0 1px 0 bg0
+        text-shadow: 0 1px 0 bg0
+        rad: .28em
+        padding: .1rem .4rem
         cursor: pointer
+        transition: transition
         &:hover {
-          background-color: v09
-          border: 2px solid v09
+          background-color: v08
+          border: 2px solid v08
           color: v98
+          b: 0 0 10px 0 v04
         }
-      }
-    }
-    // audit log export inut fields
-    &[id="start-time"], &[id="end-time" i] {
-      -webkit-appearance: none
-      -moz-appearance: none
-      appearance: none
-      background: bg0
-      border: 1px solid bg5
-      color: v99
-      &:active, &:focus-visible {
-        border-color: v08
-        outline: none
       }
     }
     // exclude #searchInput from wiki
     &[type='text']:not(#searchInput), &[type='password'] {
-      border-radius: 4px
+      rad: .28em
       border: 1px solid bg5
       c: v98 0 bg1
       margin: .2rem .3rem
@@ -1052,8 +1087,9 @@ b() { box-shadow: arguments }
       &:active, &:focus-visible {
         border: 1px solid v08
         outline: 0
-        box-shadow: 0 0 3px 0 v09
+        b: 0 0 10px 0 v04
       }
+      &:hover { border: 1px solid v08 }
     }
     &[type='password'][name*='password'] {
       padding: .243333rem .2rem
@@ -1063,44 +1099,66 @@ b() { box-shadow: arguments }
         padding: .243333rem .2rem
       }
       &[name="bday_day"], &[name="bday_year"] {
-      vertical-align: middle
+        vertical-align: middle
       }
       &.helpline {
-        border-radius: 2px
         border: 1px solid bg5
         c: v98 0 bg2
         margin: .2rem .3rem
         padding: .3rem .1rem
         font-size: 12px i
+        rad: 2px
         &:active, &:focus-visible {
           border: 1px solid v08
           outline: 0
-          box-shadow: 0 0 3px 0 v09
+          b: 0 0 10px 0 v04
         }
       }
     }
+    // exclude .searchButton this is wiki
     &[type="submit"]:not(.searchButton), &[type="reset"] {
       vertical-align: middle
-      border-radius: 4px
-      border: 1px solid v05
-      c: v98 0 v05
+      rad: .28em
+      border: 1px solid v04
+      c: v98 0 0
+      background: v06
       padding: .19rem .6rem
+      box-shadow: 0 1px 0 bg0
+      text-shadow: 0 1px 0 bg0
       &:active, &:focus-visible, &:hover {
+        background: v08
         border: 1px solid v08
         outline: 0
-        box-shadow: 0 0 3px 0 v09
+        b: 0 0 10px 0 v04
       }
     }
-    &[type='submit'][value='Go']:not(#searchGoButton) {
-      vertical-align: sub
+    // exclude .searchButton this is wiki
+    &[type='submit'][value='Go']:not(.searchButton) {
+      vertical-align: top
       height: 28px
       width: 50px
+      box-shadow: 0 1px 0 bg0
+      text-shadow: 0 1px 0 bg0
+      &:active, &:focus-visible, &:hover {
+        background: v08
+        border: 1px solid v08
+        outline: 0
+        b: 0 0 10px 0 v04
+      }
     }
     // bottom add attach by submit/preview buttons
     &[type="submit"].liteoption[name="add_attachment"] {
       margin-top: 4.3rem
       margin-left: -17.06rem
       position: absolute
+      box-shadow: 0 1px 0 bg0
+      text-shadow: 0 1px 0 bg0
+      &:active, &:focus-visible, &:hover {
+        background: v08
+        border: 1px solid v08
+        outline: 0
+        b: 0 0 10px 0 v04
+      }
     }
     // preview and post buttons down a bit
     &[type='submit'][name='preview'],
@@ -1111,15 +1169,18 @@ b() { box-shadow: arguments }
       vertical-align: unset
     }
     &[type="button"] {
-      border-radius: 4px
+      rad: .28em
       border: 1px solid v05
 
       c: v98 0 v05
       padding: .1rem .1rem
+      box-shadow: 0 1px 0 bg0
+      text-shadow: 0 1px 0 bg0
       &:active, &:focus-visible, &:hover {
+        background: v08
         border: 1px solid v08
+        box-shadow: 0 0 10px 0 v04
         outline: 0
-        box-shadow: 0 0 3px 0 v09
       }
     }
   }
@@ -1127,7 +1188,6 @@ b() { box-shadow: arguments }
   // Better select element styles.
   /select {
     // Custom icon.
-    r       = unquote
     prefix  = 'data:image/svg+xml;utf8,'
     prefix += '<svg width="16" height="16" fill="' + to_svg($v95) + '" '
     prefix += 'xmlns="http://www.w3.org/2000/svg">'
@@ -1143,9 +1203,9 @@ b() { box-shadow: arguments }
         c: v97 0 bg0
         border: 1px solid bg5
         padding: .243333rem .2rem
-        border-radius: 4px
+        rad: .28em
 
-        &:hover { c: 0 0 bg3 }
+        &:hover { c: 0 v08 bg3 }
         &:active { c: 0 0 bg4 }
       }
       option, option[style="color:black; background-color: #FAFAFA"] {
