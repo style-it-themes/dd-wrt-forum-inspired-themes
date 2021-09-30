@@ -974,12 +974,14 @@ b() { box-shadow: arguments }
       }
     }
     // style pm's background/border
-      table[width="100%"][cellspacing="1"][cellpadding="4"] td.row1[colspan="3"][valign="top"] {
-        padding: .3rem .5rem
-        border: 1px solid bg4
-        rad: .28em
     &[action*='privmsg.php?folder'] {
+      table {
+        &[width='100%'][cellspacing='1'][cellpadding='4'] td.row1[colspan='3'][valign='top'] {
           background: bg1
+          padding: .3rem .5rem
+          border: 1px solid bg4
+          rad: .28em
+        }
         // pm quotes td header nick wrote; bg color to transparent
         &[width='90%'][cellspacing='1'][cellpadding='3'] {
           tr td:not(.code):not(.quote) {
