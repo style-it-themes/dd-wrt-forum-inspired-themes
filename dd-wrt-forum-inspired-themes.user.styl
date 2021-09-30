@@ -237,7 +237,7 @@ b() { box-shadow: arguments }
     --code-bg: darken(BG, 20%)
   }
   if (avatar_soh) {
-    /img[src*="avatars"] {
+    /img[src*='avatars'] {
       transition: .33333s ease-in-out
       &:hover {
         scale: 1.8
@@ -371,7 +371,7 @@ b() { box-shadow: arguments }
       .row1 { background: bg1 }
       .row2 {
         background: bg2
-        td[bgcolor="#FFFFFF"] {
+        td[bgcolor='#FFFFFF'] {
           background: v44
           border-color: v03
         }
@@ -383,9 +383,9 @@ b() { box-shadow: arguments }
         padding: .5rem .8rem
       }
       td {
-        &[width="40%"][valign="top"][nowrap="nowrap"][align="left"] {
+        &[width='40%'][valign='top'][nowrap='nowrap'][align='left'] {
           .gensmall {
-              a[href*="watch=topic"] {
+              a[href*='watch=topic'] {
               font-size: 12px
               position: absolute
               background: v06
@@ -402,7 +402,7 @@ b() { box-shadow: arguments }
                 color: v99
               }
             }
-            a[href*="unwatch=topic"] {
+            a[href*='unwatch=topic'] {
               font-size: 12px
               position: absolute
               background: v14
@@ -432,15 +432,15 @@ b() { box-shadow: arguments }
       }
     }
     #forum_content {
-      /iframe[width="930"] {
+      /iframe[width='930'] {
         width: 967px
         margin: auto 0
         border-color: v05
         rad: .28em
       }
       td {
-        a[href*="viewtopic"] {
-          img[src*="latest_reply"] {
+        a[href*='viewtopic'] {
+          img[src*='latest_reply'] {
             height: 10px
             width: 22px
           }
@@ -625,12 +625,12 @@ b() { box-shadow: arguments }
         form.forum_login {
           input {
             margin: .3rem .3rem
-            &[class="text"][name="autologin"] {
+            &[class='text'][name='autologin'] {
               vertical-align: middle
               margin-left: .3rem
             }
-            &[type="password"],
-            &[type="text"][name="username"] {
+            &[type='password'],
+            &[type='text'][name='username'] {
               width: 64%
               rad: .28em
               padding: .2rem .1rem
@@ -651,7 +651,7 @@ b() { box-shadow: arguments }
       c: 0 bg4 var(--rgba-bg-03)
       rad: .28em
       // realign this shite bad UX design
-      .setting td[align="right"] {
+      .setting td[align='right'] {
         text-align: left
       }
     }
@@ -683,12 +683,12 @@ b() { box-shadow: arguments }
         &:first-child {
           border-right: 0
         }
-        &[valign="top"][nowrap="nowrap"] {
+        &[valign='top'][nowrap='nowrap'] {
           background: bg1
           border-left-color: t
         }
       }
-      table[width="928"] {
+      table[width='928'] {
         width: 970px i
       }
       .navigation td {
@@ -744,7 +744,7 @@ b() { box-shadow: arguments }
     }
     // https://forum.dd-wrt.com/phpBB2/login.php checkbox align
     .four_columns {
-      input[type="checkbox"][name="autologin"] {
+      input[type='checkbox'][name='autologin'] {
         vertical-align: middle
       }
     }
@@ -771,11 +771,11 @@ b() { box-shadow: arguments }
   }
   .catBottom {
     tbody tr {
-      td[align="center"] { padding-top: 1rem; padding-bottom: 1rem }
+      td[align='center'] { padding-top: 1rem; padding-bottom: 1rem }
       .gensmall { margin-right: -16rem }
-      td[width="25%"] { width: 23.33333% }
+      td[width='25%'] { width: 23.33333% }
     }
-    input[type="submit"][value="Search"] {
+    input[type='submit'][value='Search'] {
       margin-top: 1rem
       margin-bottom: -1.5rem
     }
@@ -801,19 +801,19 @@ b() { box-shadow: arguments }
   hr {
     color: bg5
   }
-  [style="color: #88171A"] {
+  [style='color: #88171A'] {
     c: v18 0 0
   }
-  [style="color: #505050"] {
+  [style='color: #505050'] {
     c: v97 0 0
   }
-  [style="color: navy"], [style="color: blue"] {
+  [style='color: navy'], [style='color: blue'] {
     c: v69
   }
-  [style="color: #EA7E20"] {
+  [style='color: #EA7E20'] {
     c: v29
   }
-  [style="color: #1A3867"] {
+  [style='color: #1A3867'] {
     c: v65
   }
   [color='blue'] {
@@ -822,28 +822,28 @@ b() { box-shadow: arguments }
   [color='black'] {
     c: v99
   }
-  [style="color: darkred"] {
+  [style='color: darkred'] {
     c: #ff3e3e
   }
-  [style="color: red"] {
+  [style='color: red'] {
     c: v18
   }
-  [style="color: black"] {
+  [style='color: black'] {
     c: v99
   }
-  [style="color: purple"]  {
+  [style='color: purple']  {
     c: v89
   }
-  [style="color: brown"] {
+  [style='color: brown'] {
     c: v29
   }
-  [style="color:#006600"] {
+  [style='color:#006600'] {
     c: v46
   }
-  [style="color:#FFA34F"] {
+  [style='color:#FFA34F'] {
     c: v29
   }
-  [style="color: darkblue"] {
+  [style='color: darkblue'] {
     c: v65
   }
   a {
@@ -858,7 +858,7 @@ b() { box-shadow: arguments }
     filter: none
     mix-blend-mode: lighten
   }
-  /img[src*="image"]:not([src*="avatars"]):not([src*="smiles"]):not([src*="clip"]):not([onload*="_resize"]):not([src*="wiki"]) {
+  /img[src*='image']:not([src*='avatars']):not([src*='smiles']):not([src*='clip']):not([onload*='_resize']):not([src*='wiki']) {
     filter: invert(.9) hue-rotate(180deg) brightness(1.3)
     mix-blend-mode: lighten
     image-rendering: crispy-edges
@@ -868,7 +868,7 @@ b() { box-shadow: arguments }
     }
   }
   /img {
-    &[src*="clip"] {
+    &[src*='clip'] {
       filter: invert(.9)
       &:hover {
         scale: 1.6
@@ -876,7 +876,7 @@ b() { box-shadow: arguments }
         image-rendering: crisp-edges
       }
     }
-    &[src*="voting"] {
+    &[src*='voting'] {
       scale: 1.03
       margin-left: -.3rem
       margin-right: -.3rem
@@ -884,11 +884,11 @@ b() { box-shadow: arguments }
         scale: 1.03
       }
     }
-    &[src*="vote_lcap"] {
+    &[src*='vote_lcap'] {
       margin-right: -.2rem
       filter: invert(.9) hue-rotate(180deg) brightness(1.3)
     }
-    &[src*="vote_rcap"] {
+    &[src*='vote_rcap'] {
       margin-left: -.2rem
       filter: none
     }
@@ -897,17 +897,17 @@ b() { box-shadow: arguments }
     background: bg4
   }
   // KP69 avatar is black NOK with this, lets make exception
-  /img[src*="avatars/1516946736133b68f67b73"] {
+  /img[src*='avatars/1516946736133b68f67b73'] {
     filter: invert(.9)
   }
   // tweak avatars and margins a bit
-  /img[src*="avatars"] {
+  /img[src*='avatars'] {
     rad: 3px
     margin-top: .3rem
   }
-  tr.info td[width="100%"] {
+  tr.info td[width='100%'] {
     font-size: 70% i
-    img[alt="Post"] {
+    img[alt='Post'] {
       height: 14px
       width: 20px
       filter: hue-rotate(180deg) invert(.9) i
@@ -926,42 +926,42 @@ b() { box-shadow: arguments }
       line-height: 1.4em
     }
     &.four_columns {
-      table[width="928"] {
+      table[width='928'] {
         width: 970px i
       }
     }
   }
   /form {
-      &[action*="profile_sec"] {
+      &[action*='profile_sec'] {
       // hide broken shit theres no avatars provided in this forum
       .block > table > tbody > tr:nth-child(41) > td > span:last-child,
-      input[name="avatargallery"] {
+      input[name='avatargallery'] {
         display: none
       }
       // fix avatar delete checkbox align and tweak margins
-      input[type="checkbox"][name="avatardel"] {
+      input[type='checkbox'][name='avatardel'] {
         vertical-align: middle
       }
-      img[src*="/avatars/"] {
+      img[src*='/avatars/'] {
         margin-bottom: .4rem
         &:hover {
           margin-bottom: 2rem
         }
       }
       // end
-      textarea[name="signature"] {
+      textarea[name='signature'] {
         max-width: 500px i
         width: 500px i
         height: 200%
         resize: vertical i
         margin-left: .3rem
       }
-      &[action="posting_sec.php"] {
-        table[width="450"] {
-          /tr[valign="middle"][align="center"] {
+      &[action='posting_sec.php'] {
+        table[width='450'] {
+          /tr[valign='middle'][align='center'] {
             text-align: left
           }
-          /textarea[rows="15"][style*="width"][wrap="virtual"] {
+          /textarea[rows='15'][style*='width'][wrap='virtual'] {
             width: 770px i
             max-width: @width
             resize: vertical
@@ -979,8 +979,8 @@ b() { box-shadow: arguments }
       }
     }
     // external login page fixes due to increasing table width from 928px to 970px
-    &[action="login.php"]:not(.forum_login) {
-      .posting table[width="928"][cellspacing="1"]:not(#z) {
+    &[action='login.php']:not(.forum_login) {
+      .posting table[width='928'][cellspacing='1']:not(#z) {
         width: 908px i
         max-width: @width
       }
@@ -988,8 +988,8 @@ b() { box-shadow: arguments }
         margin: 10px 0 8px 0 i
       }
     }
-    &[action="search.php?mode=results"] {
-      table[width="928"] {
+    &[action='search.php?mode=results'] {
+      table[width='928'] {
         width: 930px
         input {
           vertical-align: middle
@@ -1113,7 +1113,7 @@ b() { box-shadow: arguments }
       &[name] {
         padding: .243333rem .2rem
       }
-      &[name="bday_day"], &[name="bday_year"] {
+      &[name='bday_day'], &[name='bday_year'] {
         vertical-align: middle
       }
       &.helpline {
@@ -1131,7 +1131,7 @@ b() { box-shadow: arguments }
       }
     }
     // exclude .searchButton this is wiki
-    &[type="submit"]:not(.searchButton), &[type="reset"] {
+    &[type='submit']:not(.searchButton), &[type='reset'] {
       vertical-align: middle
       rad: .28em
       border: 1px solid v04
@@ -1162,7 +1162,7 @@ b() { box-shadow: arguments }
       }
     }
     // bottom add attach by submit/preview buttons
-    &[type="submit"].liteoption[name="add_attachment"] {
+    &[type='submit'].liteoption[name='add_attachment'] {
       margin-top: 4.3rem
       margin-left: -17.06rem
       position: absolute
@@ -1180,10 +1180,10 @@ b() { box-shadow: arguments }
     &[type='submit'][name='post'] {
       margin-top: 1.8rem
     }
-    &[type="submit"][name="usersubmit"].liteoption {
+    &[type='submit'][name='usersubmit'].liteoption {
       vertical-align: unset
     }
-    &[type="button"] {
+    &[type='button'] {
       rad: .28em
       border: 1px solid v05
 
@@ -1223,7 +1223,7 @@ b() { box-shadow: arguments }
         &:hover { c: 0 v08 bg3 }
         &:active { c: 0 0 bg4 }
       }
-      option, option[style="color:black; background-color: #FAFAFA"] {
+      option, option[style*='background-color: #FAFAFA'] {
         background: bg1 i
         &[selected] {
           background: v05
