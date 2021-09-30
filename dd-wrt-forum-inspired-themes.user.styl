@@ -450,9 +450,13 @@ b() { box-shadow: arguments }
   }
   // https://forum.dd-wrt.com/phpBB2/login.php
   .forum #content:not([style]) {
+    .content {
+      border-top: 1px solid t
+    }
     #menu_forum {
       background: bg2
       border: 1px solid bg4
+      margin-bottom: -.4rem
       .active span {
         background: none i
         background-image: linear-gradient(v05, v06)
@@ -488,6 +492,10 @@ b() { box-shadow: arguments }
         background: v02
         width: 246px
       }
+    }
+    h2 {
+      padding-top: 0px
+      padding-bottom: .7rem;
     }
   }
   #header_wrap {
@@ -574,6 +582,7 @@ b() { box-shadow: arguments }
       #toggle a {
         color: v99 i
         font-weight: 600
+        text-shadow: 0 1px 0 bg0
         &::after {
           content: '\00A0\23F7'
           font-size: 16px
@@ -582,21 +591,24 @@ b() { box-shadow: arguments }
         &:hover {
           color: v09 i
           text-decoration: none
+          text-shadow: 0 1px 0 bg0
         }
       }
       .frame_bottom, .frame_top {
-        background-image: linear-gradient(v02, v02)
+        background: v02
         border-color: v04
       }
       .frame_bottom {
         height: 12px
         border: 1px solid
         border-color: v02 v04 v04 v04
+        rad: 0 0 4px 4px
       }
       .frame_top {
         height: 12px
         border: 1px solid
         border-color: v04 v04 v02 v04
+        rad: 4px 4px 0 0
         margin-top: -.02rem
       }
       #quick_link_infos {
