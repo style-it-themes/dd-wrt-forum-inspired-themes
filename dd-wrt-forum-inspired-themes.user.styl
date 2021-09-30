@@ -768,6 +768,10 @@ b() { box-shadow: arguments }
     color: v99
     padding: .6rem .5rem
     rad: .28em
+    cursor: copy
+  }
+  .forum #content .quote td:not(.code) {
+    background: t
   }
   .catBottom {
     tbody tr {
@@ -976,6 +980,17 @@ b() { box-shadow: arguments }
         padding: .3rem .5rem
         border: 1px solid bg4
         rad: .28em
+        // pm quotes td header nick wrote; bg color to transparent
+        &[width='90%'][cellspacing='1'][cellpadding='3'] {
+          tr td:not(.code):not(.quote) {
+            background: t i
+          }
+          // style quotes in PM's
+          td.quote {
+            border-left: 5px solid bg5
+            rad: 1px .28em .28em 1px
+          }
+        }
       }
     }
     // external login page fixes due to increasing table width from 928px to 970px
