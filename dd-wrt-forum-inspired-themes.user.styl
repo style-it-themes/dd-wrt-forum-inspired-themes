@@ -668,11 +668,15 @@ b() { box-shadow: arguments }
         color: fg1
         &:first-child {
           border-left: 1px solid bg4
-          rad: .28em .28em
+          border-right: 1px solid bg0
+          padding-left: .4rem
+          rad: .28em 0 0 .28em
         }
         &:last-child {
           border-right: 1px solid bg4
-          rad: .28em .28em
+          border-left: 1px solid bg4
+          padding-left: .4rem
+          rad: 0 .28em .28em 0
         }
       }
       .info td {
