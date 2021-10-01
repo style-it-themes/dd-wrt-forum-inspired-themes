@@ -572,7 +572,8 @@ b() { box-shadow: arguments }
     .catHead a {
       color: v97
     }
-    .thHead, .thSides, .thLeft, .thRight  {
+    .thHead, .thSides,
+    .thLeft, .thRight {
       color: fg1
     }
     #quick_links {
@@ -655,6 +656,7 @@ b() { box-shadow: arguments }
         text-align: left
       }
     }
+
     .posting {
       border: 0
       background: bg2
@@ -728,11 +730,13 @@ b() { box-shadow: arguments }
           rad: .28em .28em
         }
       }
-      .row1 td {
-        border-top: solid 1px bg4
-      }
-      table[width*='928'] {
-        width: 970px
+      .row1 {
+        td {
+          border-top: solid 1px bg4
+        }
+        table[width*='928'] {
+          width: 970px
+        }
       }
     }
     .row1 td, .row2 td, .block td, .row1 .col2 {
@@ -1072,8 +1076,8 @@ b() { box-shadow: arguments }
     &:indeterminate {
       path = '<rect x="128" y="128" width="256" height="256" fill="' + to_svg($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
-      c: 0 v08 v09
-      &:hover { c: 0 v09 bg2; b: 0 0 10px 0 v04 }
+        c: 0 v08 v09
+        &:hover { c: 0 v09 bg2; b: 0 0 10px 0 v04 }
       }
     }
 
