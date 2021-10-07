@@ -553,6 +553,21 @@ b() { box-shadow: arguments }
         }
       }
     }
+    // Fix double word e.g. DD-WRT Forum Forum Index
+    a.nav {
+      &[href*='index'] {
+        font-size: 0
+        &::after {
+          content: 'DD-WRT Forum Index'
+          Font-size: 12px
+        }
+        // add speech bubble before
+        &::before {
+          content: '\1F4AC\00A0'
+          font-size: 12px
+        }
+      }
+    }
   }
   .forum #content {
     .content {
