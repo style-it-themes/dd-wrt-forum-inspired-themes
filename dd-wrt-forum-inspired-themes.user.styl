@@ -59,7 +59,7 @@ to_hsla(input) {
 
 // SVG-friendly colors mixin.
 // NOTE: Compiler does not like HSLA format, so we convert back to HEX.
-to_svg(input) {
+to_hex(input) {
   s('\%23%s', rq(substr(s('%s', convert(input)), 1, 6)))
 }
 
@@ -1055,7 +1055,7 @@ b() { box-shadow: arguments }
       // align with checked state
       padding: 7px
       &:checked {
-        path = '<circle cx="256" cy="256" r="128" fill="' + to_svg($v99) + '"/>'
+        path = '<circle cx="256" cy="256" r="128" fill="' + to_hex($v99) + '"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
         c: 0 v07 v07
       }
@@ -1065,7 +1065,7 @@ b() { box-shadow: arguments }
     &[type='checkbox'] {
     rad: 2px
     &:checked {
-      path ='<path fill="' + to_svg($v99) + '" d="M99 213l-1 89 104 102 205-201v-91L203 315 99 213z"/>'
+      path ='<path fill="' + to_hex($v99) + '" d="M99 213l-1 89 104 102 205-201v-91L203 315 99 213z"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
       c: 0 v07 v07
 
@@ -1073,7 +1073,7 @@ b() { box-shadow: arguments }
     }
     &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
     &:indeterminate {
-      path = '<rect x="128" y="128" width="256" height="256" fill="' + to_svg($v99) + '"/>'
+      path = '<rect x="128" y="128" width="256" height="256" fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
         c: 0 v08 v09
         &:hover { c: 0 v09 bg2; b: 0 0 10px 0 v04 }
@@ -1228,7 +1228,7 @@ b() { box-shadow: arguments }
   /select {
     // Custom icon.
     prefix  = 'data:image/svg+xml;utf8,'
-    prefix += '<svg width="16" height="16" fill="' + to_svg($v95) + '" '
+    prefix += '<svg width="16" height="16" fill="' + to_hex($v95) + '" '
     prefix += 'xmlns="http://www.w3.org/2000/svg">'
     path    = '<path d="M4.427 9.427l3.396 3.396a.251.251 0 00.354 '
     path   += '0l3.396-3.396A.25.25 0 0011.396 9H4.604a.25.25 0 '
