@@ -268,6 +268,23 @@ b() { box-shadow: arguments }
     //fix wiki ad block
     border: 0
   }
+  // fix fuckery with phpbb terrible craziness images displaying where they should not
+  // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?p=170921#170921
+  [class*='row'].navigation td {
+     div[style="position:absolute"] {
+       position: relative i
+       a img[src*="icq"] {
+         margin-top: -1.6rem
+         margin-left: 8rem
+       }
+     }
+  }
+  // fix icq badge inline
+  // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?p=170921#170921
+  img[src*="web.icq"] {
+    width: 0
+    height: 0
+  }
 
   a[href*='mode=viewprofile'] {
     img {
