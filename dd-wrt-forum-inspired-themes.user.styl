@@ -33,6 +33,7 @@
 @var range    cg_lig       'Lightness of gray colors' [0, -30, 30, 0.01]
 
 @var checkbox avatar_soh   'Avatar on hover scale   ' 0
+@var checkbox emoji_new    'Enable emoji override   ' 1
 
 @var text     transition   'Define transition value ' 'all 0.2s cubic-bezier( 0.3, 0, 0.5, 1)'
 
@@ -232,6 +233,7 @@ b() { box-shadow: arguments }
 
     // rgba BG/AC vars
     --rgba-bg-03: rgba(convert($bg1), .3)
+    --rgba-bg-05: rgba(convert($bg5), .5)
     // Code areas
     --code-bg: darken(BG, 20%)
   }
@@ -239,11 +241,10 @@ b() { box-shadow: arguments }
     /img[src*='avatars'] {
       transition: .33333s ease-in-out
       &:hover {
-        scale: 1.8
+        transform: scale(1.8)
         margin-left: 1.63333rem
         margin-top: 2.2rem
         margin-bottom: 1rem
-        image-rendering: smooth
         cursor: help
       }
     }
@@ -271,13 +272,13 @@ b() { box-shadow: arguments }
   // fix fuckery with phpbb terrible craziness images displaying where they should not
   // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?p=170921#170921
   [class*='row'].navigation td {
-     div[style="position:absolute"] {
-       position: relative i
-       a img[src*="icq"] {
-         margin-top: -1.6rem
-         margin-left: 8rem
-       }
-     }
+    div[style="position:absolute"] {
+      position: relative i
+      a img[src*="icq"] {
+        margin-top: -1.633rem
+        margin-left: calc(24.355rem - .70rem )
+      }
+    }
   }
   // fix icq badge inline
   // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?p=170921#170921
@@ -285,15 +286,1461 @@ b() { box-shadow: arguments }
     width: 0
     height: 0
   }
-
-  a[href*='mode=viewprofile'] {
-    img {
+  img {
+    image-rendering: smooth
+    transition: transition
+    &[title*="profile"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="50" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\1F464\00A0profile</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
       width: 0
-      &:after {
-        content: 'This profile'
-        font-size: 20px
-        width: 20px
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
       }
+    }
+    &[src*="icon_pm"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="60" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\1F465pm</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_www"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="55" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\1F517www</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_email"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="52" y="37" fill="' + to_hex($v97) + '" '
+      path  += 'font-weight="bold" font-size="18px">\0040\00A0</text>'
+      path  += '<text x="73" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">'email'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_yim"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="52" y="37" fill="' + to_hex($v19) + '" '
+      path  += 'font-weight="bold" font-size="18px">Y!</text>'
+      path  += '<text x="78" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\00A0'Yim'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_msnm"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="52" y="37" fill="' + to_hex($v69) + '" '
+      path  += 'font-weight="bold" font-size="18px">\265F</text>'
+      path  += '<text x="73" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">'msnm'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_icq"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="52" y="42" fill="' + to_hex($v46) + '" '
+      path  += 'font-weight="normal" font-size="36px">\2055</text>'
+      path  += '<text x="75" y="36" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">'ICQ'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_quote"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="53" y="48" fill="' + to_hex($v99) + '" '
+      path  += 'font-weight="normal" font-size="28px">\1F677</text>'
+      path  += '<text x="73" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">'quote'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_edit"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="55" y="37" fill="' + to_hex($v99) + '" '
+      path  += 'font-weight="normal" font-size="16px">\270E</text>'
+      path  += '<text x="80" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">'edit'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_delete"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="80" y="37" fill="' + to_hex($v99) + '" '
+      path  += 'font-weight="400" font-size="16px">\1F5D1</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 28px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*="icon_ip"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="80" y="36" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">'IP'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 28px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    // postimages replacements
+    // new topic/new post/post reply/topic locked buttons
+    &[src*='msg_newpost'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="47" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\1F4DDnew\00A0\pm</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding: 14px
+      padding-right: 98px
+      background-size: 170px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*='english/post'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="38" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\1F4C4\00A0new\00A0topic</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding: 14px
+      padding-right: 98px
+      background-size: 170px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*='english/reply'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="40" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\1F4DDpost\00A0reply</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding: 14px
+      padding-right: 98px
+      background-size: 170px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    &[src*='reply-locked'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="48" y="35" fill="' + to_hex($v98) + '" '
+      path  += 'font-weight="bold" font-size="14px">\1F512\00A0locked</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding: 14px
+      padding-right: 98px
+      background-size: 170px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
+    // forum icons new/no new/locked
+    &[src*='folder_new_big.gif'], &[src*='folder_new_big.gif'][width]:not(#x) {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ar'
+      path  += 'ia-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid me'
+      path  += 'et" viewBox="0 0 24 24"><g fill="none"><path d="M12 2v6a2 2 0 0 0 2 2h6v10a2 2 0 0 1-'
+      path  += '2 2h-6.81A6.5 6.5 0 0 0 4 11.498V4a2 2 0 0 1 2-2h6z" fill="' + to_hex($v99) + '"/><pa'
+      path  += 'th d="M13.5 2.5V8a.5.5 0 0 0 .5.5h5.5l-6-6z" fill="' + to_hex($v99) + '"/><path d="M1'
+      path  += '2 17.5a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0zM6.5 14a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 1 0'
+      path  += 'v-4a.5.5 0 0 0-.5-.5zm0 7.125a.625.625 0 1 0 0-1.25a.625.625 0 0 0 0 1.25z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 14px
+      padding-right: 24px
+      background-size: 24px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_big.gif'][alt="No new posts"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M18.5 20a.5.5 0 0 1-.5.5H6a.5.5'
+      path  += ' 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5h6V8a2 2 0 0 0 2 2h4.5v10zm-5-15.379L17.378 8.5H14a.'
+      path  += '5.5 0 0 1-.5-.5V4.621zm5.914 3.793l-5.829-5.828c-.026-.026-.058-.046-.085-.07a2.072'
+      path  += ' 2.072 0 0 0-.219-.18c-.04-.027-.086-.045-.128-.068c-.071-.04-.141-.084-.216-.116a1'
+      path  += '.977 1.977 0 0 0-.624-.138C12.266 2.011 12.22 2 12.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0'
+      path  += ' 0 2 2h12a2 2 0 0 0 2-2V9.828a2 2 0 0 0-.586-1.414z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 14px
+      padding-right: 24px
+      background-size: 24px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_locked_big.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M13 6.75V2H8.75A2.25 2.25 0 0 0'
+      path  += ' 6.5 4.25V11a6.5 6.5 0 0 1 6.187 8.5h5.063A2.25 2.25 0 0 0 20 17.25V9h-4.75A2.25 2.'
+      path  += '25 0 0 1 13 6.75zM5.503 4.627l-.002 6.45A6.457 6.457 0 0 0 4 11.497V6.75c0-.98.627-'
+      path  += '1.815 1.503-2.123zm9.741 17.377h-4.058a6.518 6.518 0 0 0 1.08-1.5h5.1a2.251 2.251 0'
+      path  += ' 0 1-2.122 1.5zM14.5 6.75V2.5l5 5h-4.25a.75.75 0 0 1-.75-.75zM12 17.5a5.5 5.5 0 1 1'
+      path  += '-11 0a5.5 5.5 0 0 1 11 0zm-9.5 0c0 .834.255 1.608.691 2.248l5.557-5.557A4 4 0 0 0 2'
+      path  += '.5 17.5zm4 4a4 4 0 0 0 3.309-6.248l-5.557 5.557c.64.436 1.414.691 2.248.691z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 24px
+      background-size: 24px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    // new posts/popular/locked/announce/sticky
+    &[src*='folder_new'][width]:not([alt*='Popular']) {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M10 2v4.5A1.5 1.5 0 0 0 11.5 8H'
+      path  += '16v8.5a1.5 1.5 0 0 1-1.5 1.5H9.743A5.5 5.5 0 0 0 4 9.207V3.5A1.5 1.5 0 0 1 5.5 2H10'
+      path  += 'z" fill="' + to_hex($v99) + '"/><path d="M11 2.25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25z'
+      path  += '" fill="' + to_hex($v99) + '"/><path d="M10 14.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 '
+      path  += '0zM5.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5zm0 5.125a.625.625 0 '
+      path  += '1 0 0-1.25a.625.625 0 0 0 0 1.25z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_new_hot'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M10 2v4.5A1.5 1.5 0 0 0 11.5 8H'
+      path  += '16v8.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V13h1.5a1.5 1.5 0 0 0 1.342-.83'
+      path  += 'l.034-.068l1.24 2.975a1.5 1.5 0 0 0 2.726.094L11.927 13h.573a1.5 1.5 0 0 0 0-3H11a1'
+      path  += '.5 1.5 0 0 0-1.342.83l-.034.068l-1.24-2.975a1.5 1.5 0 0 0-2.726-.094L4.573 10H4V3.5'
+      path  += 'A1.5 1.5 0 0 1 5.5 2H10z" fill="' + to_hex($v99) + '"/><path d="M11 2.25V6.5a.5.5 0'
+      path  += ' 0 0 .5.5h4.25L11 2.25z" fill="' + to_hex($v99) + '"/><path d="M7.462 8.308a.5.5 0 '
+      path  += '0 0-.91-.032L5.192 11H3.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .447-.276L6.96 9.7l2.08 4.991'
+      path  += 'a.5.5 0 0 0 .908.032L11.31 12H12.5a.5.5 0 0 0 0-1H11a.5.5 0 0 0-.447.276L9.54 13.3l'
+      path  += '-2.08-4.991z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      filter: none i
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_lock_new'][alt='New posts [ Locked ]'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M11 2v4.5A1.5 1.5 0 0 0 12.5 8H'
+      path  += '17v6.5a1.5 1.5 0 0 1-1.5 1.5h-4.707A5.5 5.5 0 0 0 6 9.022V3.5A1.5 1.5 0 0 1 7.5 2H1'
+      path  += '1zM5 9.022V4a1 1 0 0 0-1 1v4.207a5.48 5.48 0 0 1 1-.185zM10.4 17a5.507 5.507 0 0 1-'
+      path  += '.657 1H14a1 1 0 0 0 1-1h-4.6zM12 2.25V6.5a.5.5 0 0 0 .5.5h4.25L12 2.25zM1 14.5a4.5 '
+      path  += '4.5 0 1 0 9 0a4.5 4.5 0 0 0-9 0zm2.404 2.803l4.9-4.9a3.5 3.5 0 0 1-4.9 4.9zm-.707-.'
+      path  += '707a3.5 3.5 0 0 1 4.9-4.9l-4.9 4.9z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      filter: none i
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder.gif'][width][alt='No new posts'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0'
+      path  += ' 2 2h8a2 2 0 0 0 2-2V7.414a1.5 1.5 0 0 0-.44-1.06l-3.914-3.915A1.5 1.5 0 0 0 10.586'
+      path  += ' 2H6zM5 4a1 1 0 0 1 1-1h4v3.5A1.5 1.5 0 0 0 11.5 8H15v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1'
+      path  += '-1V4zm9.793 3H11.5a.5.5 0 0 1-.5-.5V3.207L14.793 7z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0 i
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_hot'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlin'
+      path  += 'k" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="x'
+      path  += 'MidYMid meet" viewBox="0 0 20 20"><g fill="none"><path d="M6 2a2 2 0 0 0-2 2v4.5'
+      path  += 'a.5.5 0 0 0 1 0V4a1 1 0 0 1 1-1h4v3.5A1.5 1.5 0 0 0 11.5 8H15v8a1 1 0 0 1-1 1H6a'
+      path  += '1 1 0 0 1-1-1v-3H4v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7.414a1.5 1.5 0 0 0-.44-1.06l'
+      path  += '-3.914-3.915A1.5 1.5 0 0 0 10.586 2H6zm8.793 5H11.5a.5.5 0 0 1-.5-.5V3.207L14.79'
+      path  += '3 7z" fill="' + to_hex($v99) + '"/><path d="M7.462 8.308a.5.5 0 0 0-.91-.032L5.1'
+      path  += '92 11H3.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .447-.276L6.96 9.7l2.08 4.991a.5.5 0 0 0 .'
+      path  += '908.032L11.31 12H12.5a.5.5 0 0 0 0-1H11a.5.5 0 0 0-.447.276L9.54 13.3l-2.08-4.99'
+      path  += '1z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_lock.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M8 2a2 2 0 0 0-2 2v5.022c.343.0'
+      path  += '31.678.094 1 .185V4a1 1 0 0 1 1-1h3v3.5A1.5 1.5 0 0 0 12.5 8H16v6a1 1 0 0 1-1 1h-4.'
+      path  += '022a5.489 5.489 0 0 1-.185 1H15a2 2 0 0 0 2-2V7.414a1.5 1.5 0 0 0-.44-1.06l-3.914-3'
+      path  += '.915A1.5 1.5 0 0 0 11.586 2H8zm4 4.5V3.207L15.793 7H12.5a.5.5 0 0 1-.5-.5zM5 9.022V'
+      path  += '4a1 1 0 0 0-1 1v4.207a5.48 5.48 0 0 1 1-.185zM9.743 18c.253-.307.474-.642.657-1H15a'
+      path  += '1 1 0 0 1-1 1H9.743zM1 14.5a4.5 4.5 0 1 0 9 0a4.5 4.5 0 0 0-9 0zm2.404 2.803l4.9-4.'
+      path  += '9a3.5 3.5 0 0 1-4.9 4.9zm-.707-.707a3.5 3.5 0 0 1 4.9-4.9l-4.9 4.9z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_announce'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M8.686 2.852L2.127 14.777A1.5 1'
+      path  += '.5 0 0 0 3.441 17H16.56a1.5 1.5 0 0 0 1.314-2.223L11.314 2.852a1.5 1.5 0 0 0-2.628 '
+      path  += '0zM10 6.75a.75.75 0 0 1 .75.75v4a.75.75 0 0 1-1.5 0v-4a.75.75 0 0 1 .75-.75zm.75 7a'
+      path  += '.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    &[src*='folder_sticky'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M18 10a8 8 0 1 0-16 0a8 8 0 0 0'
+      path  += ' 16 0zM9.508 8.91a.5.5 0 0 1 .984 0L10.5 9v4.502l-.008.09a.5.5 0 0 1-.984 0l-.008-.'
+      path  += '09V9l.008-.09zM9.25 6.75a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 20px
+      background-size: 20px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        scale: 1 i
+      }
+    }
+    // private message area Microsoft MIT lic.
+    &[src*='msg_inbox'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M16 10.4v.6h-3.5a.5.5 0 0 0-.5.'
+      path  += '498V11.511l-.004.06a2.57 2.57 0 0 1-.256.955a1.694 1.694 0 0 1-.572.667c-.26.174-.6'
+      path  += '3.307-1.168.307c-.538 0-.907-.133-1.168-.307a1.694 1.694 0 0 1-.572-.667A2.572 2.57'
+      path  += '2 0 0 1 8 11.511V11.5A.5.5 0 0 0 7.5 11H4V7a2 2 0 0 1 2-2h2.022a5.48 5.48 0 0 1 .18'
+      path  += '5-1H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V9.743a5.507 5.507 0 0 1-1 .657z'
+      path  += 'm-2.5-.4a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9zm-2.354-4.146a.5.5 0 0 1 .708-.708L13 '
+      path  += '6.293V3.5a.5.5 0 0 1 1 0v2.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.499.499 0 0 1-'
+      path  += '.351.146h-.006a.498.498 0 0 1-.348-.144l-.003-.003l-2-2z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 24px
+      background-size: 24px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      }
+    }
+    &[src*='msg_sentbox'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M10.499 4a6.454 6.454 0 0 0-.42'
+      path  += '3 1.5H6.25A1.75 1.75 0 0 0 4.5 7.25V14H9a.75.75 0 0 1 .743.648l.007.102a2.25 2.25 0'
+      path  += ' 0 0 4.5 0A.75.75 0 0 1 15 14h4.5l.001-1.733a6.517 6.517 0 0 0 1.5-1.077L21 18.75A3'
+      path  += '.25 3.25 0 0 1 17.75 22H6.25A3.25 3.25 0 0 1 3 18.75V7.25A3.25 3.25 0 0 1 6.25 4h4.'
+      path  += '249zM16.5 1a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11zm.216 2.589l-.07.057l-.057.07a.5.'
+      path  += '5 0 0 0 0 .568l.057.07L18.292 6H13l-.09.008a.5.5 0 0 0-.402.402l-.008.09l.008.09a.5'
+      path  += '.5 0 0 0 .402.402L13 7h5.292l-1.646 1.646l-.057.07a.5.5 0 0 0 .695.695l.07-.057l2.5'
+      path  += '41-2.548l.033-.048l.034-.067l.021-.063l.015-.082L20 6.5l-.003-.053l-.014-.075l-.03-'
+      path  += '.083l-.042-.074l-.045-.056l-2.512-2.513l-.07-.057a.5.5 0 0 0-.568 0z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 24px
+      background-size: 24px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      }
+    }
+    &[src*='msg_outbox'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M10.499 4a6.454 6.454 0 0 0-.42'
+      path  += '3 1.5H6.25A1.75 1.75 0 0 0 4.5 7.25V14H9a.75.75 0 0 1 .743.648l.007.102a2.25 2.25 0'
+      path  += ' 0 0 4.5 0A.75.75 0 0 1 15 14h4.5l.001-1.733a6.517 6.517 0 0 0 1.5-1.077L21 18.75A3'
+      path  += '.25 3.25 0 0 1 17.75 22H6.25A3.25 3.25 0 0 1 3 18.75V7.25A3.25 3.25 0 0 1 6.25 4h4.'
+      path  += '249zM16.5 1a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11zm.128 2.017l-.086-.015L16.488 3l-'
+      path  += '.056.005l-.06.012l-.083.03l-.074.042l-.056.045l-2.513 2.512l-.057.07a.5.5 0 0 0 0 .'
+      path  += '568l.057.07l.07.057a.5.5 0 0 0 .568 0l.07-.057l1.645-1.646L16 10l.008.09a.5.5 0 0 0'
+      path  += ' .402.402l.09.008l.09-.008a.5.5 0 0 0 .402-.402L17 10l-.001-5.294l1.647 1.648l.07.0'
+      path  += '57a.5.5 0 0 0 .695-.695l-.057-.07l-2.548-2.542l-.047-.032l-.068-.034l-.063-.021z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 24px
+      background-size: 24px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      }
+    }
+    &[src*='msg_savebox'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M17.75 3A3.25 3.25 0 0 1 21 6.2'
+      path  += '5v11.5A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6'
+      path  += '.25 3h11.5zm0 1.5H6.25A1.75 1.75 0 0 0 4.5 6.25V13H9a.75.75 0 0 1 .743.648l.007.102'
+      path  += 'a2.25 2.25 0 0 0 4.495.154l.005-.154A.75.75 0 0 1 15 13h4.5V6.25a1.75 1.75 0 0 0-1.'
+      path  += '607-1.744L17.75 4.5zm-11 5h10.5a.75.75 0 0 1 .102 1.493L17.25 11H6.75a.75.75 0 0 1-'
+      path  += '.102-1.493L6.75 9.5h10.5h-10.5zm0-3h10.5a.75.75 0 0 1 .102 1.493L17.25 8H6.75a.75.7'
+      path  += '5 0 0 1-.102-1.493L6.75 6.5h10.5h-10.5z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 12px
+      padding-right: 24px
+      background-size: 24px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      }
+    }
+    &[src*='icon_clip.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 12 12"><g fill="none"><path d="M9.01 2.582a2.014 2.014 0 0 0-2'
+      path  += '.83-.01L2.85 5.844a.501.501 0 0 1-.707-.004a.497.497 0 0 1 .005-.705l3.329-3.271a3.'
+      path  += '017 3.017 0 0 1 4.24.013a2.987 2.987 0 0 1 0 4.237l-4.332 4.314a1.966 1.966 0 0 1-2'
+      path  += '.772 0a1.947 1.947 0 0 1 0-2.761l4.04-4.023a.501.501 0 0 1 .706 0a.497.497 0 0 1 0 '
+      path  += '.704L3.32 8.371a.954.954 0 0 0 0 1.353a.963.963 0 0 0 1.36 0L9.01 5.41a1.994 1.994 '
+      path  += '0 0 0 0-2.828z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding: 14px
+      padding-right: 0
+      padding-top: 0
+      padding-bottom: 14px
+      background-size: 16px
+      background-repeat: no-repeat
+      background-position: left
+      vertical-align: middle
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        transform: scale(1.08)
+      }
+    }
+    &[src*='icon_minipost.gif'][alt="Post"]:not(#x), &[src*='icon_minipost'][alt="Goto page"] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 16 16"><g fill="none"><path d="M9 1v3.5A1.5 1.5 0 0 0 10.5 6H1'
+      path  += '4v7.5a1.5 1.5 0 0 1-1.5 1.5H8.663A5.5 5.5 0 0 0 4 5.207V2.5A1.5 1.5 0 0 1 5.5 1H9z"'
+      path  += ' fill="' + to_hex($v99) + '"/><path d="M10 1.25V4.5a.5.5 0 0 0 .5.5h3.25L10 1.25z" '
+      path  += 'fill="' + to_hex($v99) + '"/><path d="M10 10.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0z'
+      path  += 'm-4-2a.5.5 0 0 0-1 0V10H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V11h1.5a.5.5 0 0 0 0'
+      path  += '-1H6V8.5z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0 i
+      height: 14px
+      padding: 16px
+      padding-right: 10px
+      padding-top: 0
+      padding-bottom: 0
+      background-size: 16px
+      background-repeat: no-repeat
+      background-position: center
+      vertical-align: middle
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      }
+    }
+    &[src*='icon_minipost_new.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M10 2v4.5A1.5 1.5 0 0 0 11.5 8H'
+      path  += '16v8.5a1.5 1.5 0 0 1-1.5 1.5H9.743A5.5 5.5 0 0 0 4 9.207V3.5A1.5 1.5 0 0 1 5.5 2H10'
+      path  += 'z" fill="' + to_hex($v99) + '"/><path d="M11 2.25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25z'
+      path  += '" fill="' + to_hex($v99) + '"/><path d="M10 14.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 '
+      path  += '0zM5.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5zm0 5.125a.625.625 0 '
+      path  += '1 0 0-1.25a.625.625 0 0 0 0 1.25z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0 i
+      height: 14px
+      padding: 16px
+      padding-right: 10px
+      padding-top: 0
+      padding-bottom: 0
+      background-size: 16px
+      background-repeat: no-repeat
+      background-position: center
+      vertical-align: middle
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      }
+    }
+    &[src*='icon_latest_reply']:not(#x), &[src*='icon_newest_reply'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 16 16"><g fill="none"><path d="M4.133 3.692A2.501 2.501 0 0 1 '
+      path  += '6.5 2h5A2.5 2.5 0 0 1 14 4.5v5c0 1.098-.708 2.03-1.692 2.367v.364c0 .335-.117.763-.'
+      path  += '392 1.116c-.289.372-.748.653-1.377.653h-5.77A2.75 2.75 0 0 1 2 11.23V5.463c0-.549.1'
+      path  += '97-1.006.546-1.323c.34-.309.785-.447 1.223-.447h.364zm-.133 1h-.23a.81.81 0 0 0-.55'
+      path  += '2.188C3.1 4.987 3 5.164 3 5.462v5.769c0 .993.776 1.77 1.77 1.77h5.769c.299 0 .474-.'
+      path  += '121.588-.268a.886.886 0 0 0 .18-.502V12H6.5A2.5 2.5 0 0 1 4 9.5V4.692zM8 6h1.293L6.'
+      path  += '646 8.646a.5.5 0 1 0 .708.708L10 6.707V8a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H8a.5.5'
+      path  += ' 0 0 0 0 1z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0 i
+      height: 18px
+      padding-right: 14px
+      padding-top: 2px
+      background-size: 18px
+      background-repeat: no-repeat
+      background-position: center
+      vertical-align: middle
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        transform: scale(1.08)
+      }
+    }
+    // moderator controls
+    &[src*='topic_delete.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M10 1.25a2.75 2.75 0 0 1 2.739 '
+      path  += '2.5H17a.75.75 0 0 1 .102 1.493L17 5.25h-.583L15.15 16.23A2 2 0 0 1 13.163 18H6.837a'
+      path  += '2 2 0 0 1-1.987-1.77L3.582 5.25H3a.75.75 0 0 1-.743-.648L2.25 4.5a.75.75 0 0 1 .648'
+      path  += '-.743L3 3.75h4.261A2.75 2.75 0 0 1 10 1.25zM8.5 7.5c-.245 0-.45.155-.492.359L8 7.93'
+      path  += '8v6.125l.008.078c.042.204.247.359.492.359s.45-.155.492-.359L9 14.062V7.939l-.008-.0'
+      path  += '8C8.95 7.656 8.745 7.5 8.5 7.5zm3 0c-.245 0-.45.155-.492.359L11 7.938v6.125l.008.07'
+      path  += '8c.042.204.247.359.492.359s.45-.155.492-.359l.008-.079V7.939l-.008-.08c-.042-.203-.'
+      path  += '247-.358-.492-.358zM10 2.75c-.605 0-1.11.43-1.225 1h2.45c-.116-.57-.62-1-1.225-1z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding-right: 20px
+      background-size: 22px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        transform: scale(1.08)
+      }
+    }
+    &[src*='topic_move.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M10 2v4.5A1.5 1.5 0 0 0 11.5 8H'
+      path  += '16v8.5a1.5 1.5 0 0 1-1.5 1.5H9.743A5.5 5.5 0 0 0 4 9.207V3.5A1.5 1.5 0 0 1 5.5 2H10'
+      path  += 'zm1 .25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25zM5.5 19a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 '
+      path  += '9zm2.354-4.854a.5.5 0 1 1-.708.708L6 13.707V16.5a.5.5 0 0 1-1 0v-2.793l-1.146 1.147'
+      path  += 'a.5.5 0 1 1-.708-.707l2-2A.5.5 0 0 1 5.497 12h.006a.498.498 0 0 1 .348.144l.003.003'
+      path  += 'l2 2z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding-right: 20px
+      background-size: 22px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        transform: scale(1.08)
+      }
+    }
+    &[src*='topic_lock.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1'
+      path  += '.5 0 0 1 20 9.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1'
+      path  += ' 5.5 8H8V6a4 4 0 0 1 4-4zm0 11.5a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zM12 4a2 2 0 0 '
+      path  += '0-2 2v2h4V6a2 2 0 0 0-2-2z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding-right: 20px
+      background-size: 22px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        transform: scale(1.08)
+      }
+    }
+    &[src*='topic_unlock.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M12 2.001a4 4 0 0 1 3.771 2.666'
+      path  += 'a1 1 0 0 1-1.84.774l-.045-.107a2 2 0 0 0-3.88.517L10.002 6v1.999h7.749a2.25 2.25 0 '
+      path  += '0 1 2.245 2.097l.005.154v9.496a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25A2.25 2.25'
+      path  += ' 0 0 1 4.005 19.9L4 19.746V10.25a2.25 2.25 0 0 1 2.096-2.245L6.25 8l1.751-.001v-2A3'
+      path  += '.999 3.999 0 0 1 12 2.002zm0 11.498a1.499 1.499 0 1 0 0 2.998a1.499 1.499 0 0 0 0-2'
+      path  += '.998z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding-right: 20px
+      background-size: 22px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        transform: scale(1.08)
+      }
+    }
+    &[src*='topic_split.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M5.25 3A3.25 3.25 0 0 0 2 6.25v'
+      path  += '8.5A2.25 2.25 0 0 0 4.25 17h.25V8.75A3.25 3.25 0 0 1 7.75 5.5H19v-.25A2.25 2.25 0 0'
+      path  += ' 0 16.75 3H5.25z" fill="' + to_hex($v99) + '"/><path d="M7.75 6.5A2.25 2.25 0 0 0 5'
+      path  += '.5 8.75v9.5a2.25 2.25 0 0 0 2.25 2.25h3.982A6.5 6.5 0 0 1 22 12.81V8.75a2.25 2.25 0'
+      path  += ' 0 0-2.25-2.25h-12z" fill="' + to_hex($v99) + '"/><path d="M23 17.5a5.5 5.5 0 1 1-1'
+      path  += '1 0a5.5 5.5 0 0 1 11 0zm-8.5-.5a.5.5 0 0 0 0 1h4.793l-1.647 1.646a.5.5 0 0 0 .708.7'
+      path  += '08l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 0-.708.708L19.293 17H14.5z"'
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0
+      padding-right: 20px
+      background-size: 22px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+        path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
+        path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M5.25 3A3.25 3.25 0 0 0 2 6.25v'
+        path  += '8.5A2.25 2.25 0 0 0 4.25 17h.25V8.75A3.25 3.25 0 0 1 7.75 5.5H19v-.25A2.25 2.25 0 0'
+        path  += ' 0 16.75 3H5.25z" fill="' + to_hex($v09) + '"/><path d="M7.75 6.5A2.25 2.25 0 0 0 5'
+        path  += '.5 8.75v9.5a2.25 2.25 0 0 0 2.25 2.25h3.982A6.5 6.5 0 0 1 22 12.81V8.75a2.25 2.25 0'
+        path  += ' 0 0-2.25-2.25h-12z" fill="' + to_hex($v09) + '"/><path d="M23 17.5a5.5 5.5 0 1 1-1'
+        path  += '1 0a5.5 5.5 0 0 1 11 0zm-8.5-.5a.5.5 0 0 0 0 1h4.793l-1.647 1.646a.5.5 0 0 0 .708.7'
+        path  += '08l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 0-.708.708L19.293 17H14.5z"'
+        bgc    = 'fill="' + to_hex($v09) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        transform: scale(1.08)
+      }
+    }
+    // emoji bye bye gifs
+    if (emoji_new) {
+      &[src*='icon_biggrin.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><circle fill="%23ffcc4d" cx="18" cy="18" r="18"/><path fill="%'
+        path  += '23664500" d="M18 21c-3.623 0-6.027-.422-9-1-.679-.131-2 0-2 2 0 4 4.595 9 11 9 6.40'
+        path  += '4 0 11-5 11-9 0-2-1.321-2.132-2-2-2.973.578-5.377 1-9 1z"/><path fill="%23fff" d="M'
+        path  += '9 22s3 1 9 1 9-1 9-1-2 4-9 4-9-4-9-4z"/><ellipse fill="%23664500" cx="12" cy="13.5"'
+        path  += ' rx="2.5" ry="3.5"/><ellipse fill="%23664500" cx="24" cy="13.5" rx="2.5" ry="3.5"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_smile.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><circle fill="%23ffcc4d" cx="18" cy="18" r="18"/><path fill="%'
+        path  += '23664500" d="M10.515 23.621C10.56 23.8 11.683 28 18 28c6.318 0 7.44-4.2 7.485-4.379'
+        path  += 'a.499.499 0 0 0-.237-.554.505.505 0 0 0-.6.077C24.629 23.163 22.694 25 18 25s-6.63-'
+        path  += '1.837-6.648-1.855a.502.502 0 0 0-.598-.081.5.5 0 0 0-.239.557z"/><ellipse fill="%23'
+        path  += '664500" cx="12" cy="13.5" rx="2.5" ry="3.5"/><ellipse fill="%23664500" cx="24" cy="'
+        path  += '13.5" rx="2.5" ry="3.5"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_sad.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><ellipse fill="%23664500'
+        path  += '" cx="11.5" cy="14.5" rx="2.5" ry="3.5"/><ellipse fill="%23664500" cx="24.5" cy="14'
+        path  += '.5" rx="2.5" ry="3.5"/><path fill="%23664500" d="M8.665 27.871a.501.501 0 0 0 .635.'
+        path  += '029c.039-.029 3.922-2.9 8.7-2.9 4.766 0 8.662 2.871 8.7 2.9a.5.5 0 0 0 .729-.657C27'
+        path  += '.3 27.029 24.212 22 18 22s-9.301 5.028-9.429 5.243a.499.499 0 0 0 .094.628z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_surprised.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><ellipse fill="%23664500'
+        path  += '" cx="18" cy="27" rx="5" ry="6"/><path fill="%23664500" d="M5.999 11A1 1 0 0 1 5.2 '
+        path  += '9.4C8.462 5.05 12.816 5 13 5a1 1 0 0 1 .004 2c-.155.002-3.568.086-6.204 3.6a.998.99'
+        path  += '8 0 0 1-.801.4zm24.002 0a.998.998 0 0 1-.801-.4c-2.64-3.521-6.061-3.598-6.206-3.6a1'
+        path  += '.002 1.002 0 0 1-.991-1.005A.997.997 0 0 1 23 5c.184 0 4.537.05 7.8 4.4a1 1 0 0 1-.'
+        path  += '799 1.6z"/><path fill="%23f5f8fa" d="M18 23c-1.657 0-3 1.79-3 4h6c0-2.21-1.343-4-3-'
+        path  += '4z"/><ellipse fill="%23664500" cx="12" cy="14.5" rx="2.5" ry="3.5"/><ellipse fill="'
+        path  += '%23664500" cx="24" cy="14.5" rx="2.5" ry="3.5"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_eek.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18S0 27.9'
+        path  += '41 0 18 8.059 0 18 0s18 8.059 18 18"/><ellipse fill="%23664500" cx="18" cy="25" rx='
+        path  += '"4" ry="5"/><ellipse fill="%23664500" cx="12" cy="13.5" rx="2.5" ry="3.5"/><ellipse'
+        path  += ' fill="%23664500" cx="24" cy="13.5" rx="2.5" ry="3.5"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_confused.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18S0 27.9'
+        path  += '41 0 18 8.059 0 18 0s18 8.059 18 18"/><ellipse fill="%23664500" cx="18" cy="25" rx='
+        path  += '"4" ry="5"/><ellipse fill="%23664500" cx="12" cy="13.5" rx="2.5" ry="3.5"/><ellipse'
+        path  += ' fill="%23664500" cx="24" cy="13.5" rx="2.5" ry="3.5"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_cool.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18S0 27.9'
+        path  += '41 0 18 8.059 0 18 0s18 8.059 18 18"/><path fill-rule="evenodd" clip-rule="evenodd"'
+        path  += ' fill="%23292f33" d="M1.24 11.018c.24.239 1.438.957 1.677 1.675.24.717.72 4.784 2.1'
+        path  += '58 5.981 1.483 1.232 7.077.774 8.148.24 2.397-1.195 2.691-4.531 3.115-6.221.239-.95'
+        path  += '7 1.677-.957 1.677-.957s1.438 0 1.678.956c.424 1.691.72 5.027 3.115 6.221 1.072.535'
+        path  += ' 6.666.994 8.151-.238 1.436-1.197 1.915-5.264 2.155-5.982.238-.717 1.438-1.435 1.67'
+        path  += '7-1.674.241-.239.241-1.196 0-1.436-.479-.478-6.134-.904-12.223-.239-1.215.133-1.677'
+        path  += '.478-4.554.478-2.875 0-3.339-.346-4.553-.478-6.085-.666-11.741-.24-12.221.238-.239.'
+        path  += '239-.239 1.197 0 1.436z"/><path fill="%23664500" d="M27.335 23.629a.501.501 0 0 0-.'
+        path  += '635-.029c-.039.029-3.922 2.9-8.7 2.9-4.766 0-8.662-2.871-8.7-2.9a.5.5 0 0 0-.729.65'
+        path  += '7C8.7 24.472 11.788 29.5 18 29.5s9.301-5.028 9.429-5.243a.499.499 0 0 0-.094-.628z"'
+        path  += '/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_lol.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M30.728 5.272c7.029 7.029 7.029 18.4'
+        path  += '27 0 25.456s-18.426 7.029-25.456 0c-7.029-7.029-7.029-18.427 0-25.456s18.426-7.029 '
+        path  += '25.456 0"/><path fill="%2365471B" d="M19.279 19.28c-3.494 3.494-6.219 5.404-9.645 7'
+        path  += '.714-.781.529-1.928 1.929.001 3.859 3.857 3.857 13.111 4.247 19.287-1.929 6.177-6.1'
+        path  += '77 5.788-15.43 1.929-19.288-1.929-1.93-3.33-.782-3.858 0-2.308 3.423-4.219 6.149-7.'
+        path  += '714 9.644z"/><path fill="%23fff" d="M11.564 28.923s3.858-1.929 9.644-7.716c5.787-5.'
+        path  += '786 7.715-9.643 7.715-9.643s1.928 5.787-4.822 12.537c-6.75 6.751-12.537 4.822-12.53'
+        path  += '7 4.822z"/><path fill="%2365471B" d="M8.265 25.234a.998.998 0 0 1-1.697-.848c.025-.'
+        path  += '176.543-3.63 2.774-6.922-2.627.873-4.589 2.796-4.614 2.821a1 1 0 0 1-1.414-1.415c.1'
+        path  += '56-.156 3.882-3.828 8.485-3.828a.999.999 0 0 1 .707 1.707c-3.262 3.262-3.953 7.874-'
+        path  += '3.96 7.919a.99.99 0 0 1-.281.566zm16.968-16.97a.994.994 0 0 1-.563.282c-.047.007-4.'
+        path  += '676.715-7.921 3.96a1 1 0 0 1-1.707-.707c0-4.604 3.672-8.329 3.828-8.485a1 1 0 0 1 1'
+        path  += '.415 1.413c-.026.026-1.949 1.987-2.822 4.614 3.292-2.231 6.745-2.749 6.921-2.774a1 '
+        path  += '1 0 0 1 .849 1.697z"/><path fill="%2364aadd" d="M30.101 12.055a4.999 4.999 0 0 0 5.'
+        path  += '567-4.36 5 5 0 0 0-4.359-5.568C28.568 1.794 20.9 4.89 20.779 5.883c-.121.992 6.581 '
+        path  += '5.837 9.322 6.172zM12.157 29.999a4.999 4.999 0 0 1-4.36 5.567 5 5 0 0 1-5.568-4.359'
+        path  += 'c-.334-2.742 2.763-10.41 3.756-10.531.992-.12 5.837 6.582 6.172 9.323z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_mad.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><path fill="%23664500" d'
+        path  += '="M25.485 29.879C25.44 29.7 24.317 25.5 18 25.5c-6.318 0-7.44 4.2-7.485 4.379a.499.'
+        path  += '499 0 0 0 .237.554.507.507 0 0 0 .6-.077c.019-.019 1.954-1.856 6.648-1.856s6.63 1.8'
+        path  += '37 6.648 1.855a.502.502 0 0 0 .598.081.5.5 0 0 0 .239-.557zm-9.778-12.586C12.452 14'
+        path  += '.038 7.221 14 7 14a1.001 1.001 0 0 0-.001 2c.029 0 1.925.022 3.983.737-.593.64-.982'
+        path  += ' 1.634-.982 2.763 0 1.934 1.119 3.5 2.5 3.5s2.5-1.566 2.5-3.5c0-.174-.019-.34-.037-'
+        path  += '.507.013 0 .025.007.037.007a.999.999 0 0 0 .707-1.707zM29 14c-.221 0-5.451.038-8.70'
+        path  += '7 3.293A.999.999 0 0 0 21 19c.013 0 .024-.007.036-.007-.016.167-.036.333-.036.507 0'
+        path  += ' 1.934 1.119 3.5 2.5 3.5s2.5-1.566 2.5-3.5c0-1.129-.389-2.123-.982-2.763A13.928 13.'
+        path  += '928 0 0 1 29.002 16 1 1 0 0 0 29 14z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_razz.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><ellipse fill="%2366471b'
+        path  += '" cx="11.5" cy="14.5" rx="2.5" ry="3.5"/><ellipse fill="%2366471b" cx="24.5" cy="14'
+        path  += '.5" rx="2.5" ry="3.5"/><path fill="%2366471b" d="M7 21.262c0 3.964 4.596 9 11 9s11-'
+        path  += '5 11-9c0 0-10.333 2.756-22 0z"/><path fill="%23e8596e" d="M18.545 23.604l-1.091-.00'
+        path  += '5c-3.216-.074-5.454-.596-5.454-.596v6.961c0 3 2 6 6 6s6-3 6-6v-6.92a28.815 28.815 0'
+        path  += ' 0 1-5.455.56z"/><path fill="%23dd2f45" d="M18 31.843a.545.545 0 0 0 .545-.545v-7.6'
+        path  += '94l-1.091-.005v7.699a.546.546 0 0 0 .546.545z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_redface.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><circle fill="%23ea596e" cx="18" cy="18" r="18"/><path fill="%'
+        path  += '23292f33" d="M26.125 29.261a.339.339 0 0 1-.084-.01c-8.424-1.942-15.996-.022-16.072'
+        path  += '-.002a.381.381 0 0 1-.324-.066.38.38 0 0 1-.145-.297c0-3.178 3.713-6.872 8.5-6.872s'
+        path  += '8.5 3.694 8.5 6.872a.375.375 0 0 1-.375.375zM29 12c-5.554 0-7.802-4.367-7.895-4.553'
+        path  += 'a1 1 0 0 1 1.787-.899C22.967 6.694 24.713 10 29 10a1 1 0 1 1 0 2zM7 12a1 1 0 0 1 0-'
+        path  += '2c5.083 0 5.996-3.12 6.033-3.253a1.007 1.007 0 0 1 1.219-.709c.53.139.851.673.718 1'
+        path  += '.205C14.921 7.437 13.704 12 7 12z"/><ellipse fill="%23292f33" cx="12" cy="16.5" rx='
+        path  += '"2.5" ry="3.5"/><ellipse fill="%23292f33" cx="24" cy="16.5" rx="2.5" ry="3.5"/><pat'
+        path  += 'h fill="%23F4abba" d="M18.629 23.079v.827l-1.091.001v-.837c-2.277.127-4.191 1.162-5'
+        path  += '.455 2.516l.008.461c.086 2.932 2.08 5.802 5.992 5.802 3.899 0 5.892-2.851 5.991-5.7'
+        path  += '73l.009-.284a8.057 8.057 0 0 0-5.454-2.713z"/><path fill="%23ea596e" d="M18 23.049c'
+        path  += '-.157 0-.308.014-.462.022v4.447a.545.545 0 1 0 1.09 0V23.08a7.61 7.61 0 0 0-.628-.0'
+        path  += '31z"/><path fill="%235dadec" d="M35.906 12.062a5.093 5.093 0 0 1-5.094 5.094c-2.814'
+        path  += ' 0-5.094-2.28-5.094-5.094s4.075-10.188 5.094-10.188 5.094 7.375 5.094 10.188zM8.573'
+        path  += ' 8.438a4.188 4.188 0 1 1-8.376 0c0-2.313 3.35-8.375 4.188-8.375s4.188 6.062 4.188 8'
+        path  += '.375z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_cry.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18S0 27.9'
+        path  += '41 0 18 8.059 0 18 0s18 8.059 18 18"/><path fill="%23664500" d="M22 27c0 2.763-1.79'
+        path  += '1 3-4 3-2.21 0-4-.237-4-3 0-2.761 1.79-6 4-6 2.209 0 4 3.239 4 6zm8-12a.987.987 0 0'
+        path  += ' 1-.371-.072c-5.229-2.091-7.372-5.241-7.461-5.374a1 1 0 0 1 1.662-1.113c.019.027 1.'
+        path  += '93 2.785 6.541 4.629A1 1 0 0 1 30 15zM6 15a1.001 1.001 0 0 1-.372-1.929c4.612-1.844'
+        path  += ' 6.523-4.602 6.542-4.629a1.002 1.002 0 0 1 1.387-.27.998.998 0 0 1 .275 1.383c-.089'
+        path  += '.133-2.232 3.283-7.46 5.374A1.015 1.015 0 0 1 6 15z"/><path fill="%235dadec" d="M24'
+        path  += ' 16h4v19l-4-.046V16zM8 35l4-.046V16H8v19z"/><path fill="%23664500" d="M14.999 18c-.'
+        path  += '15 0-.303-.034-.446-.105-3.512-1.756-7.07-.018-7.105 0a1 1 0 1 1-.895-1.789c.182-.0'
+        path  += '9 4.498-2.197 8.895 0A1 1 0 0 1 14.999 18zm14 0c-.15 0-.303-.034-.446-.105-3.513-1.'
+        path  += '756-7.07-.018-7.105 0a1 1 0 1 1-.895-1.789c.182-.09 4.501-2.196 8.895 0A1 1 0 0 1 2'
+        path  += '8.999 18z"/><ellipse fill="%235dadec" cx="18" cy="34" rx="18" ry="2"/><ellipse fill'
+        path  += '="%23e75A70" cx="18" cy="27" rx="3" ry="2"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_evil.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><circle fill="%23aa8dd8" cx="18" cy="18" r="18"/><path fill="%'
+        path  += '23aa8dd8" d="M10 4C7.42 4 4.369 1.534 3.414.586A1.998 1.998 0 0 0 1.235.153 1.998 1'
+        path  += '.998 0 0 0 0 2c0 3.459 1.672 10 8 10a2 2 0 0 0 1.789-1.106l2-4A1.999 1.999 0 0 0 10'
+        path  += ' 4zM34.766.153a1.996 1.996 0 0 0-2.18.434C31.7 1.472 28.589 4 26 4a1.999 1.999 0 0 '
+        path  += '0-1.789 2.895l2 4A2 2 0 0 0 28 12c6.328 0 8-6.541 8-10 0-.809-.487-1.538-1.234-1.84'
+        path  += '7z"/><path fill="%23553986" d="M27.335 25.629a.501.501 0 0 0-.635-.029c-.039.029-3.'
+        path  += '922 2.9-8.7 2.9-4.766 0-8.662-2.871-8.7-2.9a.5.5 0 0 0-.729.657C8.7 26.472 11.788 3'
+        path  += '1.5 18 31.5s9.301-5.028 9.429-5.243a.499.499 0 0 0-.094-.628zm-11.628-7.336C12.452 '
+        path  += '15.038 7.221 15 7 15a1 1 0 0 0-.001 2c.029 0 1.925.022 3.983.737-.593.64-.982 1.634'
+        path  += '-.982 2.763 0 1.934 1.119 3.5 2.5 3.5s2.5-1.566 2.5-3.5c0-.174-.019-.34-.037-.507.0'
+        path  += '13 0 .025.007.037.007a.999.999 0 0 0 .707-1.707zM29 15c-.221 0-5.451.038-8.707 3.29'
+        path  += '3A.999.999 0 0 0 21 20c.013 0 .024-.007.036-.007-.016.167-.036.333-.036.507 0 1.934'
+        path  += ' 1.119 3.5 2.5 3.5s2.5-1.566 2.5-3.5c0-1.129-.389-2.123-.982-2.763A13.928 13.928 0 '
+        path  += '0 1 29.002 17 1 1 0 0 0 29 15z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_twisted.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><circle fill="%23aa8dd8" cx="18" cy="18" r="18"/><path fill="%'
+        path  += '23aa8dd8" d="M10 4C7.42 4 4.369 1.534 3.414.586A1.998 1.998 0 0 0 1.235.153 1.998 1'
+        path  += '.998 0 0 0 0 2c0 3.459 1.672 10 8 10a2 2 0 0 0 1.789-1.106l2-4A1.999 1.999 0 0 0 10'
+        path  += ' 4zM34.766.153a1.996 1.996 0 0 0-2.18.434C31.7 1.472 28.589 4 26 4a1.999 1.999 0 0 '
+        path  += '0-1.789 2.895l2 4A2 2 0 0 0 28 12c6.328 0 8-6.541 8-10 0-.809-.487-1.538-1.234-1.84'
+        path  += '7z"/><path fill="%23553986" d="M15.894 14.211l-6-3a2.001 2.001 0 0 0-1.789 3.579l4.'
+        path  += '212 2.106c-.306.533-.317 1.105-.317 1.105v2s0 2 2 2 2-2 2-2v-2s-.003-.109-.025-.263'
+        path  += 'a1.98 1.98 0 0 0 .814-.843 2.001 2.001 0 0 0-.895-2.684zm12.895-2.105a2 2 0 0 0-2.6'
+        path  += '84-.895l-6 3a2 2 0 0 0-.895 2.684c.186.372.476.654.814.843-.021.154-.024.263-.024.2'
+        path  += '63v2s0 2 2 2 2-2 2-2v-2s-.011-.572-.318-1.105l4.212-2.106a2 2 0 0 0 .895-2.684zm-4.'
+        path  += '507 17.489c-.039-.165-.985-3.848-6.282-3.848-5.291 0-6.245 3.69-6.282 3.848a.6.6 0 '
+        path  += '0 0 .274.661.573.573 0 0 0 .703-.092c.015-.016 1.583-1.522 5.306-1.522s5.291 1.507 '
+        path  += '5.305 1.521a.567.567 0 0 0 .701.097.61.61 0 0 0 .275-.665z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_rolleyes.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><circle fill="%23ffcc4d" cx="18" cy="18" r="18"/><circle fill='
+        path  += '"%23f4f7f9" cx="24.5" cy="13.5" r="5.5"/><circle fill="%23f4f7f9" cx="11.5" cy="13.'
+        path  += '5" r="5.5"/><path fill="%2365471b" d="M23.109 23.424c-2.763-.667-8.873-.06-11.162 4'
+        path  += '.405a.373.373 0 0 0 .334.546.378.378 0 0 0 .241-.087c3.084-2.58 7.436-2.58 10.036-2'
+        path  += '.58 1.635 0 2.536 0 2.536-.708s-.705-1.268-1.985-1.576zM10.5 13a2.5 2.5 0 0 0 2.5-2'
+        path  += '.5c0-1.252-.923-2.28-2.124-2.462a5.441 5.441 0 0 0-2.178.736A2.487 2.487 0 0 0 8 10'
+        path  += '.5a2.5 2.5 0 0 0 2.5 2.5zm13 0a2.5 2.5 0 0 0 2.5-2.5c0-1.252-.923-2.28-2.124-2.462a'
+        path  += '5.437 5.437 0 0 0-2.177.736A2.484 2.484 0 0 0 21 10.5a2.5 2.5 0 0 0 2.5 2.5z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_wink.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><ellipse fill="%23664500'
+        path  += '" cx="11.5" cy="16.5" rx="2.5" ry="3.5"/><path fill="%23664500" d="M28.457 17.797c-'
+        path  += '.06-.135-1.499-3.297-4.457-3.297-2.957 0-4.397 3.162-4.457 3.297a.503.503 0 0 0 .75'
+        path  += '5.605c.012-.009 1.262-.902 3.702-.902 2.426 0 3.674.881 3.702.901a.498.498 0 0 0 .7'
+        path  += '55-.604zM5.999 12.458a1 1 0 0 1-.799-1.6c3.262-4.35 7.616-4.4 7.8-4.4a1 1 0 0 1 .00'
+        path  += '4 2c-.156.002-3.569.086-6.205 3.6a.995.995 0 0 1-.8.4zm23.002 2.125a.998.998 0 0 1-'
+        path  += '.801-.4c-2.592-3.457-6.961-2.627-7.004-2.62a1 1 0 0 1-.393-1.961c.231-.047 5.657-1.'
+        path  += '072 8.996 3.38a1 1 0 0 1-.798 1.601zm-5.747 8.994a.513.513 0 0 0-.597.06c-.01.008-1'
+        path  += '.013.863-4.657.863-3.641 0-4.646-.854-4.646-.854a.5.5 0 0 0-.838.475c.01.044 1.144 '
+        path  += '4.379 5.484 4.379s5.474-4.335 5.485-4.379a.497.497 0 0 0-.231-.544z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_exclaim.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M2.653 35C.811 35-.001 33.662.847 32'
+        path  += '.027L16.456 1.972c.849-1.635 2.238-1.635 3.087 0l15.609 30.056c.85 1.634.037 2.972-'
+        path  += '1.805 2.972H2.653z"/><path fill="%23231f20" d="M15.583 28.953a2.421 2.421 0 0 1 2.4'
+        path  += '19-2.418 2.421 2.421 0 0 1 2.418 2.418 2.422 2.422 0 0 1-2.418 2.419 2.422 2.422 0 '
+        path  += '0 1-2.419-2.419zm.186-18.293c0-1.302.961-2.108 2.232-2.108 1.241 0 2.233.837 2.233 '
+        path  += '2.108v11.938c0 1.271-.992 2.108-2.233 2.108-1.271 0-2.232-.807-2.232-2.108V10.66z"/'
+        path  += '>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_question.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23be1931" d="M17 27a3 3 0 0 1-3-3v-4a3 3 0 0 1 3-'
+        path  += '3c.603-.006 6-1 6-5 0-2-2-4-5-4-2.441 0-4 2-4 3a3 3 0 1 1-6 0c0-4.878 4.58-9 10-9 8'
+        path  += ' 0 11 5.982 11 11 0 4.145-2.277 7.313-6.413 8.92-.9.351-1.79.587-2.587.747V24a3 3 0'
+        path  += ' 0 1-3 3z"/><circle fill="%23b31931" cx="17" cy="32" r="3"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_idea.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffd983" d="M29 11.06c0 6.439-5 7.439-5 13.44 0 '
+        path  += '3.098-3.123 3.359-5.5 3.359-2.053 0-6.586-.779-6.586-3.361C11.914 18.5 7 17.5 7 11.'
+        path  += '06 7 5.029 12.285.14 18.083.14 23.883.14 29 5.029 29 11.06z"/><path fill="%23ccd6dd'
+        path  += '" d="M22.167 32.5c0 .828-2.234 2.5-4.167 2.5-1.933 0-4.167-1.672-4.167-2.5 0-.828 2'
+        path  += '.233-.5 4.167-.5 1.933 0 4.167-.328 4.167.5z"/><path fill="%23ffcc4d" d="M22.707 10'
+        path  += '.293a.999.999 0 0 0-1.414 0L18 13.586l-3.293-3.293a.999.999 0 1 0-1.414 1.414L17 15'
+        path  += '.414V26a1 1 0 1 0 2 0V15.414l3.707-3.707a.999.999 0 0 0 0-1.414z"/><path fill="%239'
+        path  += '9aab5" d="M24 31a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-6h12v6z"/><path fill="%23ccd6dd" d'
+        path  += '="M11.999 32a1 1 0 0 1-.163-1.986l12-2a.994.994 0 0 1 1.15.822.999.999 0 0 1-.822 1'
+        path  += '.15l-12 2a.927.927 0 0 1-.165.014zm0-4a1 1 0 0 1-.163-1.986l12-2a.995.995 0 0 1 1.1'
+        path  += '5.822.999.999 0 0 1-.822 1.15l-12 2a.927.927 0 0 1-.165.014z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_idea.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffd983" d="M29 11.06c0 6.439-5 7.439-5 13.44 0 '
+        path  += '3.098-3.123 3.359-5.5 3.359-2.053 0-6.586-.779-6.586-3.361C11.914 18.5 7 17.5 7 11.'
+        path  += '06 7 5.029 12.285.14 18.083.14 23.883.14 29 5.029 29 11.06z"/><path fill="%23ccd6dd'
+        path  += '" d="M22.167 32.5c0 .828-2.234 2.5-4.167 2.5-1.933 0-4.167-1.672-4.167-2.5 0-.828 2'
+        path  += '.233-.5 4.167-.5 1.933 0 4.167-.328 4.167.5z"/><path fill="%23ffcc4d" d="M22.707 10'
+        path  += '.293a.999.999 0 0 0-1.414 0L18 13.586l-3.293-3.293a.999.999 0 1 0-1.414 1.414L17 15'
+        path  += '.414V26a1 1 0 1 0 2 0V15.414l3.707-3.707a.999.999 0 0 0 0-1.414z"/><path fill="%239'
+        path  += '9aab5" d="M24 31a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-6h12v6z"/><path fill="%23ccd6dd" d'
+        path  += '="M11.999 32a1 1 0 0 1-.163-1.986l12-2a.994.994 0 0 1 1.15.822.999.999 0 0 1-.822 1'
+        path  += '.15l-12 2a.927.927 0 0 1-.165.014zm0-4a1 1 0 0 1-.163-1.986l12-2a.995.995 0 0 1 1.1'
+        path  += '5.822.999.999 0 0 1-.822 1.15l-12 2a.927.927 0 0 1-.165.014z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_arrow.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%233b88c3" d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4'
+        path  += 'V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"/><path fill="%23fff" d="M7 14h9V7l13 11-13 1'
+        path  += '1v-7H7z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_neutral.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><ellipse fill="%23664500'
+        path  += '" cx="11.5" cy="16.5" rx="2.5" ry="3.5"/><ellipse fill="%23664500" cx="24.5" cy="16'
+        path  += '.5" rx="2.5" ry="3.5"/><path fill="%23664500" d="M25 26H11a1 1 0 1 1 0-2h14a1 1 0 1'
+        path  += ' 1 0 2z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+      &[src*='icon_mrgreen.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><path fill="%23664500" d'
+        path  += '="M28.457 17.797c-.06-.135-1.499-3.297-4.457-3.297-2.957 0-4.397 3.162-4.457 3.297a'
+        path  += '.503.503 0 0 0 .755.605c.012-.009 1.262-.902 3.702-.902 2.426 0 3.674.881 3.702.901'
+        path  += 'a.498.498 0 0 0 .755-.604zm-12 0c-.06-.135-1.499-3.297-4.457-3.297-2.957 0-4.397 3.'
+        path  += '162-4.457 3.297a.499.499 0 0 0 .754.605C8.31 18.393 9.559 17.5 12 17.5c2.426 0 3.67'
+        path  += '4.881 3.702.901a.498.498 0 0 0 .755-.604zM18 22c-3.623 0-6.027-.422-9-1-.679-.131-2'
+        path  += ' 0-2 2 0 4 4.595 9 11 9 6.404 0 11-5 11-9 0-2-1.321-2.132-2-2-2.973.578-5.377 1-9 1'
+        path  += 'z"/><path fill="%23fff" d="M9 23s3 1 9 1 9-1 9-1-2 4-9 4-9-4-9-4z"/><path fill="%23'
+        path  += '5dadec" d="M35 11c0 2.762-2.238 5-5 5s-5-2.238-5-5 4-10 5-10 5 7.238 5 10z"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+        width: 0
+        height: 16px
+        padding-right: 16px
+        padding-top: 2px
+        background-size: 16px
+        background-repeat: no-repeat
+        background-position: center
+      }
+    }
+  }
+  // post emoticons on left side when posting message
+  a[href*="emoticon"] {
+    /img[src*='/smiles'] {
+      transform: scale(1.09888)
     }
   }
 }
@@ -304,6 +1751,19 @@ b() { box-shadow: arguments }
     text-shadow: none
     box-shadow: none
   }
+
+  // set new forum width
+  #header_wrap #navigation, #header_wrap #navigation_minimized,
+  .forum #header, #main, #content, .forum #content #forum_content, #footer {
+    width: 1155px
+    margin: 0 auto 0 auto
+  }
+  body.mediawiki {
+    #content {
+      width: initial
+    }
+  }
+
   // dont target mediawiki bg
   body:not(.mediawiki) {
     background: bg0
@@ -319,11 +1779,11 @@ b() { box-shadow: arguments }
     font-size: 12px
     line-height: 1.4em
     table {
-      &[width='928'] {
-        width: 970px
-      }
       &[cellspacing='2'][cellpadding='2'][align='center']:not([width]) {
         margin-top: .1rem
+      }
+      &[width="930"] {
+        width: 1130px
       }
     }
     #menu_forum {
@@ -383,13 +1843,49 @@ b() { box-shadow: arguments }
         }
       }
     }
+    @keyframes animate-progress {
+      to { background-position: -40px 0 }
+    }
     fieldset {
-      .row1 { background: bg1 }
-      .row2 {
+      c: 0 bg4 var(--rgba-bg-03)
+      rad: 4px
+      // realign this shite bad design
+      .setting {
+        td[align='right'] {
+          text-align: left
+        }
+        table[width='910'] {
+          width: 1100px
+        }
+      }
+      .bodyline .row2[width='175'] {
+        background: bg3
+        box-shadow: 0px 0 8px 4px bg0 inset
+        border: 1px solid bg4
+        rad: 3px
+      }
+      .bodyline .row1[width='175'] {
+        background: t
+      }
+      .row1 {
         background: bg2
-        td[bgcolor='#FFFFFF'] {
-          background: v44
-          border-color: v03
+        td {
+          border-color: bg4
+        }
+      }
+      .row2 {
+        background: bg3
+        td {
+          &[bgcolor='#FFFFFF'] {
+            background: v05
+            border-color: v03
+            background-image: linear-gradient(-45deg, t, t 33%,
+                                              rgba(convert($v01), .3) 33%,
+                                              rgba(convert($v01), .3) 66%, t 66%)
+            background-size: 20px 15px
+            animation: animate-progress 4s linear infinite
+            rad: 3px
+          }
         }
       }
       th {
@@ -397,11 +1893,16 @@ b() { box-shadow: arguments }
         border: 1px solid bg0
         border-bottom-color: bg5
         padding: .5rem .8rem
+        &.thTop {
+          &[width='55%'] { width: 50% }
+          &[width='15%'] { width: 20% }
+        }
       }
       td {
+        transition: transition
         &[width='40%'][valign='top'][nowrap='nowrap'][align='left'] {
           .gensmall {
-              a[href*='watch=topic'] {
+            a[href*='watch=topic'] {
               font-size: 12px
               position: absolute
               background: v06
@@ -439,9 +1940,10 @@ b() { box-shadow: arguments }
       }
     }
     h2 {
-      a {
+      a:not([href*='wiki']) {
         color: v98
         padding-top: 1rem
+        margin-left: .68rem
         &:hover {
           color: v09
         }
@@ -456,11 +1958,16 @@ b() { box-shadow: arguments }
       }
       td {
         a[href*='viewtopic'] {
-          img[src*='latest_reply'] {
-            height: 10px
-            width: 22px
+            img {
+            &[src*='latest_reply'] {
+              height: 10px
+              width: 22px
+            }
           }
         }
+      }
+      table[width*='928'] {
+        width: 1120px
       }
     }
   }
@@ -500,7 +2007,7 @@ b() { box-shadow: arguments }
     #quick_links {
       position: absolute
       top: 285px
-      left: 700px
+      left: 890px
       z-index: 1
       #quick_link_infos {
         border-left: 1px solid v04
@@ -551,7 +2058,7 @@ b() { box-shadow: arguments }
         border: 0
       }
       #menu_areas {
-        // hide in // https://forum.dd-wrt.com/phpBB2/login.php
+        // hide in https://forum.dd-wrt.com/phpBB2/login.php
         display: none
         li a {
           color: v98
@@ -571,17 +2078,34 @@ b() { box-shadow: arguments }
       }
     }
     // Fix double word e.g. DD-WRT Forum Forum Index
+    strong a.nav { vertical-align: middle }
     a.nav {
+      &:hover { text-decoration: none }
       &[href*='index'] {
         font-size: 0
         &::after {
           content: 'DD-WRT Forum Index'
-          Font-size: 12px
+          font-size: 14px
+          font-weight: 900
+          vertical-align: middle
         }
         // add speech bubble before
         &::before {
-          content: '\1F4AC\00A0'
-          font-size: 12px
+          content: '\1F578\00A0'
+          color: v98
+          font-size: 24px
+          vertical-align: -.3rem
+        }
+      }
+    }
+    form {
+      &[action*='posting_sec'],
+      &[action*='privmsg.php?folder'] {
+        a.nav {
+          vertical-align: middle
+          &[href*='index'] {
+            vertical-align: middle
+          }
         }
       }
     }
@@ -684,14 +2208,6 @@ b() { box-shadow: arguments }
         }
       }
     }
-    fieldset {
-      c: 0 bg4 var(--rgba-bg-03)
-      rad: 4px
-      // realign this shite bad UX design
-      .setting td[align='right'] {
-        text-align: left
-      }
-    }
 
     .posting {
       border: 0
@@ -730,9 +2246,6 @@ b() { box-shadow: arguments }
           border-left-color: t
         }
       }
-      table[width='928'] {
-        width: 970px
-      }
       .navigation td {
         border-top: solid 1px bg4
       }
@@ -770,17 +2283,15 @@ b() { box-shadow: arguments }
         td {
           border-top: solid 1px bg4
         }
-        table[width*='928'] {
-          width: 970px
-        }
       }
     }
-    .row1 td, .row2 td, .block td, .row1 .col2 {
+    .row2 td, .row1 .col2,
+    .row1 td, .block td {
       padding: 3px 6px
       background: bg2
     }
     .row1 {
-      font-size: 108%
+      font-size: 99%
     }
     // https://forum.dd-wrt.com/phpBB2/login.php
     .four_columns .frame_top, .corner_left, .corner_right {
@@ -813,6 +2324,8 @@ b() { box-shadow: arguments }
     padding: .6rem .5rem
     rad: 4px
     cursor: copy
+    max-width: 0
+    overflow-x: auto
   }
   .forum #content .quote td:not(.code) {
     background: t
@@ -820,7 +2333,7 @@ b() { box-shadow: arguments }
   .catBottom {
     tbody tr {
       td[align='center'] { padding-top: 1rem; padding-bottom: 1rem }
-      .gensmall { margin-right: -16rem }
+      .gensmall { margin-right: -17.6rem }
       td[width='25%'] { width: 23.33333% }
     }
     input[type='submit'][value='Search'] {
@@ -849,41 +2362,33 @@ b() { box-shadow: arguments }
   hr {
     color: bg5
   }
-  [style='color: #88171A'] {
+  [style='color: #88171A'], [style='color: red'] {
     c: v18 0 0
   }
   [style='color: #505050'] {
     c: v97 0 0
   }
-  [style='color: navy'], [style='color: blue'] {
+  [style='color: navy'], [style='color: blue'],
+  [color='blue'] {
     c: v69
   }
-  [style='color: #EA7E20'] {
+  [style='color: #EA7E20'], [style='color: brown'] {
     c: v29
   }
   [style='color: #1A3867'] {
     c: v65
   }
-  [color='blue'] {
-    c: v65
+  [style='color: #8B0000'] {
+    c: v17
   }
-  [color='black'] {
+  [style='color: black'], [color='black'] {
     c: v99
   }
   [style='color: darkred'] {
     c: #ff3e3e
   }
-  [style='color: red'] {
-    c: v18
-  }
-  [style='color: black'] {
-    c: v99
-  }
   [style='color: purple']  {
     c: v89
-  }
-  [style='color: brown'] {
-    c: v29
   }
   [style='color:#006600'] {
     c: v46
@@ -894,10 +2399,11 @@ b() { box-shadow: arguments }
   [style='color: darkblue'] {
     c: v66
   }
-  [style="color: indigo"] {
-    c: v77
+  [style='color: indigo'] {
+    c: v79
   }
-  [style="color: green"] {
+  [style='color: green'], [style='color: #006400'],
+  [style='color: #556B2F'] {
     c: v45
   }
   a {
@@ -912,24 +2418,8 @@ b() { box-shadow: arguments }
     filter: none
     mix-blend-mode: lighten
   }
-  /img[src*='image']:not([src*='avatars']):not([src*='smiles']):not([src*='clip']):not([onload*='_resize']):not([src*='wiki']) {
-    filter: invert(.9888) hue-rotate(180deg) saturate(2)
-    mix-blend-mode: exclusion
-    image-rendering: smooth
-    transition: .13333s ease-in-out
-    &:hover {
-      scale: 1.08
-    }
-  }
-  /img {
-    &[src*='clip'] {
-      filter: invert(.9)
-      &:hover {
-        scale: 1.6
-        mix-blend-mode: lighten
-        image-rendering: crisp-edges
-      }
-    }
+
+  img {
     &[src*='voting'] {
       scale: 1.03
       margin-left: -.3rem
@@ -950,40 +2440,58 @@ b() { box-shadow: arguments }
   .spaceRow {
     background: bg4
   }
-  // KP69 avatar is black NOK with this, lets make exception
-  /img[src*='avatars/1516946736133b68f67b73'] {
-    filter: invert(.9)
-  }
   // tweak avatars and margins a bit
   /img[src*='avatars'] {
     rad: 3px
     margin-top: .3rem
   }
   tr.info td[width='100%'] {
-    font-size: 70% i
-    img[alt='Post'] {
-      height: 14px
-      width: 20px
-      filter: hue-rotate(180deg) invert(.9) i
+    img[alt='post' i] {
+
     }
   }
   #content #forum_content {
     td, th {
-      font-size: 12px
+      // dont break layout max font size is as set here.
+      // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=51486
+      // https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=301950
+      font-size: 13px
       line-height: 1.4em
     }
-    td .genmed {
-      font-size: 12px
+    td .genmed, .topictitle, .postdetails, .name {
+      font-size: 13px
+    }
+    .topictitle img[src*='folder.gif'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ar'
+      path  += 'ia-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid me'
+      path  += 'et" viewBox="0 0 24 24"><g fill="none"><path d="M12 2v6a2 2 0 0 0 2 2h6v10a2 2 0 0 1-'
+      path  += '2 2h-6.81A6.5 6.5 0 0 0 4 11.498V4a2 2 0 0 1 2-2h6zm1.5.5V8a.5.5 0 0 0 .5.5h5.5l-6-6z'
+      path  += 'm-1.5 15a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0zm-2.146-2.354a.5.5 0 0 0-.708 0L5.5 18'
+      path  += '.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      width: 0 i
+      padding: 12px
+      padding-right: 14px
+      background-size: 18px
+      background-repeat: no-repeat
+      background-position: center
+      &:hover {
+        bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      }
     }
     .postbody {
       // dont break width max font size is as set here.
       // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=51486
-      font-size: 13.4px
+      // https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=301950
+      font-size: 14px
       line-height: 1.4em
     }
     &.four_columns {
       table[width='928'] {
-        width: 970px
+        width: 1120px
       }
       // quote table bring it a bit into left and widen it
       // padding needed else it just left aligns
@@ -994,7 +2502,34 @@ b() { box-shadow: arguments }
       }
     }
   }
+  a[href*='modcp'] {
+    img[src*='topic_'] {
+      height: 22px
+      margin-top: .362rem
+    }
+  }
   /form {
+      // moderator pannel
+      &[action^='modcp'] {
+        // moderator move topic checkbox align
+        input[type='checkbox'][name='move_leave_shadow'] {
+          vertical-align: middle
+        }
+      }
+      // end
+      &[action*='memberlist'] {
+        tr.row2 td {
+          background: bg3 i
+        }
+        tr[class*='row'] {
+          &:hover td {
+            background: var(--rgba-bg-05) i
+          }
+        }
+        tr td {
+          transition: transition
+        }
+      }
       &[action*='profile_sec'] {
       // hide broken shit theres no avatars provided in this forum
       .block > table > tbody > tr:nth-child(41) > td > span:last-child,
@@ -1034,6 +2569,25 @@ b() { box-shadow: arguments }
         }
       }
     }
+    &[action='groupcp.php?g=4070'] {
+      tr .catSides {
+        background: bg2
+      }
+      tr td.row1 {
+        background: bg3 i
+      }
+      tr td.row2, td.row1[width] {
+        background: bg2 i
+      }
+      tr td[align="right"] {
+        .nav {
+          margin-left: -26.66rem i
+        }
+        .gensmall {
+          float: right
+        }
+      }
+    }
     // style pm's background/border
     &[action*='privmsg.php?folder'] {
       table {
@@ -1058,15 +2612,52 @@ b() { box-shadow: arguments }
       .catBottom input[type='submit'] {
         margin-top: .8rem
       }
+      img {
+        // read message icon in pm inbox
+        &[src*='folder.gif'][alt='Read message'] {
+          prefix = 'data:image/svg+xml;utf8,'
+          path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ar'
+          path  += 'ia-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid me'
+          path  += 'et" viewBox="0 0 24 24"><g fill="none"><path d="M12 2v6a2 2 0 0 0 2 2h6v10a2 2 0 0 1-'
+          path  += '2 2h-6.81A6.5 6.5 0 0 0 4 11.498V4a2 2 0 0 1 2-2h6zm1.5.5V8a.5.5 0 0 0 .5.5h5.5l-6-6z'
+          path  += 'm-1.5 15a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0zm-2.146-2.354a.5.5 0 0 0-.708 0L5.5 18'
+          path  += '.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708z" '
+          bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+          background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+          width: 0 i
+          padding: 12px
+          padding-right: 20px
+          background-size: 20px
+          background-repeat: no-repeat
+          background-position: center
+          &:hover {
+            bgc    =  'fill="' + to_hex($v99) + '"/></g>'
+            background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+          }
+        }
+      }
     }
     // external login page fixes due to increasing table width from 928px to 970px
     &[action='login.php']:not(.forum_login) {
       .posting table[width='928'][cellspacing='1']:not(#z) {
-        width: 908px i
-        max-width: @width
+        width: 1100px
       }
       h2 {
         margin: 10px 0 8px 0 i
+      }
+    }
+    // bottom of the forum login addy, reworks this a bit.
+    &[action*="login"]:not([target]) {
+      input {
+        margin-top: 1.5rem
+        &[type='text'], &[type='password'] {
+          width: 20%
+          rad: 4px
+          padding: 0.2rem 0.1rem
+        }
+        &[type='checkbox'], &.mainoption[name='login'] {
+          margin-top: 0
+        }
       }
     }
     &[action='search.php?mode=results'] {
@@ -1082,6 +2673,7 @@ b() { box-shadow: arguments }
       }
     }
   }
+
   // Better checkbox/radio inputs.
   input {
     prefix  = 'data:image/svg+xml;utf8,'
@@ -1224,6 +2816,7 @@ b() { box-shadow: arguments }
       padding: .19rem .6rem
       box-shadow: 0 1px 0 bg0
       text-shadow: 0 1px 0 bg0
+      cursor: pointer
       &:active, &:focus-visible, &:hover {
         background: v08
         border: 1px solid v08
@@ -1280,6 +2873,11 @@ b() { box-shadow: arguments }
         border: 1px solid v08
         box-shadow: 0 0 10px 0 v04
         outline: 0
+      }
+      &[accesskey] {
+        min-width: 100%
+        text-transform: uppercase
+        cursor: pointer
       }
     }
   }

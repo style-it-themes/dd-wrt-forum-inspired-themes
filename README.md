@@ -9,15 +9,17 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://discord.gg/EpdGSfH">
-    <img src="https://img.shields.io/badge/style--it--themes-discord%20channel-blue.svg?style=for-the-badge" alt="Style-It Themes (sit) Discord Channel">
+  <a href="https://matrix.to/#/#style_it_themes_public:matrix.org">
+    <img src="https://img.shields.io/badge/style--it--themes-matrix%20channel-blue.svg?style=for-the-badge" alt="Style-It Themes (sit) :matrix.org channel">
   </a>
   <a href="https://github.com/style-it-themes/dd-wrt-forum-inspired-themes/releases">
     <img src="https://img.shields.io/github/tag/style-it-themes/dd-wrt-forum-inspired-themes.svg?label=Current%20Version&style=for-the-badge" alt="Current version">
   </a>
+  <!--
   <a href="https://david-dm.org/Style-it-Themes/dd-wrt-forum-inspired-themes?type=dev">
     <img src="https://img.shields.io/david/dev/style-it-themes/dd-wrt-forum-inspired-themes.svg?label=devDependencies&style=for-the-badge" alt="devDependencies">
   </a>
+  -->
 </p>
 
 # TOC
@@ -42,8 +44,11 @@ The default boards are old, look old, feel old, so here are a couple of coats of
 
 It's made for my personal use only, and shared because... Why not.
 
-This style leverages the _awesome_ v2 [stylus lang color generator](https://github.com/vednoc/stylus-color-generator) by @vednoc
+This style leverages;
 
+1. The _awesome_ v2 [stylus lang color generator](https://github.com/vednoc/stylus-color-generator) by @vednoc [MIT](https://git.io/JPwy6)
+2. [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons) [MIT](https://git.io/JPwyH)
+3. [Twitter Emoji (Twemoji)](https://github.com/twitter/twemoji) [MIT](https://git.io/JPwyA)
 ## Features
 
 The *DD-WRT Forum Inspired Themes* style has optional and built in redesigns that fix,
