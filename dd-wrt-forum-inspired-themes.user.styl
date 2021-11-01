@@ -293,9 +293,9 @@ b() { box-shadow: arguments }
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" '
       path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
-      path  += '<text x="50" y="37" fill="' + to_hex($v99) + '" '
-      path  += 'font-weight="bold" font-size="18px">\1F5E3\00A0</text>'
-      path  += '<text x="75" y="34" fill="' + to_hex($v98) + '" '
+      path  += '<text x="52" y="37" fill="' + to_hex($v99) + '" '
+      path  += 'font-weight="100" font-size="20px">\1F6C8\00A0</text>'
+      path  += '<text x="73" y="34" fill="' + to_hex($v98) + '" '
       path  += 'font-weight="bold" font-size="14px">'profile'</text>/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
       width: 0
@@ -1082,17 +1082,16 @@ b() { box-shadow: arguments }
     // moderator controls
     &[src*='topic_delete.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
-      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
-      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M10 1.25a2.75 2.75 0 0 1 2.739 '
-      path  += '2.5H17a.75.75 0 0 1 .102 1.493L17 5.25h-.583L15.15 16.23A2 2 0 0 1 13.163 18H6.837a'
-      path  += '2 2 0 0 1-1.987-1.77L3.582 5.25H3a.75.75 0 0 1-.743-.648L2.25 4.5a.75.75 0 0 1 .648'
-      path  += '-.743L3 3.75h4.261A2.75 2.75 0 0 1 10 1.25zM8.5 7.5c-.245 0-.45.155-.492.359L8 7.93'
-      path  += '8v6.125l.008.078c.042.204.247.359.492.359s.45-.155.492-.359L9 14.062V7.939l-.008-.0'
-      path  += '8C8.95 7.656 8.745 7.5 8.5 7.5zm3 0c-.245 0-.45.155-.492.359L11 7.938v6.125l.008.07'
-      path  += '8c.042.204.247.359.492.359s.45-.155.492-.359l.008-.079V7.939l-.008-.08c-.042-.203-.'
-      path  += '247-.358-.492-.358zM10 2.75c-.605 0-1.11.43-1.225 1h2.45c-.116-.57-.62-1-1.225-1z"'
-      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+      path  += ' viewBox="0 0 20 20"><path d="M10 1.25a2.75 2.75 0 0 1 2.739 2.5H17a.75.75 0 0 1 .1'
+      path  += '02 1.493L17 5.25h-.583L15.15 16.23A2 2 0 0 1 13.163 18H6.837a2 2 0 0 1-1.987-1.77L3'
+      path  += '.582 5.25H3a.75.75 0 0 1-.743-.648L2.25 4.5a.75.75 0 0 1 .648-.743L3 3.75h4.261A2.7'
+      path  += '5 2.75 0 0 1 10 1.25zM8.5 7.5c-.245 0-.45.155-.492.359L8 7.938v6.125l.008.078c.042.'
+      path  += '204.247.359.492.359s.45-.155.492-.359L9 14.062V7.939l-.008-.08C8.95 7.656 8.745 7.5'
+      path  += ' 8.5 7.5zm3 0c-.245 0-.45.155-.492.359L11 7.938v6.125l.008.078c.042.204.247.359.492'
+      path  += '.359s.45-.155.492-.359l.008-.079V7.939l-.008-.08c-.042-.203-.247-.358-.492-.358zM10'
+      path  += ' 2.75c-.605 0-1.11.43-1.225 1h2.45c-.116-.57-.62-1-1.225-1z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
       padding-right: 20px
@@ -1100,22 +1099,20 @@ b() { box-shadow: arguments }
       background-repeat: no-repeat
       background-position: center
       &:hover {
-        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        bgc    =  'fill="' + to_hex($v09) + '"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
         transform: scale(1.08)
       }
     }
     &[src*='topic_move.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
-      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
-      path  += 'd meet" viewBox="0 0 20 20"><g fill="none"><path d="M10 2v4.5A1.5 1.5 0 0 0 11.5 8H'
-      path  += '16v8.5a1.5 1.5 0 0 1-1.5 1.5H9.743A5.5 5.5 0 0 0 4 9.207V3.5A1.5 1.5 0 0 1 5.5 2H10'
-      path  += 'zm1 .25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25zM5.5 19a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 '
-      path  += '9zm2.354-4.854a.5.5 0 1 1-.708.708L6 13.707V16.5a.5.5 0 0 1-1 0v-2.793l-1.146 1.147'
-      path  += 'a.5.5 0 1 1-.708-.707l2-2A.5.5 0 0 1 5.497 12h.006a.498.498 0 0 1 .348.144l.003.003'
-      path  += 'l2 2z"'
-      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+      path  += ' viewBox="0 0 20 20"><path d="M10 2v4.5A1.5 1.5 0 0 0 11.5 8H16v8.5a1.5 1.5 0 0 1-1'
+      path  += '.5 1.5H9.743A5.5 5.5 0 0 0 4 9.207V3.5A1.5 1.5 0 0 1 5.5 2H10zm1 .25V6.5a.5.5 0 0 0'
+      path  += ' .5.5h4.25L11 2.25zM5.5 19a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm2.354-4.854a.5.5 0 '
+      path  += '1 1-.708.708L6 13.707V16.5a.5.5 0 0 1-1 0v-2.793l-1.146 1.147a.5.5 0 1 1-.708-.707l'
+      path  += '2-2A.5.5 0 0 1 5.497 12h.006a.498.498 0 0 1 .348.144l.003.003 2 2z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
       padding-right: 20px
@@ -1123,20 +1120,19 @@ b() { box-shadow: arguments }
       background-repeat: no-repeat
       background-position: center
       &:hover {
-        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        bgc    =  'fill="' + to_hex($v09) + '"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
         transform: scale(1.08)
       }
     }
     &[src*='topic_lock.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
-      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
-      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1'
-      path  += '.5 0 0 1 20 9.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1'
-      path  += ' 5.5 8H8V6a4 4 0 0 1 4-4zm0 11.5a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zM12 4a2 2 0 0 '
-      path  += '0-2 2v2h4V6a2 2 0 0 0-2-2z" '
-      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+      path  += ' viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1.5 0 0 1 20 9.5v11a1.5'
+      path  += ' 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1 5.5 8H8V6a4 4 0 0 1 4'
+      path  += '-4zm0 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM12 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-'
+      path  += '2-2z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
       padding-right: 20px
@@ -1144,22 +1140,20 @@ b() { box-shadow: arguments }
       background-repeat: no-repeat
       background-position: center
       &:hover {
-        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        bgc    =  'fill="' + to_hex($v09) + '"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
         transform: scale(1.08)
       }
     }
     &[src*='topic_unlock.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
-      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
-      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M12 2.001a4 4 0 0 1 3.771 2.666'
-      path  += 'a1 1 0 0 1-1.84.774l-.045-.107a2 2 0 0 0-3.88.517L10.002 6v1.999h7.749a2.25 2.25 0 '
-      path  += '0 1 2.245 2.097l.005.154v9.496a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25A2.25 2.25'
-      path  += ' 0 0 1 4.005 19.9L4 19.746V10.25a2.25 2.25 0 0 1 2.096-2.245L6.25 8l1.751-.001v-2A3'
-      path  += '.999 3.999 0 0 1 12 2.002zm0 11.498a1.499 1.499 0 1 0 0 2.998a1.499 1.499 0 0 0 0-2'
-      path  += '.998z" '
-      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+      path  += ' viewBox="0 0 24 24"><path d="M12 2.001a4 4 0 0 1 3.771 2.666 1 1 0 0 1-1.84.774l-.'
+      path  += '045-.107a2 2 0 0 0-3.88.517L10.002 6v1.999h7.749a2.25 2.25 0 0 1 2.245 2.097l.005.1'
+      path  += '54v9.496a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25A2.25 2.25 0 0 1 4.005 19.9L4 19'
+      path  += '.746V10.25a2.25 2.25 0 0 1 2.096-2.245L6.25 8l1.751-.001v-2A3.999 3.999 0 0 1 12 2.'
+      path  += '002zm0 11.498a1.499 1.499 0 1 0 0 2.998 1.499 1.499 0 0 0 0-2.998z" '
+      bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
       padding-right: 20px
@@ -1167,24 +1161,22 @@ b() { box-shadow: arguments }
       background-repeat: no-repeat
       background-position: center
       &:hover {
-        bgc    =  'fill="' + to_hex($v09) + '"/></g>'
+        bgc    =  'fill="' + to_hex($v09) + '"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
         transform: scale(1.08)
       }
     }
     &[src*='topic_split.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
-      path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-      path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
-      path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M5.25 3A3.25 3.25 0 0 0 2 6.25v'
-      path  += '8.5A2.25 2.25 0 0 0 4.25 17h.25V8.75A3.25 3.25 0 0 1 7.75 5.5H19v-.25A2.25 2.25 0 0'
-      path  += ' 0 16.75 3H5.25z" fill="' + to_hex($v99) + '"/><path d="M7.75 6.5A2.25 2.25 0 0 0 5'
-      path  += '.5 8.75v9.5a2.25 2.25 0 0 0 2.25 2.25h3.982A6.5 6.5 0 0 1 22 12.81V8.75a2.25 2.25 0'
-      path  += ' 0 0-2.25-2.25h-12z" fill="' + to_hex($v99) + '"/><path d="M23 17.5a5.5 5.5 0 1 1-1'
-      path  += '1 0a5.5 5.5 0 0 1 11 0zm-8.5-.5a.5.5 0 0 0 0 1h4.793l-1.647 1.646a.5.5 0 0 0 .708.7'
-      path  += '08l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 0-.708.708L19.293 17H14.5z"'
-      bgc    = 'fill="' + to_hex($v99) + '"/></g>'
-      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+      path  += ' viewBox="0 0 24 24"><g fill="' + to_hex($v99) + '"><path d="M5.25 3A3.25 3.25 0 0 '
+      path  += '0 2 6.25v8.5A2.25 2.25 0 0 0 4.25 17h.25V8.75A3.25 3.25 0 0 1 7.75 5.5H19v-.25A2.25'
+      path  += ' 2.25 0 0 0 16.75 3H5.25z"/><path d="M7.75 6.5A2.25 2.25 0 0 0 5.5 8.75v9.5a2.25 2.'
+      path  += '25 0 0 0 2.25 2.25h3.982A6.5 6.5 0 0 1 22 12.81V8.75a2.25 2.25 0 0 0-2.25-2.25h-12z'
+      path  += '"/><path d="M23 17.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0zm-8.5-.5a.5.5 0 0 0 0 1h'
+      path  += '4.793l-1.647 1.646a.5.5 0 0 0 .708.708l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 '
+      path  += '0-.708.708L19.293 17H14.5z"/></g>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
       width: 0
       padding-right: 20px
       background-size: 22px
@@ -1192,17 +1184,15 @@ b() { box-shadow: arguments }
       background-position: center
       &:hover {
         prefix = 'data:image/svg+xml;utf8,'
-        path   = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-        path  += 'aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMi'
-        path  += 'd meet" viewBox="0 0 24 24"><g fill="none"><path d="M5.25 3A3.25 3.25 0 0 0 2 6.25v'
-        path  += '8.5A2.25 2.25 0 0 0 4.25 17h.25V8.75A3.25 3.25 0 0 1 7.75 5.5H19v-.25A2.25 2.25 0 0'
-        path  += ' 0 16.75 3H5.25z" fill="' + to_hex($v09) + '"/><path d="M7.75 6.5A2.25 2.25 0 0 0 5'
-        path  += '.5 8.75v9.5a2.25 2.25 0 0 0 2.25 2.25h3.982A6.5 6.5 0 0 1 22 12.81V8.75a2.25 2.25 0'
-        path  += ' 0 0-2.25-2.25h-12z" fill="' + to_hex($v09) + '"/><path d="M23 17.5a5.5 5.5 0 1 1-1'
-        path  += '1 0a5.5 5.5 0 0 1 11 0zm-8.5-.5a.5.5 0 0 0 0 1h4.793l-1.647 1.646a.5.5 0 0 0 .708.7'
-        path  += '08l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 0-.708.708L19.293 17H14.5z"'
-        bgc    = 'fill="' + to_hex($v09) + '"/></g>'
-        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 24 24"><g fill="' + to_hex($v09) + '"><path d="M5.25 3A3.25 3.25 0 0 '
+        path  += '0 2 6.25v8.5A2.25 2.25 0 0 0 4.25 17h.25V8.75A3.25 3.25 0 0 1 7.75 5.5H19v-.25A2.25'
+        path  += ' 2.25 0 0 0 16.75 3H5.25z"/><path d="M7.75 6.5A2.25 2.25 0 0 0 5.5 8.75v9.5a2.25 2.'
+        path  += '25 0 0 0 2.25 2.25h3.982A6.5 6.5 0 0 1 22 12.81V8.75a2.25 2.25 0 0 0-2.25-2.25h-12z'
+        path  += '"/><path d="M23 17.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0zm-8.5-.5a.5.5 0 0 0 0 1h'
+        path  += '4.793l-1.647 1.646a.5.5 0 0 0 .708.708l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 '
+        path  += '0-.708.708L19.293 17H14.5z"/></g>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
         transform: scale(1.08)
       }
     }
