@@ -48,7 +48,9 @@ This style leverages;
 
 1. The _awesome_ v2 [stylus lang color generator](https://github.com/vednoc/stylus-color-generator) by @vednoc [MIT](https://git.io/JPwy6)
 2. [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons) [MIT](https://git.io/JPwyH)
-3. [Twitter Emoji (Twemoji)](https://github.com/twitter/twemoji) [MIT](https://git.io/JPwyA)
+3. [Twitter Emoji (Twemoji)](https://github.com/twitter/twemoji) [CC-BY 4.0](https://git.io/JPiMA)
+   NOTE: All Twemoji and Fluent UI system icons have been optimized with svgomg, no other changes done.
+
 ## Features
 
 The *DD-WRT Forum Inspired Themes* style has optional and built in redesigns that fix,
