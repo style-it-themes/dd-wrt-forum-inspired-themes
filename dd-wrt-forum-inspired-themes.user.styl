@@ -1337,10 +1337,11 @@ b() { box-shadow: arguments }
       &[src*='icon_confused.gif'] {
         prefix = 'data:image/svg+xml;utf8,'
         path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18S0 27.9'
-        path  += '41 0 18 8.059 0 18 0s18 8.059 18 18"/><ellipse fill="%23664500" cx="18" cy="25" rx='
-        path  += '"4" ry="5"/><ellipse fill="%23664500" cx="12" cy="13.5" rx="2.5" ry="3.5"/><ellipse'
-        path  += ' fill="%23664500" cx="24" cy="13.5" rx="2.5" ry="3.5"/>'
+        path  += ' viewBox="0 0 36 36"><path fill="%23ffcc4d" d="M36 18c0 9.941-8.059 18-18 18-9.94 0'
+        path  += '-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18"/><ellipse fill="%23664500'
+        path  += '" cx="11.5" cy="16.5" rx="2.5" ry="3.5"/><ellipse fill="%23664500" cx="24.5" cy="16'
+        path  += '.5" rx="2.5" ry="3.5"/><path fill="%23664500" d="M12 28c2-5 13-5 13-3 0 1-8-1-13 3z'
+        path  += '"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
         width: 0
         height: 16px
@@ -1728,6 +1729,7 @@ b() { box-shadow: arguments }
   a[href*='emoticon'] {
     /img[src*='/smiles'] {
       transform: scale(1.09888)
+      vertical-align: middle
     }
   }
 }
