@@ -2134,15 +2134,27 @@ b() { box-shadow: arguments }
         color: v99 i
         font-weight: 600
         text-shadow: 0 1px 0 bg0
-        &::after {
-          content: '\00A0\00A0\2630'
-          font-size: 16px
+        margin-top: .01rem
+        margin-left: .3rem
+        display: inline-block
+        &::before {
+          content: '\007C\007C\007C'
+          font-size: 12px
+          vertical-align: 0
+          letter-spacing: -.09em
+          margin-right: .6rem
+          transform: rotate(90deg)
           text-shadow: 0 1px 0 bg0
+          display: inline-block
         }
-        &:hover {
+        &:hover, &:target {
           color: v09 i
           text-decoration: none
           text-shadow: 0 1px 0 bg0
+          &::before {
+            transform: rotate(0deg)
+            display: inline-block
+          }
         }
       }
       .frame_bottom, .frame_top {
