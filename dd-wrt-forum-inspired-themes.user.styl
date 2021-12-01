@@ -444,6 +444,32 @@ b() { box-shadow: arguments }
         b: 0 0 8px 0 bg4
       }
     }
+    &[src*='icon_aim'] {
+      prefix = 'data:image/svg+xml;utf8,'
+      path   = '<svg xmlns="http://www.w3.org/2000/svg" '
+      path  += 'width="24px" height="24px" viewBox="0 0 170 60">'
+      path  += '<text x="52" y="37" fill="' + to_hex($v37) + '" '
+      path  += 'font-weight="600" font-size="22px">\25CE</text>'
+      path  += '<text x="76" y="36" fill="' + to_hex($v98) + '" '
+      path  += 'style="text-shadow: 0 1px 0 ' + to_hex($bg0) + '" '
+      path  += 'font-weight="900" font-size="14px">'AIM'</text>/>'
+      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path))
+      width: 0
+      padding-top: 23px
+      padding-right: 78px
+      vertical-align: -.2rem
+      background-size: 150px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: bg4
+      border: 1px solid bg5
+      rad: 4px
+      &:hover {
+        background-color: bg5
+        border: 1px solid bg5
+        b: 0 0 8px 0 bg4
+      }
+    }
     &[src*='icon_icq'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" '
@@ -587,6 +613,7 @@ b() { box-shadow: arguments }
       background-color: bg4
       border: 1px solid bg5
       rad: 4px
+      float: right
       &:hover {
         background-color: bg5
         border: 1px solid bg5
@@ -785,7 +812,7 @@ b() { box-shadow: arguments }
       background-repeat: no-repeat
       background-position: center
     }
-    &[src*='folder_lock_new'][alt='New posts [ Locked ]'] {
+    &[src*='folder_lock_new'][alt='New posts [ Locked ]'], &[src*='folder_lock_new'][alt='New posts'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
       path  += ' viewBox="0 0 20 20"><path d="M11 2v4.5A1.5 1.5 0 0 0 12.5 8H17v6.5a1.5 1.5 0 0 1-1'
@@ -1838,10 +1865,23 @@ b() { box-shadow: arguments }
     fieldset {
       c: 0 bg4 var(--rgba-bg-03)
       rad: 4px
+      &:last-of-type:not(:only-of-type) {
+        margin-top: .5rem
+      }
+      &:first-of-type:not(:only-of-type) {
+        margin-top: .5rem
+      }
       // realign this shite bad design
       .setting {
         td[align='right'] {
           text-align: left
+          // ip search align
+          span.gen {
+            float: right
+          }
+        }
+        td[nowrap='nowrap'] form[name='jumpbox'] {
+          margin-top: initial
         }
         table[width='910'] {
           width: 1100px
@@ -1849,12 +1889,14 @@ b() { box-shadow: arguments }
       }
       .bodyline .row2[width='175'] {
         background: bg3
-        box-shadow: 0px 0 8px 4px bg0 inset
+        box-shadow: 0 0 8px 4px bg0 inset
         border: 1px solid bg4
         rad: 3px
       }
-      .bodyline .row1[width='175'] {
-        background: t
+      .bodyline .row1 {
+        &[width='175'], &[width*='3'] {
+          background: t
+        }
       }
       .row1 {
         background: bg2
@@ -1880,7 +1922,7 @@ b() { box-shadow: arguments }
       }
       th {
         background: bg3
-        border: 1px solid bg0
+        border-color: bg0
         border-bottom-color: bg5
         padding: .5rem .8rem
         &.thTop {
@@ -1941,14 +1983,19 @@ b() { box-shadow: arguments }
     }
     #forum_content {
       /iframe[width='930'] {
-        width: 967px
+        width: 1120px
         margin: auto 0
         border-color: v05
         rad: 4px
+        body.forum, html {
+          max-width: 800px i
+          width: @max-width
+          margin: auto 0
+        }
       }
       td {
         a[href*='viewtopic'] {
-            img {
+          img {
             &[src*='latest_reply'] {
               height: 10px
               width: 22px
@@ -1961,6 +2008,7 @@ b() { box-shadow: arguments }
       }
     }
   }
+
   // https://forum.dd-wrt.com/phpBB2/login.php
   .forum #content:not([style]) {
     .content {
@@ -2097,6 +2145,16 @@ b() { box-shadow: arguments }
             vertical-align: middle
           }
         }
+        input[type*='checkbox'] {
+          vertical-align: middle
+        }
+        table[cellspacing='1'] {
+          border-spacing: 0 i
+        }
+      }
+      &[name='jumpbox'] {
+        text-align: left
+        margin-top: .688rem
       }
     }
     #main[style] {
@@ -2247,6 +2305,9 @@ b() { box-shadow: arguments }
           background: bg1
           border-left-color: t
         }
+        &.catHead[colspan="2"] {
+          background: bg1 i
+        }
       }
       .navigation td {
         border-top: solid 1px bg4
@@ -2281,14 +2342,24 @@ b() { box-shadow: arguments }
           rad: 4px 4px
         }
       }
-      .row1 {
-        td {
-          border-top: solid 1px bg4
-        }
+      .row1 td { border-top: 1px solid bg4 }
+    }
+    .row1 .col2, .block td {
+      padding: 3px 6px
+      background: bg2
+    }
+    .row2 td {
+      padding: 3px 6px
+      background: bg3
+      &[width='150'], &[width='100%'][height='28'],
+      &[colspan='2'], &[width='22%'], &[valign='top'][height='28'] {
+        background: bg2
+      }
+      &.attachrow {
+        background: darken(convert($bg2), 10%)
       }
     }
-    .row2 td, .row1 .col2,
-    .row1 td, .block td {
+    .row1 td {
       padding: 3px 6px
       background: bg2
     }
@@ -2335,13 +2406,13 @@ b() { box-shadow: arguments }
   .catBottom {
     tbody tr {
       td[align='center'] { padding-top: 1rem; padding-bottom: 1rem }
-      .gensmall { margin-right: -17.6rem }
       td[width='25%'] { width: 23.33333% }
     }
     input[type='submit'][value='Search'] {
       margin-top: 1rem
       margin-bottom: -1.5rem
     }
+    .nav { white-space: pre }
   }
   td.attachheader {
     background: bg1 i
@@ -2383,8 +2454,12 @@ b() { box-shadow: arguments }
   [style='color: #8B0000'] {
     c: v17
   }
-  [style='color: black'], [color='black'] {
+  [style='color: black'], [color='black'],
+  [style='color: #000000'] {
     c: v99
+  }
+  [style='color: #404040'] {
+    c: v95
   }
   [style='color: darkred'] {
     c: #ff3e3e
@@ -2405,7 +2480,7 @@ b() { box-shadow: arguments }
     c: v79
   }
   [style='color: green'], [style='color: #006400'],
-  [style='color: #556B2F'] {
+  [style='color: #556B2F'], [style='color: darkgreen'] {
     c: v45
   }
   a {
@@ -2440,21 +2515,13 @@ b() { box-shadow: arguments }
     }
   }
   .spaceRow {
-    padding: 0
-    border-top: 1px solid bg5
-    img {
-      margin-top: .1rem
-    }
+    display: none
+    img { margin-top: .1rem }
   }
   // tweak avatars and margins a bit
   /img[src*='avatars'] {
     rad: 3px
     margin-top: .3rem
-  }
-  tr.info td[width='100%'] {
-    img[alt='post' i] {
-
-    }
   }
   #content #forum_content {
     td, th {
@@ -2468,10 +2535,12 @@ b() { box-shadow: arguments }
       font-size: 13px
     }
     .inlineadtitle {
+      position: absolute
       .name { display: none }
     }
-    .inlinead[height="28"]  {
-      .ad-tag { height: 0 }
+    .inlinead[height='28'] {
+      position: absolute
+      .ad-tag { display: none }
     }
     .topictitle img[src*='folder.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
@@ -2499,12 +2568,21 @@ b() { box-shadow: arguments }
       display: block
       text-overflow: ellipsis
       overflow: auto
+      ul {
+        background: bg1
+        margin-left: 1rem
+        padding: .5rem
+        width: 93%
+        rad: 2px
+      }
     }
     &.four_columns {
       table[width='928'] {
         width: 1120px
         tr.navigation td {
           background: bg1
+          border-top: 1px solid bg4
+          border-bottom: 1px solid bg4
         }
       }
       // quote table bring it a bit into left and widen it
@@ -2513,6 +2591,7 @@ b() { box-shadow: arguments }
         padding-left: 2rem
         margin-left: -1rem
         width: 98%
+        td:not(.quote):not(.code) { background: t }
       }
     }
   }
@@ -2528,6 +2607,50 @@ b() { box-shadow: arguments }
         // moderator move topic checkbox align
         input[type='checkbox'][name='move_leave_shadow'] {
           vertical-align: middle
+        }
+        fieldset td {
+          background: t i
+          border-color: t i
+          input[type="text"] {
+            margin-left: 0 i
+          }
+          &.catBottom {
+            border-top: 1px solid bg4
+          }
+          .quote {
+            border: 0 i
+            background: var(--bg-1) i
+            padding: 0.1rem 0.3rem i
+            border-left: 6px solid var(--bg-5) i
+            border-radius: 1px 4px 4px 1px i
+          }
+        }
+        img[src*='icon_minipost.gif'] {
+          prefix = 'data:image/svg+xml;utf8,'
+          path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+          path  += ' viewBox="0 0 20 20"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h5A2.5 2.5 0 0 1 13 5.5a.5.'
+          path  += '5 0 0 1-1 0A1.5 1.5 0 0 0 10.5 4h-5A1.5 1.5 0 0 0 4 5.5v5A1.5 1.5 0 0 0 5.5 12h4.51'
+          path  += '4a2.25 2.25 0 1 1 .114 1H5.5A2.5 2.5 0 0 1 3 10.5v-5zm8 6.75a1.25 1.25 0 1 0 2.5 0 '
+          path  += '1.25 1.25 0 0 0-2.5 0zM7.5 14a.5.5 0 0 0-.5.5A2.5 2.5 0 0 0 9.5 17h5a2.5 2.5 0 0 0 '
+          path  += '2.5-2.5v-5A2.5 2.5 0 0 0 14.5 7H9.872a2.25 2.25 0 1 0 .114 1H14.5A1.5 1.5 0 0 1 16 '
+          path  += '9.5v5a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 8 14.5a.5.5 0 0 0-.5-.5zm.25-7.5a1.25 '
+          path  += '1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z" '
+          bgc    = 'fill="' + to_hex($v99) + '"/>'
+          background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+          width: 0
+          height: 18px
+          padding-left: 16px
+          padding-right: 14px
+          padding-top: 0
+          padding-bottom: 0
+          background-size: 22px
+          background-repeat: no-repeat
+          background-position: center
+          vertical-align: middle
+          &:hover {
+            bgc    =  'fill="' + to_hex($v09) + '"/>'
+            background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+          }
         }
       }
       // end
@@ -2601,6 +2724,10 @@ b() { box-shadow: arguments }
           float: right
         }
       }
+      table[cellspacing='1'] {
+        border-spacing: 0
+        padding: 3px
+      }
     }
     // style pm's background/border
     &[action*='privmsg.php?folder'] {
@@ -2671,10 +2798,12 @@ b() { box-shadow: arguments }
     }
     &[action='search.php?mode=results'] {
       table[width='928'] {
-        width: 930px
         input {
           vertical-align: middle
-          margin: .1rem .1rem
+          margin: .1rem .2rem
+          &[name='show_results'] {
+            margin: .1rem .3rem
+          }
         }
         .genmed {
           vertical-align: middle
@@ -2836,9 +2965,9 @@ b() { box-shadow: arguments }
     }
     // exclude .searchButton this is wiki
     &[type='submit'][value='Go']:not(.searchButton) {
-      vertical-align: top
-      height: 28px
-      width: 50px
+      border: 1px solid v06
+      padding: .243333rem .2rem
+      width: 3rem
       box-shadow: 0 1px 0 bg0
       text-shadow: 0 1px 0 bg0
       &:active, &:focus-visible, &:hover {
@@ -2905,7 +3034,7 @@ b() { box-shadow: arguments }
 
     & {
       transition: transition
-      vertical-align: middle
+      vertical-align: -.1rem
       &:not([disabled]) {
         c: v97 0 bg0
         border: 1px solid bg5

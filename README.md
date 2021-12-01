@@ -19,7 +19,7 @@
   <a href="https://david-dm.org/Style-it-Themes/dd-wrt-forum-inspired-themes?type=dev">
     <img src="https://img.shields.io/david/dev/style-it-themes/dd-wrt-forum-inspired-themes.svg?label=devDependencies&style=for-the-badge" alt="devDependencies">
   </a>
-  -->
+    -->
 </p>
 
 # TOC
@@ -49,7 +49,7 @@ This style leverages;
 1. The _awesome_ v2 [stylus lang color generator](https://github.com/vednoc/stylus-color-generator) by @vednoc [MIT](https://git.io/JPwy6)
 2. [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons) [MIT](https://git.io/JPwyH)
 3. [Twitter Emoji (Twemoji)](https://github.com/twitter/twemoji) [CC-BY 4.0](https://git.io/JPiMA)
-   NOTE: All Twemoji and Fluent UI system icons have been optimized with svgomg, no other changes done.
+  NOTE: All Twemoji and Fluent UI system icons have been optimized with svgomg, no other changes done.
 
 ## Features
 
