@@ -2387,6 +2387,9 @@ b() { box-shadow: arguments }
       b: 0 0 10px 0 v04
       rad: 4px
     }
+    &[name='filecomment'] {
+      margin-bottom: .3rem
+    }
   }
   // style code blocks all over
   .posting td.code,
@@ -2399,6 +2402,7 @@ b() { box-shadow: arguments }
     cursor: copy
     max-width: 0
     overflow-x: auto
+    font-family: monospace
   }
   .forum #content .quote td:not(.code) {
     background: t
@@ -2979,8 +2983,8 @@ b() { box-shadow: arguments }
     }
     // bottom add attach by submit/preview buttons
     &[type='submit'].liteoption[name='add_attachment'] {
-      margin-top: 4.3rem
-      margin-left: -17.06rem
+      margin-top: calc(5.5% + .5rem)
+      left: calc(50% - 26.4%)
       position: absolute
       box-shadow: 0 1px 0 bg0
       text-shadow: 0 1px 0 bg0
