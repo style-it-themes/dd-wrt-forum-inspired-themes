@@ -249,6 +249,10 @@ b() { box-shadow: arguments }
       }
     }
   }
+  // rset min height when page says you are working too fast.
+  #content {
+    min-height: initial
+  }
   if (sdetails) {
     .forum #footer {
       border-top: 0
@@ -1050,7 +1054,7 @@ b() { box-shadow: arguments }
         transform: scale(1.08)
       }
     }
-    &[src*='icon_minipost.gif'][alt='Post'][width='12'] {
+    &[src*='icon_minipost.gif'][alt='Post'][width='12'], &[src*='icon_minipost.gif'][alt='Post'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
       path  += ' viewBox="0 0 20 20"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h5A2.5 2.5 0 0 1 13 5.5a.5.'
@@ -1808,8 +1812,12 @@ b() { box-shadow: arguments }
   #navigation_minimized #menu_sub li {
     margin-top: 6rem
     a[href*="imprint"] {
-      margin-left: -4.8rem
-      padding: .262em
+      margin-left: -4.6rem
+      padding: .260em
+      &:hover {
+        margin-left: -4.6rem
+        padding: .188rem .1rem
+      }
     }
     a[href*="privacy-policy"] {
       margin-left: -1rem
@@ -2085,7 +2093,7 @@ b() { box-shadow: arguments }
     // z-index ensure this displays ontop of the input boxes below.
     #quick_links {
       position: absolute
-      top: 285px
+      top: 160px
       left: 890px
       z-index: 1
       #quick_link_infos {
@@ -2187,11 +2195,10 @@ b() { box-shadow: arguments }
   .forum {
     #header {
       background: bg0
+      height: 149px
       #header_ads {
         //fix privacy policy/inprint align on scroll
-        margin-left: 3rem
-        height: 0
-        border: 0
+        display: none
       }
       #menu_areas {
         // hide in https://forum.dd-wrt.com/phpBB2/login.php
@@ -2216,7 +2223,12 @@ b() { box-shadow: arguments }
     // Fix double word e.g. DD-WRT Forum Forum Index
     strong a.nav { vertical-align: middle }
     a.nav {
-      &:hover { text-decoration: none }
+      &:hover {
+        text-decoration: none
+      }
+      &[href*="view="]:hover {
+        color: v09 i
+      }
       &[href*='index'] {
         font-size: 0
         &::after {
@@ -2372,7 +2384,7 @@ b() { box-shadow: arguments }
       background: bg2
       padding: 3px
       th {
-        padding: 8px 4px
+        padding: 5px 4px 8px 0
         background: bg4
         border-bottom: solid 1px bg5
         border-bottom: 1px solid t
@@ -2474,6 +2486,14 @@ b() { box-shadow: arguments }
         vertical-align: middle
       }
     }
+  }
+  .thTop, .thCornerR {
+    &[align="center"] {
+      text-align: right i
+    }
+  }
+  .thCornerL[align="center"]  {
+    width: 60%
   }
   textarea {
     appearance: none
