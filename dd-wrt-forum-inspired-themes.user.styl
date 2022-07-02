@@ -32,6 +32,7 @@
 @var range    cg_sat       'Saturation of RGB colors' [0, -50, 40, 0.01]
 @var range    cg_lig       'Lightness of gray colors' [0, -30, 30, 0.01]
 
+@var checkbox new-top-menu 'Use top menu redesign   ' 0
 @var checkbox avatar_soh   'Avatar on hover scale   ' 0
 @var checkbox emoji_new    'Enable emoji override   ' 1
 
@@ -83,6 +84,7 @@ g(x, y = 0, xi = 1, yi = 1) {
 rad() { border-radius: arguments }
 // Box-shadow mixin.
 b() { box-shadow: arguments }
+tsh() { text-shadow: arguments }
 
 // Color generator.
 // NOTE: Fix the scope to avoid conflicts.
@@ -92,7 +94,7 @@ b() { box-shadow: arguments }
     'custom-style'   : { BG:   cg_bg, FG:   cg_fg, AC:   cg_ac }
     'dracula'        : { BG: #282A36, FG: #f8f8f2, AC: #bd93f9 }
     'duo-cocoa'      : { BG: #28231f, FG: #ffdac2, AC: #dfb249 }
-    'material'       : { BG: #263238, FG: #eeffff, AC: #82aaff }
+    'material'       : { BG: #263238, FG: #eeffff, AC: #89ddff }
     'material-dkr'   : { BG: #212121, FG: #eeffff, AC: #82aaff }
     'solarized-dark' : { BG: #002b36, FG: #fdf6e3, AC: #268bd2 }
     'twilight'       : { BG: #141414, FG: #f7f7f7, AC: #8f9d6a }
@@ -1761,25 +1763,190 @@ b() { box-shadow: arguments }
     /img[src*='/smiles'] {
       transform: scale(1.09888)
       vertical-align: middle
+      margin: 0 .2rem 0 .2rem
     }
   }
 }
 @-moz-document regexp('https?://forum.dd-wrt.com.*(/.*)?') {
-  // Style selection bg/fg with accent color
+  // style selection bg/fg with accent color
   ::selection { background-color: v03; color: v99 }
   * {
-    text-shadow: none
+    //text-shadow: none
     box-shadow: none
+    text-rendering: geometricPrecision
   }
-
-  #navigation #menu_main .parent:hover {
-    background-image: linear-gradient(#318cd8, #2874b4)
-    border-bottom: none
-    border-right-color: #2874b4
-    transition: transition
-    cursor: pointer
+  #header #menu_top li {
+    a {
+      color: v98
+      &:hover {
+        color: v09
+      }
+    }
+    &.first {
+      display: none
+    }
+    &:first-of-type + li {
+      border-left: 0
+    }
   }
+  if (new-top-menu) {
+    #header_wrap {
+      background: bg0
+      #navigation a,
+      #navigation_minimized a {
+        color: v99
+        tsh: 0 1px 0 bg0
+      }
+    }
+    #navigation {
+      #menu_main {
+        .parent {
+          transition: transition
+          background-image: none
+          c: v98 v05 v02
+          rad: 4px
+          tsh: 0 1px 0 bg0
+          text-align: center
+          margin: -.8rem 5px 8px 10px
+          //width: 15.9rem
+          &:hover {
+            background-image: none
+            c: 0 v04 v08
+            transition: transition
+            cursor: pointer
+          }
+          &.active {
+            border-bottom: 1px solid v06
+            background: v08 i
+          }
+        }
+        ul {
+          background: bg2
+          border: 1px solid bg4
+          padding-top: 0
+          border-bottom: 1px solid t
+          rad: 4px 4px 0 0
+          max-width: @width
+          margin-top: -.8rem
+          width: 1153px
+        }
+      }
+      #left, #middle, #right {
+        display: none
+      }
+      #menu_sub {
+        ul {
+          height: 28px
+          padding-bottom: 10px
+          rad: 0 4px 0 0
+          background: bg2
+          background-image: none
+          border-color: bg4
+          margin-bottom: -2px
+        }
+        li {
+          a {
+            padding: 4px 10px 4px
+            border: solid 1px v04
+            border-radius: 4px
+            color: v99
+            background: v02
+            background-image: none
+            transition: transition
+          }
+          .active a, a:hover {
+            padding: 4px 10px 4px
+            border: solid 1px v08
+            border-radius: 4px
+            color: v99
+            background: v08
+            background-image: none
+          }
+        }
+        .active a, a:hover {
+          padding: 4px 10px 4px
+          border: solid 1px v08
+          border-radius: 4px
+          color: v99
+          background: v08
+          background-image: none
+        }
+      }
+      div[style="position: absolute; width: 1000px;"] {
+        position: relative i
+        width: 1155px i
+      }
+      &_minimized #menu_sub {
+        li {
+          a {
+            animation-name: fadeIn
+            animation-iteration-count: 1
+            animation-timing-function: ease-in
+            animation-duration: 500ms
 
+            padding: 4px 10px 4px
+            border: solid 1px v04
+            border-radius: 4px
+            color: v99
+            background: v02
+            background-image: none
+            &:hover {
+              padding: 4px 10px 4px
+              border: solid 1px v08
+              border-radius: 4px
+              color: v99
+              background: v08
+              background-image: none
+            }
+            &[href*='imprint'] {
+              margin-top: 5.5rem i
+              position: absolute
+              padding: 2px 10px 4px i
+              margin-left: -18rem i
+              &:hover {
+                padding: 3px 10px 4px i
+              }
+            }
+            &[href*="privacy-policy"] {
+              margin-top: 5.5rem i
+              position: absolute
+              padding: 2px 10px 4px i
+              margin-left: -13.6rem i
+              &:hover {
+                padding: 3px 10px 4px i
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  else {
+    #header_wrap {
+      c: 0 t bg0
+    }
+    #navigation {
+      #menu_sub {
+        ul {
+          height: 28px
+          padding-bottom: 2px
+          margin-bottom: -2px
+        }
+      }
+    }
+  }
+  #header_wrap[style*='background-position-y: -23px'] {
+    #content[style*='min-height: 0'] {
+      margin-top: .61rem i
+      #menu_forum {
+        rad: 4px 4px 0 0
+      }
+    }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0  }
+    100% { opacity: 1 }
+  }
   // set new forum width
   #header_wrap #navigation, #header_wrap #navigation_minimized,
   .forum #header, #main, #content, .forum #content #forum_content, #footer {
@@ -1809,25 +1976,6 @@ b() { box-shadow: arguments }
       }
     }
   }
-  #navigation_minimized #menu_sub li {
-    margin-top: 6rem
-    a[href*="imprint"] {
-      margin-left: -4.6rem
-      padding: .260em
-      &:hover {
-        margin-left: -4.6rem
-        padding: .188rem .1rem
-      }
-    }
-    a[href*="privacy-policy"] {
-      margin-left: -1rem
-      margin-top: -.13rem
-      position: fixed
-      &:hover {
-        margin-top: -.11rem
-      }
-    }
-  }
 
   // dont target mediawiki bg
   body:not(.mediawiki) {
@@ -1839,6 +1987,28 @@ b() { box-shadow: arguments }
   // efing ff fix it upstream too
   .attachtable[width='95%'] img {
     max-width: 95%
+  }
+  if (new-top-menu) {
+    #content {
+      #menu_forum {
+        // when not sicky make it same bg color
+        background: bg3
+        border-color: bg5 bg4
+        border-bottom: 1px solid bg5 i
+        rad: 0
+        padding-bottom: .7rem
+      }
+    }
+  }
+  else {
+    #content {
+      #menu_forum {
+        background: bg3
+        border: 1px solid bg4
+        border-bottom: 1px solid bg5 i
+        rad: 0
+      }
+    }
   }
   #content {
     font-size: 12px
@@ -1852,12 +2022,6 @@ b() { box-shadow: arguments }
       }
     }
     #menu_forum {
-      // when not sicky make it same bg color
-      padding: 8px 0
-      background: bg3
-      border-color: bg4
-      border-bottom: 1px solid bg4
-      rad: 4px 4px 0 0
       li a {
         color: v98
         rad: 4px
@@ -1883,6 +2047,7 @@ b() { box-shadow: arguments }
         border-color: v08
         b: 0 0 10px 0 v04
         rad: 4px
+
         span {
           color: v99
           text-shadow: 0 1px 0 bg0
@@ -2057,36 +2222,31 @@ b() { box-shadow: arguments }
       }
     }
   }
-
   // https://forum.dd-wrt.com/phpBB2/login.php
   .forum #content:not([style]) {
     .content {
       border-top: 1px solid t
     }
     #menu_forum {
-      background: bg2
-      border: 1px solid bg4
-      margin-bottom: -.4rem
-      .active span {
+      // when not sicky make it same bg color
+      padding: 8px 0
+      background: bg3
+      border-color: bg4
+      border-bottom: 1px solid bg5
+      padding-bottom: .7rem
+      rad: 4px 4px 0 0
+    }
+    li a {
+      &:hover span {
         background: none i
         background-image: linear-gradient(v05, v06)
         border-color: v08
         color: v98
+      }
+      span {
+        background: none i
         padding: 4px 20px 4px 0
         margin-top: -.1rem
-      }
-      li a {
-        &:hover span {
-          background: none i
-          background-image: linear-gradient(v05, v06)
-          border-color: v08
-          color: v98
-        }
-        span {
-          background: none
-          padding: 4px 20px 4px 0
-          margin-top: -.1rem
-        }
       }
     }
     // fix quick links
@@ -2108,9 +2268,7 @@ b() { box-shadow: arguments }
       padding-bottom: .7rem;
     }
   }
-  #header_wrap {
-    background-color: bg0
-  }
+
   // https://forum.dd-wrt.com/phpBB2/login.php
   #header  {
     #logo {
@@ -2358,7 +2516,7 @@ b() { box-shadow: arguments }
             margin: .3rem .3rem
             &[class='text'][name='autologin'] {
               vertical-align: middle
-              margin-left: .3rem
+              margin-left: .5rem
             }
             &[type='password'],
             &[type='text'][name='username'] {
@@ -2428,6 +2586,11 @@ b() { box-shadow: arguments }
         padding: .1rem .3rem
         border-left: 6px solid bg5
         rad: 1px 4px 4px 1px
+        max-width: 905px
+        margin-right: -1.5rem
+        display: block
+        text-overflow: fade
+        overflow-x: auto
       }
     }
     .block {
