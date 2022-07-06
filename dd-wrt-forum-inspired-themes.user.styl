@@ -1933,6 +1933,49 @@ tsh() { text-shadow: arguments }
           margin-bottom: -2px
         }
       }
+      &_minimized #menu_sub {
+        li {
+          a {
+            animation-name: fadeIn
+            animation-iteration-count: 1
+            animation-timing-function: ease-in
+            animation-duration: 500ms
+
+            padding: 4px 10px 4px
+            border: solid 1px v04
+            border-radius: 4px
+            color: v99
+            background: v02
+            background-image: none
+            &:hover {
+              padding: 4px 10px 4px
+              border: solid 1px v08
+              border-radius: 4px
+              color: v99
+              background: v08
+              background-image: none
+            }
+            &[href*='imprint'] {
+              margin-top: 6rem i
+              position: absolute
+              padding: 2px 10px 4px i
+              margin-left: -18rem i
+              &:hover {
+                padding: 3px 10px 4px i
+              }
+            }
+            &[href*="privacy-policy"] {
+              margin-top: 6rem i
+              position: absolute
+              padding: 2px 10px 4px i
+              margin-left: -13.6rem i
+              &:hover {
+                padding: 3px 10px 4px i
+              }
+            }
+          }
+        }
+      }
     }
   }
   #header_wrap[style*='background-position-y: -23px'] {
@@ -2445,8 +2488,9 @@ tsh() { text-shadow: arguments }
       padding-top: .4rem
       padding-bottom: .4rem
     }
-    .catHead a {
-      color: v97
+    .catHead {
+      a { color: v97 }
+      b b { color: v09 }
     }
     .thHead, .thSides,
     .thLeft, .thRight {
