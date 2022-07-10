@@ -2,7 +2,7 @@
   "name": "dd-wrt-forum-inspired-themes",
   "title": "DD-WRT Forum Inspired Themes",
   "description": "Customizable dark themes for the DD-WRT phpBB forums",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "author": {
     "name": "Style-it Themes: the-j0k3r",
     "url": "https://github.com/style-it-themes"
@@ -25,14 +25,14 @@
   },
   "devDependencies": {
     "eclint": "^2.8.1",
-    "updates": "^13.1.1",
+    "updates": "^13.1.2",
     "versions": "^9.3.0"
   },
   "scripts": {
     "authors": "bash tools/authors.sh",
-    "patch": "versions -p -C patch dd-wrt-forum-inspired-themes.user.styl",
-    "minor": "versions -p -C minor dd-wrt-forum-inspired-themes.user.styl",
-    "major": "versions -p -C major dd-wrt-forum-inspired-themes.user.styl",
+    "patch": "versions -p -C patch dd-wrt-forum-inspired-themes.user.styl && git psh",
+    "minor": "versions -p -C minor dd-wrt-forum-inspired-themes.user.styl && git psh",
+    "major": "versions -p -C major dd-wrt-forum-inspired-themes.user.styl && git psh",
     "fix": "eclint fix dd-wrt-forum-inspired-themes.user.styl && eclint fix *.md",
     "update": "updates -cuU && npm install"
   }
