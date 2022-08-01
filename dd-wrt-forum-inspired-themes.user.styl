@@ -292,6 +292,11 @@ tsh() { text-shadow: arguments }
     width: 0
     height: 0
   }
+  @keyframes wiggle {
+    0% { transform: scale(1) }
+    50% { transform: scale(.9) }
+    100% { transform: scale(1.05) }
+  }
   img {
     image-rendering: smooth
     transition: transition
@@ -783,7 +788,7 @@ tsh() { text-shadow: arguments }
       background-position: center
     }
     // new posts/popular/locked/announce/sticky
-    &[src*='folder_new'][width]:not([alt*='Popular']) {
+    &[src*='folder_new.gif'][width]:not([alt*='Popular']) {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
       path  += ' viewBox="0 0 20 20"><g fill="' + to_hex($v99) + '"><path d="M10 2v4.5A1.5 1.5 0 0 '
@@ -802,7 +807,7 @@ tsh() { text-shadow: arguments }
     &[src*='folder_new_hot'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' viewBox="0 0 20 20"><g fill="' + to_hex($v99) + '"><path d="M10 2v4.5A1.5 1.5 0 0 '
+      path  += ' viewBox="0 0 20 20"><g fill="' + to_hex($v29) + '"><path d="M10 2v4.5A1.5 1.5 0 0 '
       path  += '0 11.5 8H16v8.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V13h1.5a1.5 1.5 0 0 0 '
       path  += '1.342-.83l.034-.068 1.24 2.975a1.5 1.5 0 0 0 2.726.094L11.927 13h.573a1.5 1.5 0 0 0'
       path  += ' 0-3H11a1.5 1.5 0 0 0-1.342.83l-.034.068-1.24-2.975a1.5 1.5 0 0 0-2.726-.094L4.573 '
@@ -817,6 +822,7 @@ tsh() { text-shadow: arguments }
       background-size: 20px
       background-repeat: no-repeat
       background-position: center
+      animation: wiggle 1s infinite
     }
     &[src*='folder_lock_new'][alt='New posts [ Locked ]'], &[src*='folder_lock_new'][alt='New posts'] {
       prefix = 'data:image/svg+xml;utf8,'
