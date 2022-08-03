@@ -292,10 +292,10 @@ tsh() { text-shadow: arguments }
     width: 0
     height: 0
   }
-  @keyframes wiggle {
+  @keyframes pulse {
     0% { transform: scale(1) }
-    50% { transform: scale(.9) }
-    100% { transform: scale(1.05) }
+    50% { transform: scale(1.2) }
+    100% { transform: scale(1) }
   }
   img {
     image-rendering: smooth
@@ -753,9 +753,11 @@ tsh() { text-shadow: arguments }
     &[src*='folder_big.gif'][alt="No new posts"] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M12 2v6a2 2 0 0 0'
-      path  += ' 2 2h6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6Zm1.5.5V8a.5.5 0 0 0 .5.5h'
-      path  += '5.5l-6-6Z"'
+      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M12 8V2H6a2 2 0 0'
+      path  += ' 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2Zm-3.75 3.5h7.5a.75.75 '
+      path  += '0 0 1 0 1.5h-7.5a.75.75 0 0 1 0-1.5Zm0 2.75h7.5a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 '
+      path  += '1 0-1.5Zm0 2.75h7.5a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1 0-1.5Zm5.25-9V2.5l6 6H14a.'
+      path  += '5.5 0 0 1-.5-.5Z"'
       bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
@@ -768,18 +770,16 @@ tsh() { text-shadow: arguments }
     &[src*='folder_locked_big.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M18.5 20a.5.5 0 0'
-      path  += ' 1-.5.5h-6v1c0 .171-.017.338-.05.5H18a2 2 0 0 0 2-2V9.828a2 2 0 0 0-.586-1.414l-5.8'
-      path  += '29-5.828a.491.491 0 0 0-.049-.04a.63.63 0 0 1-.036-.03a2.072 2.072 0 0 0-.219-.18a.'
-      path  += '652.652 0 0 0-.08-.044l-.048-.024l-.05-.029c-.054-.031-.109-.063-.166-.087a1.977 1.'
-      path  += '977 0 0 0-.624-.138a.56.56 0 0 1-.059-.007a.605.605 0 0 0-.082-.007H6a2 2 0 0 0-2 2'
-      path  += 'v7.55a3.5 3.5 0 0 1 1.5-.905V4a.5.5 0 0 1 .5-.5h6V8a2 2 0 0 0 2 2h4.5v10Zm-5-15.379'
-      path  += 'L17.378 8.5H14a.5.5 0 0 1-.5-.5V4.621ZM4 15h-.5A1.5 1.5 0 0 0 2 16.5v5A1.5 1.5 0 0 '
-      path  += '0 3.5 23h6a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 9.5 15H9v-1a2.5 2.5 0 0 0-5 0v1Zm'
-      path  += '1.5-1a1 1 0 1 1 2 0v1h-2v-1Zm2 5a1 1 0 1 1-2 0a1 1 0 0 1 2 0Z"'
+      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M12 2v6a2 2 0 0 0'
+      path  += ' 2 2h6v10a2 2 0 0 1-2 2h-6.05c.033-.162.05-.329.05-.5v-5a2.5 2.5 0 0 0-2-2.45V14a3.'
+      path  += '5 3.5 0 0 0-6-2.45V4a2 2 0 0 1 2-2h6Zm1.5.5V8a.5.5 0 0 0 .5.5h5.5l-6-6ZM4 15h-.5A1.'
+      path  += '5 1.5 0 0 0 2 16.5v5A1.5 1.5 0 0 0 3.5 23h6a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 '
+      path  += '9.5 15H9v-1a2.5 2.5 0 0 0-5 0v1Zm1.5-1a1 1 0 1 1 2 0v1h-2v-1Zm2 5a1 1 0 1 1-2 0a1 1'
+      path  += ' 0 0 1 2 0Z"'
       bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
+      padding: 14px
       padding-right: 24px
       background-size: 24px
       background-repeat: no-repeat
@@ -789,12 +789,11 @@ tsh() { text-shadow: arguments }
     &[src*='folder_new.gif'][width]:not([alt*='Popular']) {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 6.5V2H5.5A1.5'
-      path  += ' 1.5 0 0 0 4 3.5v5.503a3.84 3.84 0 0 1 2.003.654a3.852 3.852 0 0 1 4.875 5.916L8.45'
-      path  += ' 18h6.05a1.5 1.5 0 0 0 1.5-1.5V8h-4.5A1.5 1.5 0 0 1 10 6.5Zm1 0V2.25L15.75 7H11.5a.'
-      path  += '5.5 0 0 1-.5-.5Zm-4.863 4.335a2.85 2.85 0 1 1 4.031 4.031L6.354 18.68a.5.5 0 0 1-.7'
-      path  += '07 0l-3.814-3.814a2.85 2.85 0 1 1 4.031-4.031l.137.136l.136-.136Zm4.031 4.031l-.353'
-      path  += '-.353Z"'
+      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 2v4.5A1.5 1.5'
+      path  += ' 0 0 0 11.5 8H16v8.5a1.5 1.5 0 0 1-1.5 1.5H9.743A5.5 5.5 0 0 0 4 9.207V3.5A1.5 1.5 '
+      path  += '0 0 1 5.5 2H10Zm1 .25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25ZM10 14.5a4.5 4.5 0 1 1-9 0a4'
+      path  += '.5 4.5 0 0 1 9 0ZM5.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm0 5.'
+      path  += '125a.625.625 0 1 0 0-1.25a.625.625 0 0 0 0 1.25Z"'
       bgc    = 'fill="' + to_hex($v29) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
@@ -804,15 +803,14 @@ tsh() { text-shadow: arguments }
       background-repeat: no-repeat
       background-position: center
     }
-    &[src*='folder_new_hot'] {
+    &[src*='folder_new_hot.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 6.5V2H5.5A1.5'
-      path  += ' 1.5 0 0 0 4 3.5v5.503a3.84 3.84 0 0 1 2.003.654a3.852 3.852 0 0 1 4.875 5.916L8.45'
-      path  += ' 18h6.05a1.5 1.5 0 0 0 1.5-1.5V8h-4.5A1.5 1.5 0 0 1 10 6.5Zm1 0V2.25L15.75 7H11.5a.'
-      path  += '5.5 0 0 1-.5-.5Zm-4.863 4.335a2.85 2.85 0 1 1 4.031 4.031L6.354 18.68a.5.5 0 0 1-.7'
-      path  += '07 0l-3.814-3.814a2.85 2.85 0 1 1 4.031-4.031l.137.136l.136-.136Zm4.031 4.031l-.353'
-      path  += '-.353Z"'
+      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 2v4.5A1.5 1.5'
+      path  += ' 0 0 0 11.5 8H16v8.5a1.5 1.5 0 0 1-1.5 1.5H8.632c.25-.473.368-.988.368-1.5a2.5 2.5 '
+      path  += '0 0 0-2.273-2.49A3 3 0 0 0 4 9.041V3.5A1.5 1.5 0 0 1 5.5 2H10Zm1 .25V6.5a.5.5 0 0 0'
+      path  += ' .5.5h4.25L11 2.25ZM6.5 12a2 2 0 1 1-4 0a2 2 0 0 1 4 0ZM8 16.5C8 17.745 7 19 4.5 19'
+      path  += 'S1 17.75 1 16.5A1.5 1.5 0 0 1 2.5 15h4A1.5 1.5 0 0 1 8 16.5Z"'
       bgc    = 'fill="' + to_hex($v29) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
@@ -821,7 +819,7 @@ tsh() { text-shadow: arguments }
       background-size: 20px
       background-repeat: no-repeat
       background-position: center
-      animation: wiggle 1s infinite
+      animation: pulse 1.2s infinite
     }
     &[src*='folder_lock_new'][alt='New posts [ Locked ]'], &[src*='folder_lock_new'][alt='New posts'] {
       prefix = 'data:image/svg+xml;utf8,'
@@ -843,9 +841,11 @@ tsh() { text-shadow: arguments }
     &[src*='folder.gif'][width][alt='No new posts'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 2v4.5A1.5 1.5'
-      path  += ' 0 0 0 11.5 8H16v8.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5v-13A1.5 1.5 0 0 '
-      path  += '1 5.5 2H10Zm1 .25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25Z"'
+      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 6.5V2H5.5A1.5'
+      path  += ' 1.5 0 0 0 4 3.5v13A1.5 1.5 0 0 0 5.5 18h9a1.5 1.5 0 0 0 1.5-1.5V8h-4.5A1.5 1.5 0 0'
+      path  += ' 1 10 6.5ZM6.5 10h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1Zm0 2h7a.5.5 0 0 1 0 1h-7a.5.5 '
+      path  += '0 0 1 0-1Zm0 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1ZM11 6.5V2.25L15.75 7H11.5a.5.5 0 '
+      path  += '0 1-.5-.5Z"'
       bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0 i
@@ -858,12 +858,11 @@ tsh() { text-shadow: arguments }
     &[src*='folder_hot'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 6.5V2H5.5A1.5'
-      path  += ' 1.5 0 0 0 4 3.5v5.503a3.84 3.84 0 0 1 2.003.654a3.852 3.852 0 0 1 4.875 5.916L8.45'
-      path  += ' 18h6.05a1.5 1.5 0 0 0 1.5-1.5V8h-4.5A1.5 1.5 0 0 1 10 6.5Zm1 0V2.25L15.75 7H11.5a.'
-      path  += '5.5 0 0 1-.5-.5Zm-4.863 4.335a2.85 2.85 0 1 1 4.031 4.031L6.354 18.68a.5.5 0 0 1-.7'
-      path  += '07 0l-3.814-3.814a2.85 2.85 0 1 1 4.031-4.031l.137.136l.136-.136Zm4.031 4.031l-.353'
-      path  += '-.353Z"'
+      path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10 2v4.5A1.5 1.5'
+      path  += ' 0 0 0 11.5 8H16v8.5a1.5 1.5 0 0 1-1.5 1.5H8.632c.25-.473.368-.988.368-1.5a2.5 2.5 '
+      path  += '0 0 0-2.273-2.49A3 3 0 0 0 4 9.041V3.5A1.5 1.5 0 0 1 5.5 2H10Zm1 .25V6.5a.5.5 0 0 0'
+      path  += ' .5.5h4.25L11 2.25ZM6.5 12a2 2 0 1 1-4 0a2 2 0 0 1 4 0ZM8 16.5C8 17.745 7 19 4.5 19'
+      path  += 'S1 17.75 1 16.5A1.5 1.5 0 0 1 2.5 15h4A1.5 1.5 0 0 1 8 16.5Z"'
       bgc    = 'fill="' + to_hex($v99) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
@@ -872,7 +871,7 @@ tsh() { text-shadow: arguments }
       background-size: 20px
       background-repeat: no-repeat
       background-position: center
-      animation: wiggle 1s infinite
+      animation: pulse 1.2s infinite
     }
     &[src*='folder_lock.gif'] {
       prefix = 'data:image/svg+xml;utf8,'
@@ -2480,7 +2479,7 @@ tsh() { text-shadow: arguments }
         &::before {
           content: '\1F578\00A0'
           color: v98
-          font-size: 24px
+          font-size: 20px
           vertical-align: -.3rem
         }
       }
