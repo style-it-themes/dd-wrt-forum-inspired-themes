@@ -2051,7 +2051,7 @@ tsh() { text-shadow: arguments }
   }
 
   // dont target mediawiki bg
-  body:not(.mediawiki) {
+  body {
     background: bg0
     color: v98
     box-sizing: border-box
@@ -2347,6 +2347,19 @@ tsh() { text-shadow: arguments }
       padding-top: 0px
       padding-bottom: .7rem;
     }
+    form[action*='login'] {
+      td {
+        &[width="45%"], &[align="right"] {
+          .gen {
+            margin-right: -.6rem
+          }
+        }
+        &[colspan="2"] .gen input[name="autologin"] {
+          margin-left: .6rem
+          margin-right: -1.6rem
+        }
+      }
+    }
   }
 
   // https://forum.dd-wrt.com/phpBB2/login.php
@@ -2602,7 +2615,7 @@ tsh() { text-shadow: arguments }
             }
             &[type='password'],
             &[type='text'][name='username'] {
-              width: 64%
+              width: 56%
               rad: 4px
               padding: .2rem .1rem
             }
@@ -2633,7 +2646,7 @@ tsh() { text-shadow: arguments }
         &:first-child {
           border-left: 1px solid bg4
           border-right: 1px solid bg0
-          padding-left: .4rem
+          padding-left: .5rem
           rad: 4px 0 0 4px
         }
         &:last-child {
@@ -2641,6 +2654,9 @@ tsh() { text-shadow: arguments }
           border-left: 1px solid bg4
           padding-left: .4rem
           rad: 0 4px 4px 0
+        }
+        &.thLeft {
+          min-width: 150px
         }
       }
       .info td {
@@ -2955,6 +2971,7 @@ tsh() { text-shadow: arguments }
       font-size: 14px
       line-height: 1.4em
       max-width: 940px i
+      padding: 5px 0 0 10px
       display: block
       text-overflow: ellipsis
       overflow: auto
