@@ -1838,7 +1838,9 @@ tsh() { text-shadow: arguments }
           text-align: center
           margin: -.8rem 5px 8px 10px
           padding: 1px 3px 3px
-          //width: 15.9rem
+          width: 16.5rem
+          letter-spacing: 1px
+          font-size: 14px
           &:hover {
             background-image: none
             c: 0 v04 v08
@@ -1956,12 +1958,32 @@ tsh() { text-shadow: arguments }
       c: 0 t bg0
     }
     #navigation {
+      #menu_main {
+        ul {
+          width: 1153px
+        }
+        .parent {
+          padding: 0 8px 2px
+          width: 15.641rem
+          &:hover {
+            background-image: linear-gradient(#318cd8, #2874b4)
+            border-bottom: 0
+            border-right-color: #2874b4
+          }
+        }
+      }
       #menu_sub {
         ul {
           height: 28px
           padding-bottom: 2px
           margin-bottom: -2px
         }
+        li {
+          margin-top: 2px
+        }
+      }
+      [style*="width: 1000px"] {
+        width: 1155px i
       }
       &_minimized #menu_sub {
         li {
