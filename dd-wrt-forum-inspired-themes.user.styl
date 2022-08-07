@@ -737,7 +737,7 @@ tsh() { text-shadow: arguments }
     &[src*='folder_new_big.gif'], &[src*='folder_new_big.gif'][width]:not(#x) {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-      path  += ' viewBox="0 0 24 24"><g fill="' + to_hex($v29) + '"><path d="M12 2v6a2 2 0 0 0 2 2h'
+      path  += ' viewBox="0 0 24 24"><g fill="' + to_hex($v09) + '"><path d="M12 2v6a2 2 0 0 0 2 2h'
       path  += '6v10a2 2 0 0 1-2 2h-6.81A6.5 6.5 0 0 0 4 11.498V4a2 2 0 0 1 2-2h6z"/><path d="M13.5'
       path  += ' 2.5V8a.5.5 0 0 0 .5.5h5.5l-6-6zM12 17.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0zM6.5'
       path  += ' 14a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 1 0v-4a.5.5 0 0 0-.5-.5zm0 7.125a.625.625 0 1 0 0-'
@@ -794,7 +794,7 @@ tsh() { text-shadow: arguments }
       path  += '0 0 1 5.5 2H10Zm1 .25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25ZM10 14.5a4.5 4.5 0 1 1-9 0a4'
       path  += '.5 4.5 0 0 1 9 0ZM5.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm0 5.'
       path  += '125a.625.625 0 1 0 0-1.25a.625.625 0 0 0 0 1.25Z"'
-      bgc    = 'fill="' + to_hex($v29) + '"/>'
+      bgc    = 'fill="' + to_hex($v09) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
       padding: 12px
@@ -811,7 +811,7 @@ tsh() { text-shadow: arguments }
       path  += '0 0 0-2.273-2.49A3 3 0 0 0 4 9.041V3.5A1.5 1.5 0 0 1 5.5 2H10Zm1 .25V6.5a.5.5 0 0 0'
       path  += ' .5.5h4.25L11 2.25ZM6.5 12a2 2 0 1 1-4 0a2 2 0 0 1 4 0ZM8 16.5C8 17.745 7 19 4.5 19'
       path  += 'S1 17.75 1 16.5A1.5 1.5 0 0 1 2.5 15h4A1.5 1.5 0 0 1 8 16.5Z"'
-      bgc    = 'fill="' + to_hex($v29) + '"/>'
+      bgc    = 'fill="' + to_hex($v09) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
       padding: 12px
@@ -829,7 +829,7 @@ tsh() { text-shadow: arguments }
       path  += ' 9.401V3.5A1.5 1.5 0 0 1 5.5 2H10Zm1 .25V6.5a.5.5 0 0 0 .5.5h4.25L11 2.25ZM3.5 12v1'
       path  += 'H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-.5v-1a2 2 0 1 0-'
       path  += '4 0Zm1 1v-1a1 1 0 1 1 2 0v1h-2Zm1 2.25a.75.75 0 1 1 0 1.5a.75.75 0 0 1 0-1.5Z"'
-      bgc    = 'fill="' + to_hex($v29) + '"/>'
+      bgc    = 'fill="' + to_hex($v09) + '"/>'
       background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
       width: 0
       padding: 12px
@@ -2225,11 +2225,11 @@ tsh() { text-shadow: arguments }
         td {
           border-color: bg1
           &[bgcolor='#FFFFFF'] {
-            background: v05
+            background-color: v05 i
             border-color: v03
             background-image: linear-gradient(-45deg, t, t 33%,
                                               rgba(convert($v01), .3) 33%,
-                                              rgba(convert($v01), .3) 66%, t 66%)
+                                              rgba(convert($v01), .3) 66%, t 66%) i
             background-size: 20px 15px
             animation: animate-progress 4s linear infinite
             rad: 3px
@@ -2889,7 +2889,7 @@ tsh() { text-shadow: arguments }
   [style='color: #556B2F'], [style='color: darkgreen'] {
     c: v45
   }
-  a {
+  a, .copyright {
     color: v09
     transition: transition
     &:hover {
@@ -3190,6 +3190,9 @@ tsh() { text-shadow: arguments }
             border-left: 5px solid bg5
             rad: 1px 4px 4px 1px
           }
+        }
+        &[cellspacing="1"] td.row1 {
+          background: t
         }
       }
       .catBottom {
