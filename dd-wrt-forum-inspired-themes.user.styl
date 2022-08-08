@@ -235,6 +235,7 @@ tsh() { text-shadow: arguments }
 
     // rgba BG/AC vars
     --rgba-bg-03: rgba(convert($bg1), .3)
+    --rgba-bg-04: rgba(convert($bg1), .4)
     --rgba-bg-05: rgba(convert($bg5), .5)
     // Code areas
     --code-bg: darken(BG, 20%)
@@ -2170,7 +2171,7 @@ tsh() { text-shadow: arguments }
       to { background-position: -40px 0 }
     }
     fieldset {
-      c: 0 bg4 var(--rgba-bg-03)
+      c: 0 bg4 var(--rgba-bg-04)
       rad: 4px
       &:last-of-type:not(:only-of-type) {
         margin-top: .5rem
@@ -2196,7 +2197,7 @@ tsh() { text-shadow: arguments }
       }
       .bodyline .row2[width='175'] {
         background: bg3
-        box-shadow: 0 0 8px 4px bg0 inset
+        box-shadow: inset 0 0 8px 6px bg0
         border: 1px solid bg4
         rad: 3px
       }
@@ -2507,6 +2508,11 @@ tsh() { text-shadow: arguments }
       }
     }
     form {
+      &[action*='posting_sec'] {
+        .row1:nth-child(2n) td {
+          background-color: initial i
+        }
+      }
       &[action*='posting_sec'],
       &[action*='privmsg.php?folder'] {
         a.nav {
@@ -2524,7 +2530,7 @@ tsh() { text-shadow: arguments }
       }
       &[name='jumpbox'] {
         text-align: left
-        margin-top: .688rem
+        //margin-top: .688rem
       }
     }
     #main[style] {
@@ -2825,16 +2831,24 @@ tsh() { text-shadow: arguments }
     rad: 0
   }
   table.attachtable {
-    background-color: bg0
-    border: 1px solid bg5 i
+    border: 1px solid bg5
     color: v97
-  }
-  td.attachrow {
-    color: v97
-    border-color: t
+    td {
+      &.attachrow {
+        color: v97
+        border-color: t
+        background-color: bg1 i
+      }
+      &[colspan='2'] {
+        background-color: bg1 i
+      }
+    }
+    div:nth-child(8) > hr:nth-child(1){
+      display: none i
+    }
   }
   hr {
-    color: bg5
+    color: bg4
   }
   [style='color: #88171A'], [style='color: red'] {
     c: v18 0 0
@@ -3027,487 +3041,520 @@ tsh() { text-shadow: arguments }
     }
   }
   /form {
-      // moderator pannel
-      &[action^='modcp'] {
-        // moderator move topic checkbox align
-        input[type='checkbox'] {
-          &[name='move_leave_shadow'] {
-            vertical-align: middle
-          }
-          &[name*="post_id_list"] {
-            vertical-align: -4rem
-          }
-        }
-        fieldset td {
-          background: t i
-          border-color: t i
-          input[type="text"] {
-            margin-left: 0 i
-          }
-          &.catBottom {
-            border-top: 1px solid bg4
-          }
-          .quote {
-            border: 0 i
-            background: var(--bg-1) i
-            padding: 0.1rem 0.3rem i
-            border-left: 6px solid var(--bg-5) i
-            border-radius: 1px 4px 4px 1px i
-          }
-        }
-        img[src*='icon_minipost.gif'] {
-          prefix = 'data:image/svg+xml;utf8,'
-          path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-          path  += ' viewBox="0 0 20 20"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h5A2.5 2.5 0 0 1 13 5.5a.5.'
-          path  += '5 0 0 1-1 0A1.5 1.5 0 0 0 10.5 4h-5A1.5 1.5 0 0 0 4 5.5v5A1.5 1.5 0 0 0 5.5 12h4.51'
-          path  += '4a2.25 2.25 0 1 1 .114 1H5.5A2.5 2.5 0 0 1 3 10.5v-5zm8 6.75a1.25 1.25 0 1 0 2.5 0 '
-          path  += '1.25 1.25 0 0 0-2.5 0zM7.5 14a.5.5 0 0 0-.5.5A2.5 2.5 0 0 0 9.5 17h5a2.5 2.5 0 0 0 '
-          path  += '2.5-2.5v-5A2.5 2.5 0 0 0 14.5 7H9.872a2.25 2.25 0 1 0 .114 1H14.5A1.5 1.5 0 0 1 16 '
-          path  += '9.5v5a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 8 14.5a.5.5 0 0 0-.5-.5zm.25-7.5a1.25 '
-          path  += '1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z" '
-          bgc    = 'fill="' + to_hex($v99) + '"/>'
-          background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
-          width: 0
-          height: 18px
-          padding-left: 16px
-          padding-right: 14px
-          padding-top: 0
-          padding-bottom: 0
-          background-size: 22px
-          background-repeat: no-repeat
-          background-position: center
+    // moderator pannel
+    &[action^='modcp'] {
+      // moderator move topic checkbox align
+      input[type='checkbox'] {
+        &[name='move_leave_shadow'] {
           vertical-align: middle
-          &:hover {
-            bgc    =  'fill="' + to_hex($v09) + '"/>'
-            background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
-          }
         }
-        // split posts post details styling test
-        td[valign="middle"] {
-          background-color: bg0 i
-          height: 2.5rem
-          border: 1px dashed bg5 i
-          border-radius: 4px
+        &[name*="post_id_list"] {
+          vertical-align: -4rem
         }
       }
-      // end
-      &[action*='memberlist'] {
-        tr.row2 td {
-          background: bg2 i
+      fieldset td {
+        background: t i
+        border-color: t i
+        input[type="text"] {
+          margin-left: 0 i
         }
-        tr[class*='row'] {
-          &:hover td {
-            background: var(--rgba-bg-05) i
-          }
+        &.catBottom {
+          border-top: 1px solid bg4
         }
-        tr td {
-          transition: transition
+        .quote {
+          border: 0 i
+          background: var(--bg-1) i
+          padding: 0.1rem 0.3rem i
+          border-left: 6px solid var(--bg-5) i
+          border-radius: 1px 4px 4px 1px i
+        }
+      }
+      img[src*='icon_minipost.gif'] {
+        prefix = 'data:image/svg+xml;utf8,'
+        path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+        path  += ' viewBox="0 0 20 20"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h5A2.5 2.5 0 0 1 13 5.5a.5.'
+        path  += '5 0 0 1-1 0A1.5 1.5 0 0 0 10.5 4h-5A1.5 1.5 0 0 0 4 5.5v5A1.5 1.5 0 0 0 5.5 12h4.51'
+        path  += '4a2.25 2.25 0 1 1 .114 1H5.5A2.5 2.5 0 0 1 3 10.5v-5zm8 6.75a1.25 1.25 0 1 0 2.5 0 '
+        path  += '1.25 1.25 0 0 0-2.5 0zM7.5 14a.5.5 0 0 0-.5.5A2.5 2.5 0 0 0 9.5 17h5a2.5 2.5 0 0 0 '
+        path  += '2.5-2.5v-5A2.5 2.5 0 0 0 14.5 7H9.872a2.25 2.25 0 1 0 .114 1H14.5A1.5 1.5 0 0 1 16 '
+        path  += '9.5v5a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 8 14.5a.5.5 0 0 0-.5-.5zm.25-7.5a1.25 '
+        path  += '1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z" '
+        bgc    = 'fill="' + to_hex($v99) + '"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        width: 0
+        height: 18px
+        padding-left: 16px
+        padding-right: 14px
+        padding-top: 0
+        padding-bottom: 0
+        background-size: 22px
+        background-repeat: no-repeat
+        background-position: center
+        vertical-align: middle
+        &:hover {
+          bgc    =  'fill="' + to_hex($v09) + '"/>'
+          background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+        }
+      }
+      // split posts post details styling test
+      td[valign="middle"] {
+        background-color: bg0 i
+        height: 2.5rem
+        border: 1px dashed bg5 i
+        border-radius: 4px
+      }
+    }
+    // end
+    &[action*='memberlist'] {
+      tr.row2 td {
+        background: bg2 i
+      }
+      tr[class*='row'] {
+        &:hover td {
+          background: var(--rgba-bg-05) i
+        }
+      }
+      tr td {
+        transition: transition
         }
       }
       &[action*='profile_sec'] {
-      // hide broken shit theres no avatars provided in this forum
-      .block > table > tbody > tr:nth-child(41) > td > span:last-child,
-      input[name='avatargallery'] {
-        display: none
-      }
-      // fix avatar delete checkbox align and tweak margins
-      input[type='checkbox'][name='avatardel'] {
-        vertical-align: middle
-      }
-      img[src*='/avatars/'] {
-        margin-bottom: .4rem
-        if (avatar_soh) {
-          &:hover {
-            margin-bottom: 2rem
+        // hide broken shit theres no avatars provided in this forum
+        .block > table > tbody > tr:nth-child(41) > td > span:last-child,
+        input[name='avatargallery'] {
+          display: none
+        }
+        // fix avatar delete checkbox align and tweak margins
+        input[type='checkbox'][name='avatardel'] {
+          vertical-align: middle
+        }
+        img[src*='/avatars/'] {
+          margin-bottom: .4rem
+          if (avatar_soh) {
+            &:hover {
+              margin-bottom: 2rem
+            }
+          }
+        }
+        tr[bgcolor="#FF0000"] {
+          background-color: t i
+          td {
+            background-color: v11 i
+            border: 2px dashed v19
+            padding: 10px 20px i
+            margin: 1rem 0 1rem i
+            display: inline-grid
+            width: 253%
+            rad: 4px
+            span[style='color: #f00'] {
+              color: v19 i
+              font-weight: 900
+            }
+          }
+        }
+        // end
+        textarea[name='signature'] {
+          max-width: 500px i
+          width: 500px i
+          height: 200%
+          resize: vertical i
+          margin-left: .3rem
+        }
+        &[action='posting_sec.php'] {
+          table[width='450'] {
+            /tr[valign='middle'][align='center'] {
+              text-align: left
+            }
+            /textarea[rows='15'][style*='width'][wrap='virtual'] {
+              width: 770px i
+              max-width: @width
+              resize: vertical
+            }
           }
         }
       }
-      // end
-      textarea[name='signature'] {
-        max-width: 500px i
-        width: 500px i
-        height: 200%
-        resize: vertical i
-        margin-left: .3rem
+      &[action='groupcp.php?g=4070'] {
+        tr .catSides {
+          background: bg2
+        }
+        tr td.row1 {
+          background: bg3 i
+        }
+        tr td.row2, td.row1[width] {
+          background: bg2 i
+        }
+        tr td[align="right"] {
+          .nav {
+            margin-left: -26.66rem i
+          }
+          .gensmall {
+            float: right
+          }
+        }
+        table[cellspacing='1'] {
+          border-spacing: 0
+          padding: 3px
+        }
       }
-      &[action='posting_sec.php'] {
-        table[width='450'] {
-          /tr[valign='middle'][align='center'] {
+      &[action*='privmsg.php'] {
+        table {
+          &[width='928'] {
+            tr.row1 td {
+              background-color: bg2 i
+            }
+          }
+          &[width='100%'][cellspacing='1'] td.row1:not([width]) {
+            background: bg1
+            border: 1px solid bg4
+            rad: 4px
+          }
+        }
+      }
+      // style pm's background/border
+      &[action*='privmsg.php?folder'] {
+        table {
+          &[width='100%'][cellspacing='1'][cellpadding='4'] td.row1[colspan='3'][valign='top'] {
+            background: bg1
+            padding: .3rem .5rem
+            border: 1px solid bg4
+            rad: 4px
+          }
+          // pm quotes td header nick wrote; bg color to transparent
+          &[width='90%'][cellspacing='1'][cellpadding='3'] {
+            tr td:not(.code):not(.quote) {
+              background: t i
+            }
+            // style quotes in PM's
+            td.quote {
+              border-left: 5px solid bg5
+              rad: 1px 4px 4px 1px
+            }
+          }
+          &[cellspacing="1"] td.row1  {
+            background: t
+          }
+        }
+        .catBottom {
+          input[type='submit'] {
+            margin-top: .8rem
+          }
+          &[colspan='3'][align='right'] {
             text-align: left
-          }
-          /textarea[rows='15'][style*='width'][wrap='virtual'] {
-            width: 770px i
-            max-width: @width
-            resize: vertical
+            padding-top: 0
+            padding-bottom: 1rem
           }
         }
-      }
-    }
-    &[action='groupcp.php?g=4070'] {
-      tr .catSides {
-        background: bg2
-      }
-      tr td.row1 {
-        background: bg3 i
-      }
-      tr td.row2, td.row1[width] {
-        background: bg2 i
-      }
-      tr td[align="right"] {
-        .nav {
-          margin-left: -26.66rem i
-        }
-        .gensmall {
-          float: right
-        }
-      }
-      table[cellspacing='1'] {
-        border-spacing: 0
-        padding: 3px
-      }
-    }
-    // style pm's background/border
-    &[action*='privmsg.php?folder'] {
-      table {
-        &[width='100%'][cellspacing='1'][cellpadding='4'] td.row1[colspan='3'][valign='top'] {
-          background: bg1
-          padding: .3rem .5rem
-          border: 1px solid bg4
-          rad: 4px
-        }
-        // pm quotes td header nick wrote; bg color to transparent
-        &[width='90%'][cellspacing='1'][cellpadding='3'] {
-          tr td:not(.code):not(.quote) {
-            background: t i
+        img {
+          // read message icon in pm inbox
+          &[src*='folder.gif'][alt='Read message'] {
+            prefix = 'data:image/svg+xml;utf8,'
+            path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+            path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10.257 3.071a.5.'
+            path  += '5 0 0 0-.514 0L2.97 7.134a1.999 1.999 0 0 0-.7.709L10 11.934l7.728-4.091a2 2 0 0 0-'
+            path  += '.699-.709l-6.772-4.063ZM18 8.831l-7.766 4.11a.5.5 0 0 1-.468 0L2 8.832V14.5A2.5 2.5'
+            path  += ' 0 0 0 4.5 17h11a2.5 2.5 0 0 0 2.5-2.5V8.83Z"'
+            bgc    = 'fill="' + to_hex($v99) + '"/>'
+            background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+            width: 0 i
+            padding: 12px
+            padding-right: 20px
+            background-size: 20px
+            background-repeat: no-repeat
+            background-position: center
           }
-          // style quotes in PM's
-          td.quote {
-            border-left: 5px solid bg5
-            rad: 1px 4px 4px 1px
+          &[src*='folder_new.gif'][alt='Unread message'] {
+            prefix = 'data:image/svg+xml;utf8,'
+            path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
+            path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M16.322 8.996L16.'
+            path  += '5 9l.183-.005l.238-.02l.08-.01v3.83c0 1.114-.117 1.519-.335 1.926a2.272 2.272 0 0 1'
+            path  += '-.945.945c-.407.218-.811.334-1.926.334h-8.59c-1.114 0-1.519-.116-1.926-.334a2.272 2'
+            path  += '.272 0 0 1-.945-.945c-.203-.38-.318-.758-.332-1.712L2 7.309l7.277 3.638a.5.5 0 0 0 '
+            path  += '.447 0l4.937-2.468c.333.205.702.357 1.096.442l.242.043l.128.016l.195.016ZM4.992 4.0'
+            path  += '02L13.336 4l-.05.11l-.07.172c-.036.1-.068.2-.096.303l-.052.219l-.016.087l-.018.11a3'
+            path  += '.484 3.484 0 0 0 .663 2.598l.14.173L9.5 9.94L2.224 6.303a.499.499 0 0 0-.18-.051c.0'
+            path  += '52-.45.15-.71.29-.973c.218-.407.538-.727.945-.945c.38-.203.758-.318 1.712-.332ZM16.'
+            path  += '5 3a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5Z"'
+            bgc    = 'fill="' + to_hex($v29) + '"/>'
+            background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
+            width: 0 i
+            padding: 12px
+            padding-right: 20px
+            background-size: 20px
+            background-repeat: no-repeat
+            background-position: center
           }
         }
-        &[cellspacing="1"] td.row1 {
-          background: t
+      }
+      // external login page fixes due to increasing table width from 928px to 970px
+      &[action='login.php']:not(.forum_login) {
+        .posting table[width='928'][cellspacing='1']:not(#z) {
+          width: 1100px
+        }
+        h2 {
+          margin: 10px 0 8px 0 i
         }
       }
-      .catBottom {
-        input[type='submit'] {
-          margin-top: .8rem
-        }
-        &[colspan='3'][align='right'] {
-          text-align: left
-          padding-top: 0
-          padding-bottom: 1rem
-        }
-      }
-      img {
-        // read message icon in pm inbox
-        &[src*='folder.gif'][alt='Read message'] {
-          prefix = 'data:image/svg+xml;utf8,'
-          path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-          path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M10.257 3.071a.5.'
-          path  += '5 0 0 0-.514 0L2.97 7.134a1.999 1.999 0 0 0-.7.709L10 11.934l7.728-4.091a2 2 0 0 0-'
-          path  += '.699-.709l-6.772-4.063ZM18 8.831l-7.766 4.11a.5.5 0 0 1-.468 0L2 8.832V14.5A2.5 2.5'
-          path  += ' 0 0 0 4.5 17h11a2.5 2.5 0 0 0 2.5-2.5V8.83Z"'
-          bgc    = 'fill="' + to_hex($v99) + '"/>'
-          background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
-          width: 0 i
-          padding: 12px
-          padding-right: 20px
-          background-size: 20px
-          background-repeat: no-repeat
-          background-position: center
-        }
-        &[src*='folder_new.gif'][alt='Unread message'] {
-          prefix = 'data:image/svg+xml;utf8,'
-          path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
-          path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path d="M16.322 8.996L16.'
-          path  += '5 9l.183-.005l.238-.02l.08-.01v3.83c0 1.114-.117 1.519-.335 1.926a2.272 2.272 0 0 1'
-          path  += '-.945.945c-.407.218-.811.334-1.926.334h-8.59c-1.114 0-1.519-.116-1.926-.334a2.272 2'
-          path  += '.272 0 0 1-.945-.945c-.203-.38-.318-.758-.332-1.712L2 7.309l7.277 3.638a.5.5 0 0 0 '
-          path  += '.447 0l4.937-2.468c.333.205.702.357 1.096.442l.242.043l.128.016l.195.016ZM4.992 4.0'
-          path  += '02L13.336 4l-.05.11l-.07.172c-.036.1-.068.2-.096.303l-.052.219l-.016.087l-.018.11a3'
-          path  += '.484 3.484 0 0 0 .663 2.598l.14.173L9.5 9.94L2.224 6.303a.499.499 0 0 0-.18-.051c.0'
-          path  += '52-.45.15-.71.29-.973c.218-.407.538-.727.945-.945c.38-.203.758-.318 1.712-.332ZM16.'
-          path  += '5 3a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5Z"'
-          bgc    = 'fill="' + to_hex($v29) + '"/>'
-          background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
-          width: 0 i
-          padding: 12px
-          padding-right: 20px
-          background-size: 20px
-          background-repeat: no-repeat
-          background-position: center
-        }
-      }
-    }
-    // external login page fixes due to increasing table width from 928px to 970px
-    &[action='login.php']:not(.forum_login) {
-      .posting table[width='928'][cellspacing='1']:not(#z) {
-        width: 1100px
-      }
-      h2 {
-        margin: 10px 0 8px 0 i
-      }
-    }
-    // bottom of the forum login addy, reworks this a bit.
-    &[action*="login"]:not([target]) {
-      input {
-        margin-top: 1.5rem
-        &[type='text'], &[type='password'] {
-          width: 20%
-          rad: 4px
-          padding: .2rem .6rem i
-        }
-        &[type='checkbox'], &.mainoption[name='login'] {
-          margin-top: 0
-        }
-      }
-    }
-    &[action='search.php?mode=results'] {
-      table[width='928'] {
+      // bottom of the forum login addy, reworks this a bit.
+      &[action*="login"]:not([target]) {
         input {
-          vertical-align: middle
-          margin: .1rem .2rem
-          &[name='show_results'] {
-            margin: .1rem .3rem
+          margin-top: 1.5rem
+          &[type='text'], &[type='password'] {
+            width: 20%
+            rad: 4px
+            padding: .2rem .6rem i
+          }
+          &[type='checkbox'], &.mainoption[name='login'] {
+            margin-top: 0
           }
         }
-        .genmed {
-          vertical-align: middle
-        }
-        .row1:nth-child(2n) td {
-          background-color: initial i
+      }
+      &[action='search.php?mode=results'] {
+        table[width='928'] {
+          input {
+            vertical-align: middle
+            margin: .1rem .2rem
+            &[name='show_results'] {
+              margin: .1rem .3rem
+            }
+          }
+          .genmed {
+            vertical-align: middle
+          }
+          .row1:nth-child(2n) td {
+            background-color: initial i
+          }
         }
       }
     }
-  }
 
-  // Better checkbox/radio inputs.
-  input {
-    &:autofill { background-image: linear-gradient(v24, v24) i }
-    prefix  = 'data:image/svg+xml;utf8,'
-    prefix += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">'
-    transition: transition
+    // Better checkbox/radio inputs.
+    input {
+      &:autofill { background-image: linear-gradient(v24, v24) i }
+      prefix  = 'data:image/svg+xml;utf8,'
+      prefix += '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">'
+      transition: transition
 
-    &[type='radio'],
-    &[type='checkbox'] {
-      &, &:focus, &:hover:active {
-        -webkit-appearance: none
-        -moz-appearance: none
-        appearance: none
-        cursor: pointer
-        height: .88rem
-        width: @height
-        border: 1px solid bg5
-        background-size: cover
-        c: v08 0 bg1
+      &[type='radio'],
+      &[type='checkbox'] {
+        &, &:focus, &:hover:active {
+          -webkit-appearance: none
+          -moz-appearance: none
+          appearance: none
+          cursor: pointer
+          height: .88rem
+          width: @height
+          border: 1px solid bg5
+          background-size: cover
+          c: v08 0 bg1
+        }
+        &:disabled, &:hover:active:disabled, &:disabled:hover {
+          cursor: default
+          c: v94 bg5 bg4
+        }
       }
-      &:disabled, &:hover:active:disabled, &:disabled:hover {
-        cursor: default
-        c: v94 bg5 bg4
+      &[type='radio'] {
+        // fix border radius for radios
+        rad: 50%
+        // align with checked state
+        padding: 7px
+        margin-top: -.1rem
+        margin-bottom: .1rem
+        vertical-align: middle
+        &:checked {
+          path = '<circle cx="256" cy="256" r="128" fill="' + to_hex($v99) + '"/>'
+          background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
+          c: 0 v07 v07
+        }
+        &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
       }
-    }
-    &[type='radio'] {
-      // fix border radius for radios
-      rad: 50%
-      // align with checked state
-      padding: 7px
-      margin-top: -.1rem
-      margin-bottom: .1rem
-      vertical-align: middle
+
+      &[type='checkbox'] {
+      rad: 2px
       &:checked {
-        path = '<circle cx="256" cy="256" r="128" fill="' + to_hex($v99) + '"/>'
+        path ='<path fill="' + to_hex($v99) + '" d="M99 213l-1 89 104 102 205-201v-91L203 315 99 213z"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
         c: 0 v07 v07
+
+        rad: 3px
       }
       &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
-    }
-
-    &[type='checkbox'] {
-    rad: 2px
-    &:checked {
-      path ='<path fill="' + to_hex($v99) + '" d="M99 213l-1 89 104 102 205-201v-91L203 315 99 213z"/>'
-      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
-      c: 0 v07 v07
-
-      rad: 3px
-    }
-    &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
-    &:indeterminate {
-      path = '<rect x="128" y="128" width="256" height="256" fill="' + to_hex($v99) + '"/>'
-      background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
-        c: 0 v08 v09
-        &:hover { c: 0 v09 bg2; b: 0 0 10px 0 v04 }
-      }
-    }
-
-    &[type='file'] {
-      &::file-selector-button {
-        background-color: bg5
-        border: 2px solid bg5
-        color: v98
-        box-shadow: 0 1px 0 bg0
-        text-shadow: 0 1px 0 bg0
-        rad: 4px
-        padding: .1rem .4rem
-        cursor: pointer
-        transition: transition
-        &:hover {
-          background-color: v08
-          border: 2px solid v08
-          color: v98
-          b: 0 0 10px 0 v04
+      &:indeterminate {
+        path = '<rect x="128" y="128" width="256" height="256" fill="' + to_hex($v99) + '"/>'
+        background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
+          c: 0 v08 v09
+          &:hover { c: 0 v09 bg2; b: 0 0 10px 0 v04 }
         }
       }
-      &::-webkit-file-upload-button {
-        background-color: bg5
-        border: 2px solid bg5
-        color: v98
-        box-shadow: 0 1px 0 bg0
-        text-shadow: 0 1px 0 bg0
-        rad: 4px
-        padding: .1rem .4rem
-        cursor: pointer
-        transition: transition
-        &:hover {
-          background-color: v08
-          border: 2px solid v08
+
+      &[type='file'] {
+        &::file-selector-button {
+          background-color: bg5
+          border: 2px solid bg5
           color: v98
-          b: 0 0 10px 0 v04
+          box-shadow: 0 1px 0 bg0
+          text-shadow: 0 1px 0 bg0
+          rad: 4px
+          padding: .1rem .4rem
+          cursor: pointer
+          transition: transition
+          &:hover {
+            background-color: v08
+            border: 2px solid v08
+            color: v98
+            b: 0 0 10px 0 v04
+          }
+        }
+        &::-webkit-file-upload-button {
+          background-color: bg5
+          border: 2px solid bg5
+          color: v98
+          box-shadow: 0 1px 0 bg0
+          text-shadow: 0 1px 0 bg0
+          rad: 4px
+          padding: .1rem .4rem
+          cursor: pointer
+          transition: transition
+          &:hover {
+            background-color: v08
+            border: 2px solid v08
+            color: v98
+            b: 0 0 10px 0 v04
+          }
         }
       }
-    }
-    &[type='text'], &[type='password'] {
-      rad: 4px
-      border: 1px solid bg5
-      c: v98 0 bg1
-      margin: .2rem .3rem
-      padding: .243333rem .5rem
-      &:active, &:focus-visible {
-        border: 1px solid v08
-        outline: 0
-        b: 0 0 10px 0 v04
-      }
-      &:hover { border: 1px solid v08 }
-    }
-    &[type='password'][name*='password'] {
-      padding: .243333rem .5rem
-    }
-    &[type='text'] {
-      &[name] {
-        padding: .243333rem .2rem
-      }
-      &[name='bday_day'], &[name='bday_year'] {
-        vertical-align: middle
-      }
-      &.helpline {
+      &[type='text'], &[type='password'] {
+        rad: 4px
         border: 1px solid bg5
-        c: v98 0 bg2
+        c: v98 0 bg1
         margin: .2rem .3rem
-        padding: .3rem .1rem
-        font-size: 12px i
-        rad: 2px
+        padding: .243333rem .5rem
         &:active, &:focus-visible {
           border: 1px solid v08
           outline: 0
           b: 0 0 10px 0 v04
         }
+        &:hover { border: 1px solid v08 }
       }
-    }
-    &[type='submit'], &[type='reset'] {
-      vertical-align: middle
-      rad: 4px
-      border: 1px solid v04
-      c: v98 0 0
-      background: v06
-      padding: .19rem .6rem
-      box-shadow: 0 1px 0 bg0
-      text-shadow: 0 1px 0 bg0
-      cursor: pointer
-      &:active, &:focus-visible, &:hover {
-        background: v08
-        border: 1px solid v08
-        outline: 0
-        b: 0 0 10px 0 v04
+      &[type='password'][name*='password'] {
+        padding: .243333rem .5rem
       }
-    }
-    &[type='submit'][value='Go'] {
-      border: 1px solid v06
-      padding: .243333rem .2rem
-      width: 3rem
-      box-shadow: 0 1px 0 bg0
-      text-shadow: 0 1px 0 bg0
-      &:active, &:focus-visible, &:hover {
-        background: v08
-        border: 1px solid v08
-        outline: 0
-        b: 0 0 10px 0 v04
+      &[type='text'] {
+        &[name] {
+          padding: .243333rem .2rem
+        }
+        &[name='bday_day'], &[name='bday_year'] {
+          vertical-align: middle
+        }
+        &.helpline {
+          border: 1px solid bg5
+          c: v98 0 bg1
+          margin: .2rem .3rem
+          padding: .3rem .4rem
+          font-size: 12px i
+          rad: 2px
+          &:active, &:focus-visible {
+            border: 1px solid v08
+            outline: 0
+            b: 0 0 10px 0 v04
+          }
+        }
       }
-    }
-    // bottom add attach by submit/preview buttons
-    &[type='submit'].liteoption[name='add_attachment'] {
-      margin-top: calc(-3.3% + .5rem)
-      left: calc(66.5% - 26.4%)
-      position: absolute
-      box-shadow: 0 1px 0 bg0
-      text-shadow: 0 1px 0 bg0
-      &:active, &:focus-visible, &:hover {
-        background: v08
-        border: 1px solid v08
-        outline: 0
-        b: 0 0 10px 0 v04
-      }
-    }
-    // preview and post buttons down a bit
-    &[type='submit'][name='preview'],
-    &[type='submit'][name='post'] {
-      margin-top: 1.8rem
-    }
-    &[type='submit'][name='usersubmit'].liteoption {
-      vertical-align: unset
-    }
-    &[type='button'] {
-      rad: 4px
-      border: 1px solid v05
-
-      c: v98 0 v05
-      padding: .1rem .1rem
-      box-shadow: 0 1px 0 bg0
-      text-shadow: 0 1px 0 bg0
-      &:active, &:focus-visible, &:hover {
-        background: v08
-        border: 1px solid v08
-        box-shadow: 0 0 10px 0 v04
-        outline: 0
-      }
-      &[accesskey] {
-        min-width: 100%
-        text-transform: uppercase
-        cursor: pointer
-      }
-    }
-  }
-
-  // Better select element styles.
-  /select {
-    // Custom icon.
-    prefix  = 'data:image/svg+xml;utf8,'
-    prefix += '<svg width="16" height="16" fill="' + to_hex($v95) + '" '
-    prefix += 'xmlns="http://www.w3.org/2000/svg">'
-    path    = '<path d="M4.427 9.427l3.396 3.396a.251.251 0 00.354 '
-    path   += '0l3.396-3.396A.25.25 0 0011.396 9H4.604a.25.25 0 '
-    path   += '00-.177.427zM4.423 6.47L7.82 3.072a.25.25 0 01.354 0L11.57 '
-    path   += '6.47a.25.25 0 01-.177.427H4.6a.25.25 0 01-.177-.427z"/>'
-
-    & {
-      transition: transition
-      vertical-align: -.1rem
-      &:not([disabled]) {
-        c: v97 0 bg0
-        border: 1px solid bg5
-        padding: .243333rem .2rem
+      &[type='submit'], &[type='reset'] {
+        vertical-align: middle
         rad: 4px
+        border: 1px solid v04
+        c: v98 0 0
+        background: v06
+        padding: .19rem .6rem
+        box-shadow: 0 1px 0 bg0
+        text-shadow: 0 1px 0 bg0
+        cursor: pointer
+        &:active, &:focus-visible, &:hover {
+          background: v08
+          border: 1px solid v08
+          outline: 0
+          b: 0 0 10px 0 v04
+        }
+      }
+      &[type='submit'][value='Go'] {
+        border: 1px solid v06
+        padding: .243333rem .2rem
+        width: 3rem
+        box-shadow: 0 1px 0 bg0
+        text-shadow: 0 1px 0 bg0
+        vertical-align: unset
+        &:active, &:focus-visible, &:hover {
+          background: v08
+          border: 1px solid v08
+          outline: 0
+          b: 0 0 10px 0 v04
+        }
+      }
+      // bottom add attach by submit/preview buttons
+      &[type='submit'].liteoption[name='add_attachment'] {
+        margin-top: calc(-3.3% + .5rem)
+        left: calc(50% - 26.4%)
+        position: absolute
+        box-shadow: 0 1px 0 bg0
+        text-shadow: 0 1px 0 bg0
+        &:active, &:focus-visible, &:hover {
+          background: v08
+          border: 1px solid v08
+          outline: 0
+          b: 0 0 10px 0 v04
+        }
+      }
+      &.post[name='fileupload'] {
+        margin-bottom: 1.9rem
+      }
+      // preview and post buttons down a bit
+      &[type='submit'][name='preview'],
+      &[type='submit'][name='post'] {
+        margin-top: 1.8rem
+      }
+      &[type='submit'][name='usersubmit'].liteoption {
+        vertical-align: unset
+      }
+      &[type='button'] {
+        border: 1px solid v05
+        c: v98 0 v05
+        padding: .1rem .1rem
+        box-shadow: 0 1px 0 bg0
+        text-shadow: 0 1px 0 bg0
+        rad: 4px
+        &:active, &:focus-visible, &:hover {
+          background: v08
+          border: 1px solid v08
+          box-shadow: 0 0 10px 0 v04
+          outline: 0
+        }
+        &[accesskey] {
+          min-width: 100%
+          text-transform: uppercase
+          cursor: pointer
+        }
+      }
+    }
+
+    // Better select element styles.
+    /select {
+      // Custom icon.
+      prefix  = 'data:image/svg+xml;utf8,'
+      prefix += '<svg width="16" height="16" fill="' + to_hex($v95) + '" '
+      prefix += 'xmlns="http://www.w3.org/2000/svg">'
+      path    = '<path d="M4.427 9.427l3.396 3.396a.251.251 0 00.354 '
+      path   += '0l3.396-3.396A.25.25 0 0011.396 9H4.604a.25.25 0 '
+      path   += '00-.177.427zM4.423 6.47L7.82 3.072a.25.25 0 01.354 0L11.57 '
+      path   += '6.47a.25.25 0 01-.177.427H4.6a.25.25 0 01-.177-.427z"/>'
+
+      & {
+        transition: transition
+        vertical-align: -.1rem
+        &:not([disabled]) {
+          c: v97 0 bg0
+          border: 1px solid bg5
+          padding: .243333rem .2rem
+          rad: 4px
 
         &:hover { c: 0 v08 bg3 }
         &:active { c: 0 0 bg4 }
