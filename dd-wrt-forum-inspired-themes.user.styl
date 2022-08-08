@@ -251,7 +251,7 @@ tsh() { text-shadow: arguments }
       }
     }
   }
-  // rset min height when page says you are working too fast.
+  // reset min height when page says you are working too fast.
   #content {
     min-height: initial
   }
@@ -271,10 +271,6 @@ tsh() { text-shadow: arguments }
     transition: background .2s ease-in
   }
 
-  .mediawiki #gumax-header #ad_block {
-    //fix wiki ad block
-    border: 0
-  }
   // fix fuckery with phpbb terrible craziness images displaying where they should not
   // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?p=170921#170921
   [class*='row'].navigation td {
@@ -2048,11 +2044,7 @@ tsh() { text-shadow: arguments }
     width: 1155px
     margin: 0 auto 0 auto
   }
-  body.mediawiki {
-    #content {
-      width: initial
-    }
-  }
+
   .cookieinfo {
     c: v98 v35 v61
     .cookieinfo-close {
@@ -2072,7 +2064,6 @@ tsh() { text-shadow: arguments }
     }
   }
 
-  // dont target mediawiki bg
   body {
     background: bg0
     color: v98
@@ -2288,7 +2279,7 @@ tsh() { text-shadow: arguments }
       }
     }
     h2 {
-      a:not([href*='wiki']) {
+      a {
         color: v98
         padding-top: 1rem
         margin-left: .68rem
@@ -3380,8 +3371,7 @@ tsh() { text-shadow: arguments }
         }
       }
     }
-    // exclude #searchInput from wiki
-    &[type='text']:not(#searchInput), &[type='password'] {
+    &[type='text'], &[type='password'] {
       rad: 4px
       border: 1px solid bg5
       c: v98 0 bg1
@@ -3418,8 +3408,7 @@ tsh() { text-shadow: arguments }
         }
       }
     }
-    // exclude .searchButton this is wiki
-    &[type='submit']:not(.searchButton), &[type='reset'] {
+    &[type='submit'], &[type='reset'] {
       vertical-align: middle
       rad: 4px
       border: 1px solid v04
@@ -3436,8 +3425,7 @@ tsh() { text-shadow: arguments }
         b: 0 0 10px 0 v04
       }
     }
-    // exclude .searchButton this is wiki
-    &[type='submit'][value='Go']:not(.searchButton) {
+    &[type='submit'][value='Go'] {
       border: 1px solid v06
       padding: .243333rem .2rem
       width: 3rem
