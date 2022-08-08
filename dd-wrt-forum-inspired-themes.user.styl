@@ -2494,19 +2494,15 @@ tsh() { text-shadow: arguments }
         color: v09 i
       }
       &[href*='index'] {
-        font-size: 0
-        &::after {
-          content: 'DD-WRT Forum Index'
-          font-size: 14px
-          font-weight: 900
-          vertical-align: middle
-        }
+         font-size: 14px
+         font-weight: 900
+         vertical-align: middle
         // add speech bubble before
         &::before {
           content: '\1F578\00A0'
           color: v98
           font-size: 20px
-          vertical-align: -.3rem
+          margin-left: -.5rem
         }
       }
     }
