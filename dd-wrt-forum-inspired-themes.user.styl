@@ -2739,12 +2739,15 @@ tsh() { text-shadow: arguments }
         background: darken(convert($bg2), 10%)
       }
     }
-    .row1 td {
-      padding: 3px 6px
-      background: bg2
-    }
     .row1 {
       font-size: 99%
+      &:nth-child(2n) td {
+        background-color: bg3
+      }
+      td {
+        padding: 3px 6px
+        background: bg2
+      }
     }
     // https://forum.dd-wrt.com/phpBB2/login.php
     .four_columns .frame_top, .corner_left, .corner_right {
@@ -3085,7 +3088,7 @@ tsh() { text-shadow: arguments }
       // end
       &[action*='memberlist'] {
         tr.row2 td {
-          background: bg3 i
+          background: bg2 i
         }
         tr[class*='row'] {
           &:hover td {
@@ -3267,6 +3270,9 @@ tsh() { text-shadow: arguments }
         }
         .genmed {
           vertical-align: middle
+        }
+        .row1:nth-child(2n) td {
+          background-color: initial i
         }
       }
     }
