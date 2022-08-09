@@ -3559,8 +3559,17 @@ tsh() { text-shadow: arguments }
         &:hover { c: 0 v08 bg3 }
         &:active { c: 0 0 bg4 }
       }
+      option[value="-1"] {
+        background: bg4
+        &:nth-child {
+          &(2), &(4), &(8), &(10), &(25), &(27), &(35), &(37),
+          &(41), &(43), &(50), &(52), &(62), &(64) {
+            display: none
+          }
+        }
+      }
       option, option[style*='background-color: #FAFAFA'] {
-        background: bg1 i
+        background: bg0
         &[selected] {
           background: v05
         }
