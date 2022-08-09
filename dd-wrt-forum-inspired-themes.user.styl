@@ -261,8 +261,8 @@ tsh() { text-shadow: arguments }
       border-top: 0
       div:first-of-type::after {
         content: '- Styled with: ' + stinfo i
-        text-shadow: -3px solid v98 i
-        color: v68
+        text-shadow: 0 1px darken(convert($bg0), 20%)
+        color: v09
       }
     }
   }
@@ -2491,9 +2491,7 @@ tsh() { text-shadow: arguments }
       &:hover {
         text-decoration: none
       }
-      &[href*="view="]:hover {
-        color: v09 i
-      }
+      &[href*='view=']:hover { color: v09 i }
       &[href*='index'] {
          font-size: 14px
          font-weight: 900
@@ -3439,9 +3437,6 @@ tsh() { text-shadow: arguments }
         padding: .243333rem .5rem
       }
       &[type='text'] {
-        &[name] {
-          padding: .243333rem .2rem
-        }
         &[name='bday_day'], &[name='bday_year'] {
           vertical-align: middle
         }
@@ -3549,11 +3544,12 @@ tsh() { text-shadow: arguments }
 
       & {
         transition: transition
-        vertical-align: -.1rem
+        vertical-align: -.07rem
         &:not([disabled]) {
           c: v97 0 bg0
           border: 1px solid bg5
-          padding: .243333rem .2rem
+          padding: .26rem .2rem
+          line-height: 1.4
           rad: 4px
 
         &:hover { c: 0 v08 bg3 }
