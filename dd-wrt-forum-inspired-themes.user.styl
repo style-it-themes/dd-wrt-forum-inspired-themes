@@ -2542,6 +2542,14 @@ tsh() { text-shadow: arguments }
       }
     }
   }
+  //posts for user x reset odd/even bg colors
+  #forum_content.four_columns .posting {
+    table[width='928'] {
+      tr.row1:nth-child(2n) td.row1 {
+        background-color: initial
+      }
+    }
+  }
   .forum #content {
     .content {
       padding: 0 11px 11px 11px
@@ -2558,7 +2566,7 @@ tsh() { text-shadow: arguments }
     }
     .catHead {
       a { color: v97 }
-      b b { color: v09 }
+      div[style*='float: left'] b:not(:first-child) { color: v09 }
     }
     .thHead, .thSides,
     .thLeft, .thRight {
@@ -2649,7 +2657,6 @@ tsh() { text-shadow: arguments }
         }
       }
     }
-
     .posting {
       border: 0
       background: bg2
@@ -2673,7 +2680,7 @@ tsh() { text-shadow: arguments }
           padding-left: .4rem
           rad: 0 4px 4px 0
         }
-        &.thLeft {
+        &.thLeft[width='150'], &.thCornerL[width='150'] {
           min-width: 150px
         }
       }
@@ -2782,6 +2789,7 @@ tsh() { text-shadow: arguments }
     c: v98 bg4 bg0
     border: 1px solid
     rad: 4px
+    resize: vertical
     &:focus, &:focus-visible {
       outline: 1px solid v08
       b: 0 0 10px 0 v04
@@ -2829,13 +2837,16 @@ tsh() { text-shadow: arguments }
     rad: 0
   }
   table.attachtable {
-    border: 1px solid bg5
+    border: 1px solid bg5 i
     color: v97
     td {
       &.attachrow {
         color: v97
-        border-color: t
+        border-color: t i
         background-color: bg1 i
+      }
+      &.attachheader {
+        border-color: bg5 i
       }
       &[colspan='2'] {
         background-color: bg1 i
@@ -2845,8 +2856,8 @@ tsh() { text-shadow: arguments }
       display: none i
     }
   }
-  hr {
-    color: bg4
+  hr[width] {
+    color: bg4 i
   }
   [style='color: #88171A'], [style='color: red'] {
     c: v18 0 0
