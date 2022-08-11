@@ -1818,16 +1818,16 @@ tsh() { text-shadow: arguments }
   }
   if (max-vertical) {
     #header_wrap[style="background-position-y: -23px;"] {
-      transition: transition i
       #menu_forum {
         position: fixed
         width: 1153px
         top: 56px
       }
       #header {
-        max-height: 20px i
+        max-height: 5px i
       }
       #logo {
+        transition: transition
         scale: .8
         margin-top: -.7rem
         margin-left: -1.4rem
@@ -1839,7 +1839,6 @@ tsh() { text-shadow: arguments }
             position: absolute
             padding: 2px 10px 4px i
             right: 7.8rem i
-            z-index: 1
             &:hover {
               padding: 3px 10px 4px i
             }
@@ -1849,7 +1848,6 @@ tsh() { text-shadow: arguments }
             position: absolute
             padding: 2px 10px 4px i
             right: 0
-            z-index: 1
             &:hover {
               padding: 3px 10px 4px i
             }
@@ -2423,6 +2421,7 @@ tsh() { text-shadow: arguments }
   // https://forum.dd-wrt.com/phpBB2/login.php
   #header  {
     #logo {
+      transition: transition
       prefix = 'data:image/png;base64,'
       path   = 'iVBORw0KGgoAAAANSUhEUgAAAkQAAACMCAMAAACqGkaYAAAAY1BMVEX///8kX5T///8kX5T///8kX5T/'
       path  += '//8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T/'
@@ -2803,6 +2802,10 @@ tsh() { text-shadow: arguments }
       font-size: 99%
       &:nth-child(2n) td {
         background-color: bg3
+      }
+      &:nth-child(2n) td[class][width],
+      &:nth-child(2n) td[colspan] {
+        background-color: initial
       }
       td {
         padding: 3px 6px
