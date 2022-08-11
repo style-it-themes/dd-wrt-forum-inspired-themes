@@ -2803,9 +2803,13 @@ tsh() { text-shadow: arguments }
       &:nth-child(2n) td {
         background-color: bg3
       }
-      &:nth-child(2n) td[class][width],
-      &:nth-child(2n) td[colspan] {
-        background-color: initial
+      &:nth-child(2n) td {
+        &[class][width], &[colspan] {
+          background-color: initial
+        }
+        &[width='100%'] {
+          background-color: bg1
+        }
       }
       td {
         padding: 3px 6px
