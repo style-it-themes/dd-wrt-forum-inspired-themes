@@ -33,9 +33,9 @@
 @var range    cg_lig       'Lightness of gray colors' [0, -30, 30, 0.01]
 
 @var checkbox new-top-menu 'Use top menu redesign   ' 0
+@var checkbox max-vertical 'Maximize vertical height' 1
 @var checkbox avatar_soh   'Avatar on hover scale   ' 0
 @var checkbox emoji_new    'Enable emoji override   ' 1
-@var checkbox max-vertical 'Maximize vertical height' 1
 
 @var text     transition   'Define transition value ' 'all 0.2s cubic-bezier(0.3, 0, 0.5, 1)'
 
@@ -1817,11 +1817,14 @@ tsh() { text-shadow: arguments }
     }
   }
   if (max-vertical) {
-    #header_wrap[style="background-position-y: -23px;"] {
+    #header_wrap[style*='-23px'] {
       #menu_forum {
         position: fixed
         width: 1153px
         top: 56px
+        #quick_links {
+          margin-right: -.6rem
+        }
       }
       #header {
         max-height: 5px i
@@ -1830,7 +1833,7 @@ tsh() { text-shadow: arguments }
         transition: transition
         scale: .8
         margin-top: -.7rem
-        margin-left: -1.4rem
+        margin-left: -1.8rem
       }
       #navigation_minimized {
         #menu_sub li a {
@@ -1913,7 +1916,7 @@ tsh() { text-shadow: arguments }
           background: bg2
           background-image: none
           border-color: bg4
-          margin-bottom: -2px
+          margin-bottom: -5px
         }
         li {
           a {
@@ -2141,7 +2144,7 @@ tsh() { text-shadow: arguments }
   }
   #content {
     font-size: 12px
-    line-height: 1.4em
+    line-height: 1.2
     table {
       &[cellspacing='2'][cellpadding='2'][align='center']:not([width]) {
         margin-top: .1rem
@@ -2193,7 +2196,7 @@ tsh() { text-shadow: arguments }
     .infolink {
       a {
         color: v98
-        line-height: 1.4em
+        line-height: 1.4
         transition: transition
         background: 0
         font-size: 14px
@@ -2550,8 +2553,13 @@ tsh() { text-shadow: arguments }
     }
     form {
       &[action*='posting_sec'] {
-        .row1:nth-child(2n) td {
-          background-color: initial i
+        .row1:nth-child(2n) {
+          td {
+            background-color: initial i
+            &.quote {
+              background-color: bg1 i
+            }
+          }
         }
       }
       &[action*='posting_sec'],
@@ -2727,7 +2735,7 @@ tsh() { text-shadow: arguments }
           min-width: 150px
         }
       }
-      .info td {
+      .info td, .info {
         background: bg1
         border: 1px dashed bg5
         padding: .6rem .6rem
@@ -2800,14 +2808,15 @@ tsh() { text-shadow: arguments }
     }
     .row1 {
       font-size: 99%
-      &:nth-child(2n) td {
+      &:nth-child(2n) td, &:nth-child(2n) td[valign="middle"]:first-child {
         background-color: bg3
       }
       &:nth-child(2n) td {
-        &[class][width], &[colspan] {
+        &[class][width], &[width], &[valign='top'][height='28'],
+        &[colspan], &:only-child {
           background-color: initial
         }
-        &[width='100%'] {
+        &[width='100%'], &.quote {
           background-color: bg1
         }
       }
@@ -2907,8 +2916,8 @@ tsh() { text-shadow: arguments }
       display: none i
     }
   }
-  hr[width] {
-    color: bg4 i
+  hr[width], hr {
+    display: none
   }
   [style='color: #88171A'], [style='color: red'] {
     c: v18 0 0
@@ -3025,7 +3034,7 @@ tsh() { text-shadow: arguments }
       // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=51486
       // https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=301950
       font-size: 13px
-      line-height: 1.4em
+      line-height: 1.3
     }
     td .genmed, .topictitle, .postdetails, .name {
       font-size: 13px
@@ -3060,7 +3069,7 @@ tsh() { text-shadow: arguments }
       // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=51486
       // https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=301950
       font-size: 14px
-      line-height: 1.4em
+      line-height: 1.2
       max-width: 940px i
       padding: 5px 0 0 10px
       display: block
@@ -3123,9 +3132,9 @@ tsh() { text-shadow: arguments }
         }
         .quote {
           border: 0 i
-          background: var(--bg-1) i
+          background: bg1 i
           padding: 0.1rem 0.3rem i
-          border-left: 6px solid var(--bg-5) i
+          border-left: 6px solid bg5 i
           border-radius: 1px 4px 4px 1px i
         }
       }
@@ -3353,9 +3362,12 @@ tsh() { text-shadow: arguments }
         h2 {
           margin: 10px 0 8px 0 i
         }
+        .row1:nth-child(2n) td {
+          background-color: inherit
+        }
       }
       // bottom of the forum login addy, reworks this a bit.
-      &[action*="login"]:not([target]) {
+      &[action*='login']:not([target]) {
         input {
           margin-top: 1.5rem
           &[type='text'], &[type='password'] {
