@@ -38,7 +38,7 @@
 @var checkbox avatar_soh   'Avatar on hover scale   ' 0
 @var checkbox emoji_new    'Enable emoji override   ' 1
 
-@var text     transition   'Define transition value ' 'all 0.2s cubic-bezier(0.3, 0, 0.5, 1)'
+@var text     transition   'Define transition value ' 'all .15s cubic-bezier(0.3, 0, 0.5, 1)'
 
 ==/UserStyle== */
 // Helpers.
@@ -1819,10 +1819,13 @@ tsh() { text-shadow: arguments }
   }
   if (max-vertical) {
     #header_wrap[style*='-23px'] {
+      height: 70px i
+      background-position: 0 0 i
       #menu_forum {
         position: fixed
         width: 1153px
         top: 56px
+        padding-bottom: .7rem
         #quick_links {
           margin-right: -.6rem
         }
@@ -1860,10 +1863,12 @@ tsh() { text-shadow: arguments }
       }
     }
   }
-
   if (new-top-menu) {
     #header_wrap {
-      background: bg0
+      background-image: linear-gradient(bg0 10%, v00 90%)
+      outline: 2px solid bg4
+      border-bottom: 2px solid bg0
+      height: 150px
       #navigation a,
       #navigation_minimized a {
         color: v98
@@ -1998,7 +2003,12 @@ tsh() { text-shadow: arguments }
   }
   else {
     #header_wrap {
-      c: 0 t bg0
+      c: 0 t t
+      background: none
+      background-image: linear-gradient(#1a1a1a 10%, #1f5f94 100%)
+      outline: 2px solid bg4
+      border-bottom: 2px solid bg0
+      height: 180px
     }
     #navigation {
       #menu_main {
