@@ -34,6 +34,7 @@
 
 @var checkbox new-top-menu 'Use top menu redesign   ' 0
 @var checkbox max-vertical 'Maximize vertical height' 1
+@var checkbox show-hdr-txt 'Show header text        ' 0
 @var checkbox avatar_soh   'Avatar on hover scale   ' 0
 @var checkbox emoji_new    'Enable emoji override   ' 1
 
@@ -2484,6 +2485,20 @@ tsh() { text-shadow: arguments }
       height: 0
       width: 0
       margin-top: .5rem
+      if (show-hdr-txt) {
+        &::after {
+          content: '- Community Forums'
+          display: block
+          color: v98
+          font-size: 1.8rem
+          position: relative
+          top: -47px
+          font-family: monospace
+          font-weight: 900
+          margin-left: .5rem
+          white-space: nowrap
+        }
+      }
     }
     #menu_main {
       // hide for now.
