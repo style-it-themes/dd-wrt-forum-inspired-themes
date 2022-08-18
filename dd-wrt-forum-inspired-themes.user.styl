@@ -1865,7 +1865,7 @@ tsh() { text-shadow: arguments }
   }
   if (new-top-menu) {
     #header_wrap {
-      background-image: linear-gradient(bg0 10%, v00 90%)
+      background-image: linear-gradient(darken(convert($v00), 50%) 0%, v00 120%)
       outline: 2px solid bg4
       border-bottom: 2px solid bg0
       height: 150px
@@ -1959,17 +1959,13 @@ tsh() { text-shadow: arguments }
       &_minimized #menu_sub {
         li {
           a {
-            animation-name: fadeIn
-            animation-iteration-count: 1
-            animation-timing-function: ease-in
-            animation-duration: 500ms
-
             padding: 4px 10px 4px
             border: solid 1px v04
             border-radius: 4px
             color: v99
             background: v02
             background-image: none
+            animation: fadeIn 500ms ease-in 1
             &:hover {
               padding: 4px 10px 4px
               border: solid 1px v08
@@ -2005,10 +2001,14 @@ tsh() { text-shadow: arguments }
     #header_wrap {
       c: 0 t t
       background: none
-      background-image: linear-gradient(#1a1a1a 10%, #1f5f94 100%)
+      background-image: linear-gradient(#1a1a1a 10%, #1f5f94 105%)
       outline: 2px solid bg4
       border-bottom: 2px solid bg0
       height: 180px
+      &[style*='-23px'] {
+        background-image: linear-gradient(#1a1a1a 5%, #1f5f94 100%)
+        height: 70px
+      }
     }
     #navigation {
       #menu_main {
@@ -2041,17 +2041,13 @@ tsh() { text-shadow: arguments }
       &_minimized #menu_sub {
         li {
           a {
-            animation-name: fadeIn
-            animation-iteration-count: 1
-            animation-timing-function: ease-in
-            animation-duration: 500ms
-
             padding: 4px 10px 4px
             border: solid 1px v04
             border-radius: 4px
             color: v99
             background: v02
             background-image: none
+            animation: fadeIn 500ms ease-in 1
             &:hover {
               padding: 4px 10px 4px
               border: solid 1px v08
@@ -2225,6 +2221,25 @@ tsh() { text-shadow: arguments }
     }
     @keyframes animate-progress {
       to { background-position: -40px 0 }
+    }
+    .bodyline td {
+      &[bgcolor='#FFFFFF'] {
+        background-color: v05 i
+        border-color: v03
+        background-image: linear-gradient(-45deg, t, t 33%,
+                                          rgba(convert($v01), .3) 33%,
+                                          rgba(convert($v01), .3) 66%, t 66%) i
+        background-size: 20px 15px
+        animation: animate-progress 4s linear infinite
+        rad: 3px
+      }
+      &.row2[width='100%'] {
+        background: bg3
+        box-shadow: inset 0 0 8px 6px bg0
+        border: 1px solid bg4
+        rad: 3px
+        padding: 2px
+      }
     }
     fieldset {
       c: 0 bg4 var(--rgba-bg-04)
@@ -2436,59 +2451,58 @@ tsh() { text-shadow: arguments }
   // https://forum.dd-wrt.com/phpBB2/login.php
   #header  {
     #logo {
-      transition: transition
+      transition: all 120ms ease-in-out
       prefix = 'data:image/png;base64,'
-      path   = 'iVBORw0KGgoAAAANSUhEUgAAAkQAAACMCAMAAACqGkaYAAAAY1BMVEX///8kX5T///8kX5T///8kX5T/'
-      path  += '//8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T///8kX5T/'
-      path  += '//8kX5T///8kX5T///8kX5T///+iTMr8AAAAH3RSTlMAEBAgIDAwQEBQUGBgcHCAgJCQoKCwsMDA0NDg'
-      path  += '4PDwFagsVAAACudJREFUeNrs2oEGwzAUheEYqo8w4PT9n3JMEOm1KUY63wc4l4AfkLYaAAAAAAAAAAAA'
-      path  += 'AAAAkny6JRcOqfdc2pNyT7ln8HVOyj31ntm0F4f6dJwVcz22t3nsynGc26AcW7X1tU3OD/5jRCISkYhE'
-      path  += 'JCIRiUhEIhKRiEQkIhGJSEQiEpGIRCQiEYlIRCISkYhEJCIRiUhEIhKRiEQkIhGJSEQiEhEA8Ni7bZWH'
-      path  += 'uJ396J4/eggRiQgRISJEhIhEhIgQESJCRCJCRIhoAfUnHkQkIhGJSEQiEpGIEJGIRCQiEYlIRCJCRCIS'
-      path  += 'kYhEJKJ72V7smlGL5SAMhUVEQglFRCSUUvb//8p92un1tDap87TjnMehPffq+Uiid4iIOIGIKFqyR6MF'
-      path  += 'jRYi+t8gwnWsRDQjRLoCJ5E/jzokL17NPiypyvHsJIV1o0X+KTmTVvlUcYrwU4Qu0XvO0t8M9sjNsNwP'
-      path  += 'EJXdutwSn7KP2WxUSYHInyQGZxGQa3tpP1eGEFHV1iA8L0QgVoIH1dDLnrdXRoJGoPz1ZDbVFLBfX74U'
-      path  += 'WoiCWNawxSkhQhEgpOtYbrOP22sjfoQonA96p6uA++4MkhNp10DEh3ER/AuRyyNr5pvsecQoo1EHi2Tq'
-      path  += 'ZqDoVMXzaWogerEanh6iMrboBbIfNuIniIKxqnQgzm+WL+4TIn61GZNDVAYXfTBkv45u3wpGnWbDTlMF'
-      path  += 'Ywt5oSHhhIjebUaYF6JO9IeI1NQoi3QP7YLzaWMkV6P9wQhFdiB8p0QYe/nefhrQ+Lkj+boXZWaIIqRe'
-      path  += 'EwXXVaBUj/vsPfxdHo08rT2jfikiczfb2nA7gq/NDUTalnjK++NtAn7tH6wN7zx0sWD2l1ayszdd8ikQ'
-      path  += 'ARpiPmb57QsBcyHe3Q1ER4muIzi+5XkhYji2D10JCOz+sZqNttZIuQuMxummulXvZ2iebiCqQalj28ng'
-      path  += 'vBB90LB5Z5avmL18GIXRsV4U0IuxqHAD1JMY7qHo5V1lOJDw+SBagCG7apt9HDYqKkTO+NvHdvLQtDZb'
-      path  += 'N08wxhtvphISNx9EFS+EzfJ7k30+jeL4VCZaUNnUzUpTYlj/J5STNUKk7SfCMitE7dFktIgJjBbvFNXY'
-      path  += '/GFBPTdjkDexUBEB6p239Gle5oNIv4Oxj1Ni+4lLT1JUPpLh+xzQJoPlojHgjuAwpfezSSHS+oRxjhVl'
-      path  += '9jXXNFHD3g0FLYPrapjHyrW/Lc4knh2iajo8q8mKy2NtEbdb9LRZ72YRWvVmuOGm3pCkiuaFCDvSt94W'
-      path  += '/SxkHytGS9GBTyBVV6UrvaQD/QuRXgKGst8HZyuIWwyX0aT1xHTtbxp3pym9bvBxboiUbbZPVPJNGlfl'
-      path  += 'ba1CdOZojWy+KW+ELOqaHCJlx+zZh+/RSAYEpd+cehPQqsR4NnP+S9556LeuwmBc3vEmy3vc93/JO9qQ'
-      path  += '4IQPQx1y3N/V2amMT+FvSUYCJF2S/E6InOghwWchSraN/UYaQw2IEvj+B9/FfN1LBlmXHHYCkReX17qf'
-      path  += 'Ranrcxk5r6rxsZ1l0l7L4Okg04iIKMiPdc2V+v9ajRetRuW5rsd7K3V9zCNFYHl4F0TZptis0XoJ8JXv'
-      path  += 'ma7Eek1q25btFiInbWckbb7kqOxnhfSl8wRRKtVv05ueU46zRMaz91aIQglEh+0QgXqtTOUyXekUYaay'
-      path  += 'tKEwP7pXiGIlF/OYP1QDThvGKBAhcmrYavx16xE2dHTkEIXbxj77AEQ0oElxlCnDeS28AmDL4/B2iM7z'
-      path  += 'mlwdztA4r0v8gChWMVcSpap2WkcKEW0be/YJiB43YdibTdjJ4bVIUojCz0OEGcIU3XyPwFAPzdcY3CFS'
-      path  += 'MxdH86ym6LdC5L5MJ66G0AmO1Zj0Ejx1+HmI8jsV1zKNvoQo+PozfUTQ6ZfulavmgeR1Lefa7Q0irn3O'
-      path  += 'I++hF5dcb7xxWJdxRFyCqLwKtup3QkQMIgHrGO/cVYr12fuEiBuXa0Ay8c43EIiIotvYpwQkGh/I3c1J'
-      path  += 'JGm1hrHPMtp2fitEOPfRoS/AVH4BbNd+ICrnLzlDhfQR6Fy5t0LCY6b2AdF5zYemqobSXwqRiMQBeLMT'
-      path  += 'fAUrYN32TiH69ii1CjMOg4NHnQs3Vh6HqMX3/ZZc6WWP73rFd+9jn1iGSFI3AN8yASwdXEHypyGS3zHg'
-      path  += 'g77GWc9tUk9KaTlo3w1HKwauV7vZ2uZkox2IQOkKSJLJ+fJxPnePEJUv9gKNN9FRMA5rdou/na2ZLNza'
-      path  += 'WYAIJpc+n/bw8Yw1GuIL9lnY0+F07v4gumqAEd0gqiX+B7ihmkjtJrlvjFYaIi4bsxUJgMjino2NzLCc'
-      path  += 'JB+qY+4KfOMfhwjfkXsf/fApIg3ixhtEJVZcgyhCELFtpSBC1mEbjfqVtCcc94DoJwQlbp+GCMb+RkOp'
-      path  += '1sVuShci0oVo49hf3lVPxLSuBrkPMKMIUh+g2HZ/7swyRNHbICLTxR7AUzTUber7CkOEDQt7RcJVNj5J'
-      path  += 'ViAR7dWd7Rcievp6t6U0WlzZVW0K0ScNiMCbGJ6Vxql8nISzA1H2GYicz0IE7PqGlT6b1h6F2BmqF9wj'
-      path  += 'bwYQvTx/MLk2IZowqtoQeQYQBZ+GSLJ0bNOaw02rIE/6/wtJGvaCfdOzgos8ohWIGkOIBgDG3t1ZaLJm'
-      path  += 'GK8ebcjVX/OHscAQgUo6FDgjLjJcImkToov5/Mb+YyKwFNq8j4Rrm5+bopPQkFkoBqoXYRhV4QlLCxAx'
-      path  += 'vR5hfwSiYDtEsgEsfr7VY7P45+Xn22w1ZnvRhKJTHTQoddF8pQ2INMs9O7nXazkYdiYbaStEYMfGzLiH'
-      path  += 'uDSifTCkKFk2ZORHL+J9TxoXFOJ3XJFdiIQ40dXRyiRpj9wg7VGapD02QwSc0l+VS5rinl52ybuI//bN'
-      path  += 'bb4aIlQkJFjAUONh70A5iRWICDxWaL++UJov1U/AXlWqXOlsA6KDOIYT87UQKobX/Tr9SfzkoodRJmnI'
-      path  += '5BE/CXxouV4fVJNYgagCjxXY8xF4HyjcWhHF37qOfinIdohURzJURbgygkUl3zm4WH7WFYfVhiZJQ0Yx'
-      path  += '/aSzf8zC5wk7YVmCCLj8S+K++lkm9AB7yoCMq/7M49UiDi98Xq/Y9qxA5HYvTHTNibHssJBM3AJcPvaN'
-      path  += 'vKFCaIUfPYe2Q29Mow3NKYrqVX8gqxDJdvbuKsYS3g+MVcs+8J8gOvOS11UHxXXndLU8tiYrEFE4bT+W'
-      path  += 'AeCoK8YnLw76+KGDazKrEJmfU8HoCSJefB+v2Jb4oTufwQy3U94UIksQcYo2nuuygSJGphBlgAlsE4Ah'
-      path  += 'sgsR6XdI95rQv96XS0vQCNKal7EuyuuveeQ8q8ZnvsqsJlsQkd+96agqt/lJQxeCEOmbItfwEJzCMkSG'
-      path  += 'j1XnLiF6WZAIFqxyF+a0s4aMnj2IiNgPGJJO2BfmVu1E+hBBR1EZnsg4ufYhwhQhhkSINJdGn4m0KRoD'
-      path  += 'sgkR+YbnVQ0HkPVxL5PxCY76EEH/lBiaLka2IeLC1vtjYqA+Leg1GOJSriFXe2QXIiK36PQRyhSpQzer'
-      path  += '9BtiLulDhG3nZHq4pGsTItyxuA9AkWOuxKiPl9GzSrnmupYg4uImrBlWx71i4Vp9vXvQaahhB7A/kXYa'
-      path  += 'Vj/REgJ9qxBx8YsKdEfDwpVK2aC81lIq2mNEz+KlZV2PL5r1MXaIrEAEJPyeyrk0S/nvs+Tgm3Td4YAb'
-      path  += 'Cun/Jl+90XCpGCtwbwL5p507FgAAAAAY5G89i10F0vvofQAAAAAAAAAI+UD6fNsbckgAAAAASUVORK5C'
-      path  += 'YII='
+      path    = 'iVBORw0KGgoAAAANSUhEUgAAAkQAAACMCAMAAACqGkaYAAAAYFBMVEUAAAD///////////8kX5T////////'
+      path   += '///////////////////////////////////////8kX5QkX5QkX5QkX5QkX5QkX5QkX5QkX5QkX5QkX5QkX5'
+      path   += 'QkX5QkX5T///8kX5SoEyUbAAAAHnRSTlMAwECAQBDw4GAgoFAwsJBw0JrwEMDQgOAwYHBQsCDe78ReAAALN'
+      path   += 'klEQVR42uzSMQ7CMBBE0RCJjjNk739LCoxsNAhEFYe8V85KW/0FAAAAAAAAAAAAAACA2VTVh1tc4xBz5fzT'
+      path   += 'Xk85516Dr3O9iLnJuYk9Du9PW+pzjLHlujQxPoxb18dR30Z9G+RDEYlIRCISkYhEJCIRiUhEIhKRiEQkIhG'
+      path   += 'JSEQiEpGIRCQiEYlIRCISkYhEJCIRiUhEIhKRiEQkIhGJ6C8jAoDTu67NbZZHHM66NZdZHnE4IkJE7E9EiI'
+      path   += 'j9iQgRcWfX/ncUhGEAjq8ljI6N4RP0/R/zLrkfjIqlI5eY037+NFqFfhVjfD6PyHlE7vk8IucRuefziFT8x'
+      path   += 'f964xF5RIJHpPGITDwijUdk4hFpPCITj0jjEZl4RBqPyMQj0nhEJh6RxiMy8Yg0HpGJR6TxiEw8Io1H9KcK'
+      path   += 'fqJBQMRi2b0clAchI+J/i0gex4qIHtGRRAMAqyLUPJ7uPuVhgcgqmOl8UIYfQzBZoTUHkwy/8G71I1V4fDJ'
+      path   += 'oFN10e6nWcJ7YaC7a7ks1D1rwJKJxKzEFi6Zc+4Om7chkRLjwCSCP6BtN3GNJj3ZPN+4BYpBU+UcNBpn31s'
+      path   += '4HpX1ECdjgVjyiTzhxp5gPd19u3YNIjShtdxzDuZn3pmAAW9JhFxFFtiGPKFS+gA52T3xBbQZpWQymq5lQw'
+      path   += 'qnCv3AXEbEZvX1EM1+Sxe4vDyItotTzqUIs1Z7Dh9BGRNwhv3lEM18TSex+5YtWJaIA4u2uWXhjLS81JbQR'
+      path   += 'IfeI6a0jOlp9BIBl2KkAEFlqd58fDIL7QZMySEJ7ECPfy/Zr+bR/NlFje0bq/bmY3zmiIra+DJjCQwmHJR7'
+      path   += 'vfhS3gzpoxPVokP69F81Xs1uzXFX7smmLyHBKRqyT+mtC87Jf3Qe7ZrAbMQgD0Zg0AZLAIvXS///S3kpw0D'
+      path   += 'AJqtSK9T3Wyn7yjM0mdfMgwonu/UVKrFuoI59OhNEQes1a0g8C9CC2UwWidQPWvFjf4rgQObW2PzoJiKr++'
+      path   += 'qITJZUI3wIP0t2EExs7e2icKxAF35hjKTM4LkQnGtLCf7YE3Xs5JfJPbb00QN/IoeIKoFA4dYcyN2+Vfs2E'
+      path   += 'jwrRDhjCEcreHyARQRHWK/LtI2UeCmnj1HxWNp68TM2ZuFEhCuAgjGOxRe9jTnQ8d2XSalSk1GwrRoyDf0J'
+      path   += 'RrBmENN4It1EhWkGp+SEmhbXo2A8Fb1AY9VjYoIViIWgEDNq3sJuXQSGCNxjeTgn/xIU7KU0+ZuL3rEomPX'
+      path   += 'No9LkiykzRejYoRFgn6OVYsPflZ5o0m22JgRZV1hfhx7arvpG7qhsdokAtz83OyhSfyaIut7S77dpqdiipT'
+      path   += 'sSF29RMEhVmdIiyInV9LWAX6rAV7ChSzNgqVXgQyxUJmd4Q3R0Bfb23rLfCQ0SIY7RpaeJ81TfAnUpqbgv8'
+      path   += 'MThEuMy8o5JOGsErPjUh6j66SbarjDdzf8scHCKiYlzvfR+NhkBQkDhpB6Sdv2mIuauUZP+fEH1+5Piafi/'
+      path   += 'YivG976TxICDa0f5X38U8+4mtlcT8EYi+qTu3pchBIAzjhGxFZ3TlHA5TvP9b7m4WQkRoUpWJyfw3VmlLLv'
+      path   += 'jsv5smzt1Kx5VfinMiMfseaonwJQknx+yDTDH6q9EQzmOQ+req/bIqloRzOq/COTEYKCwvj4Jo2FSbvaxqA'
+      path   += 'l7BPrMvZK9fcG4bTgsR08LXJMxXjqTygJRkGUS6GC90iGOS+oIouT8UolsBost2iCr3tQbIMvviEeEAZdrb'
+      path   += '4nz0rBBZ5SFRk0JH4RtS4xIixqur2unR1NdEWBmi27a9H3aGKDuR7oEaeYDmWu03ALb8OTwcIuJbciwyRH1'
+      path   += 'bNkFkIeYkQtoDEqwIEdq2991PQNQBhdf7DBhgcvC7SDlEt8MhIr4tF7xnwZBS1RwzzhBRmDbsQQn2rBD134'
+      path   += '4TmyX0tV6rdfmv5BChoyEyMxVOajwJoXH6qlMFradYF0PNWGjXTIwWAaIYTQy+pzgrYxwNHHJpcTJMLJ0Pk'
+      path   += 's8KEepqSNTvMc7cvQPvZ58Tophc3Fhu2kgAYWqjwt5rVBGmCTkfJHBhVV6rfbJqmz0rRPXZx2fhB/AoP2H3'
+      path   += 'hs4JkQw7WQ3QqdBx0a3KSjWTSBCRlodqaCH9rBAtkLhU3Oyj2oL9rt7bPilE6r+hQJhFGBiw60ExWd0jRAJ'
+      path   += '47iQDuix5VIvfz3t/3R+i/N4A0GUWYfkE3iA5FqLyE8ew6U3OVMxJCoESETQ/CTcSnIJtlu9w2LgzRNDVFX'
+      path   += 'hI1iU/q8xzTwqRTPmiYWjRgsgaeySxO2ulLAI3jRwYLh0z9nhNEK2d07wBngU7XT7OPSlEbgUYOEDEg/+AM'
+      path   += 'tEeYZuM3ogbC6GojdOKKwDRTv+z8aWUWD6yb0I1d57RhsMhSk8sus8aqbjtbeJogEjWA1sQ4RpE3barIH/a'
+      path   += 'O7sttUEojEIQzK+JGq0zanz/t+ysOp2DkMhHEF227Lu2SEfY4TDhANqqQ5iNcMlh5Zj32LOfejTF7eUS0Tj'
+      path   += 'q05VgWTtMoRIxVKLAvi8flU8koE+bax+2WDm4paekT7xeIvYSiRYPk4gNQQmJHfV9F9T2DS4RDSzCVkLerV'
+      path   += 'yN7EBir5coezeJmPHvXUhqtL6zqwmaoitAIvs3Mcdb6emlfEEiPkWi/DkSbZ8tkT2uB+30Cdt7VBvBEN1wj'
+      path   += '0QzXbLS/AslY0qkSNXZEp09JDq8SKIW6D5kz2HYLsgV+FOML8OW07HJLCCtiBhTIu4p0XJMjDcIZzWwZxjY'
+      path   += 'PcqZdOz5A7RAVRYUOR05Q5YXuZki+RyJSkwi/qZzIn0r9Jw2os/y+UPRSqvIbyrmyF60vmRjvrCMKpHAWkS'
+      path   += '8RKJDqETjHdjOP+qR3/yxnH/MFvc7i6bWg+oSsFQa7yujSgSme3bjUW9HYsR42cgeKFE9ELl/C1Hfy2GmRZ'
+      path   += 'VRkU8cLfX/dwV8oNW/ccOiSqTPEyVSKh9Z9vj0WPbYQ8seESRifCAayUDkatDh5llVhdeYj0tkJwm1NCwBD'
+      path   += '3unfziLLBFDHivZ0RcYXS/FF2BPSLLtOoZE2aChRAEp1C4Hq+8LNWiUmEa5WZHnI77S/IBCb6Fnk8SWqDEf'
+      path   += 'K/zMR4o+9zh9d+fxWnaLp4KES3TvSoamrR092DaDCf/pKaJrM2dFyqrIc06vkPNjbmIefd0qRCL/kF9W0o6'
+      path   += 'zQmsBYayAbJzx7HzNFvlZeN8DGdvnGBLRs0B0fCVEnt2Qm0eA233Pxytqsxsq8cXUcegcnW3YFOCYQA9+dI'
+      path   += 'mkMpqjEaLKvhGiuW2DwpBoTSmv9wMU5bR+ONNjexZFIlar8GsZSMdZeN+8uPTULx8s8ogSURjFEUyXSEu+P'
+      path   += 'zrGliOVvdDuVDO//nJl8WiJyKLwe12CLBLMV6IccoKQChiIYIlw8Abp7AX908926RE1Dh89pbFq6fWnz8XW'
+      path   += 'LHpcby5XehZLIlZ0D7qqSvJhBiVzSIQMRdLzEpz2GRLhj1UnDYnMDYm7i4Uewra7C8Dm/HiJCDF4M37XXat'
+      path   += 'mXHfmkAgJFI3njYxKohKFW4Q7RBLBW6PXjMEWbQ4spkSsKAcvltnEqo8sle8Njg6JoPhUeQ5dgmEShSOUuw'
+      path   += '3ERH7a4Rfk0JW9S7n+zOJIRMi2wxXK7ywdyrzBKxKSIRK5xk7le7mkjCYR3rDUBtNJjp/3j4s53s6e7xXur'
+      path   += '2UjSUTISvCls98bUbvy62WGVMRFZm8ZQpHGtMpFbZbHJQqnaJuJ5uCidmTKHvan/jLGbr1gJuePfd9vrJL9'
+      path   += 'mg6viikRUV9f5ZT8FvFFlRUMp8iy6Ypq9r/xpzX4XxohWmpNEO0cvUQikUgkEolEIpFIJBKJRCKRSCQSiUQ'
+      path   += 'ikUj8U/wGqL9uRo5qhC4AAAAASUVORK5CYII='
       background: s("url('%s%s') %s", rq(prefix), rq(path)) i
       background-size: 290px i
       padding-left: 290px
@@ -2657,7 +2671,7 @@ tsh() { text-shadow: arguments }
         color: v99 i
         font-weight: 600
         text-shadow: 0 1px 0 bg0
-        margin-top: .01rem
+        margin-top: .12rem
         margin-left: .3rem
         display: inline-block
         &::before {
@@ -2938,12 +2952,10 @@ tsh() { text-shadow: arguments }
         background-color: bg1 i
       }
     }
-    div:nth-child(8) > hr:nth-child(1){
-      display: none i
-    }
   }
   hr[width], hr {
-    display: none
+    color: t i
+    margin-top: -.21rem
   }
   [style='color: #88171A'], [style='color: red'] {
     c: v18 0 0
@@ -3136,6 +3148,35 @@ tsh() { text-shadow: arguments }
     }
   }
   /form {
+    // attach-list
+    &[action*='uacp.php'] {
+      table[width='100%']:nth-child(1) {
+        td[align="right"] {
+          text-align: right i
+        }
+      }
+      table[width='100%']:nth-child(2) {
+        span.gen a, span.gen {
+          max-width: 185px
+          overflow: hidden
+          text-overflow: ellipsis
+          display: inline-block
+          white-space: nowrap
+        }
+        .row1, .row2 {
+          &:nth-child(3) .gen {
+            max-width: 130px
+            overflow: hidden
+            text-overflow: ellipsis
+            display: inline-block
+            white-space: nowrap
+          }
+          &:nth-child(4) .gen {
+            max-width: 50px
+          }
+        }
+      }
+    }
     // moderator pannel
     &[action^='modcp'] {
       // moderator move topic checkbox align
