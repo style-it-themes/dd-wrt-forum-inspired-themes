@@ -2655,9 +2655,61 @@ tsh() { text-shadow: arguments }
       padding-top: .4rem
       padding-bottom: .4rem
     }
-    .catHead {
-      a { color: v97 }
-      div[style*='float: left'] b:not(:first-child) { color: v09 }
+    // header paging
+    tr:first-child {
+      td.catHead {
+        div[style*='float: left'] {
+          margin-bottom: .4rem
+        }
+        div[style*='float: right'] a[href*="view=next"] {
+          margin-right: -.62rem
+          margin-bottom: .4rem
+        }
+      }
+    }
+    // footer paging
+    tr:last-child {
+      td.catHead {
+        div[style*='float'] {
+          margin-top: .4rem
+          margin-bottom: -.4rem
+        }
+      }
+    }
+    .catBottom {
+      td[width="25%"]:not([align='right']) {
+        span.nav b:not(:first-child) {
+          background: v05
+          border: 1px solid v04
+          color: v99
+          padding: 3px 6px
+          rad: 4px
+        }
+      }
+    }
+    .catHead, .catBottom {
+      a {
+        background: bg4
+        border: 1px solid bg5
+        color: v99
+        padding: 3px 6px
+        rad: 4px
+        &:hover {
+          background: v05
+          border: 1px solid v04
+          color: v99 i
+          padding: 3px 6px
+          rad: 4px
+          text-decoration: none
+        }
+      }
+      div[style*='float: left'] b:not(:first-child) {
+        background: v05
+        border: 1px solid v04
+        color: v99
+        padding: 3px 6px
+        rad: 4px
+      }
     }
     .thHead, .thSides,
     .thLeft, .thRight {
