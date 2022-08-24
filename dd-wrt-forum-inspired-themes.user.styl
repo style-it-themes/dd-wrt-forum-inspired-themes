@@ -10,10 +10,9 @@
 @license        MIT
 @preprocessor stylus
 
-@var checkbox sdetails     'Show style details'     1
+@var checkbox sdetails     'Show style details'       1
 
-@var select   cg_theme     'Preset themes toggle'   {
-
+@var select   cg_theme     'Preset themes toggle'     {
     'Custom colors   *' :  'custom-style'  ,
     'Antigua          ' :  'antigua'       ,
     'Dracula          ' :  'dracula'       ,
@@ -26,20 +25,21 @@
     'Ubuntu           ' :  'ubuntu'        ,
 }
 
-@var color    cg_bg        'Custom background       ' #111a22
-@var color    cg_fg        'Custom foreground       ' #f2f4ff
-@var color    cg_ac        'Custom accent           ' #4f74e3
+@var color    cg_bg        'Custom background         ' #111a22
+@var color    cg_fg        'Custom foreground         ' #f2f4ff
+@var color    cg_ac        'Custom accent             ' #4f74e3
 
-@var range    cg_sat       'Saturation of RGB colors' [0, -50, 40, 0.01]
-@var range    cg_lig       'Lightness of gray colors' [0, -30, 30, 0.01]
+@var range    cg_sat       'Saturation of RGB colors  ' [0, -50, 40, 0.01]
+@var range    cg_lig       'Lightness of gray colors  ' [0, -30, 30, 0.01]
 
-@var checkbox new-top-menu 'Use top menu redesign   ' 0
-@var checkbox max-vertical 'Maximize vertical height' 1
-@var checkbox show-hdr-txt 'Show header text        ' 0
-@var checkbox avatar_soh   'Avatar on hover scale   ' 0
-@var checkbox emoji_new    'Enable emoji override   ' 1
+@var checkbox new-top-menu 'Use top menu redesign     ' 0
+@var checkbox max-vertical 'Maximize vertical height  ' 1
+@var checkbox show-hdr-txt 'Show header text          ' 0
+@var checkbox avatar_soh   'Avatar on hover scale     ' 0
+@var checkbox emoji_new    'Enable emoji override     ' 1
+@var checkbox topic-review 'Topic review fixes note   ' 0
 
-@var text     transition   'Define transition value ' 'all .15s cubic-bezier(0.3, 0, 0.5, 1)'
+@var text     transition   'Define transition value   ' 'all .15s cubic-bezier(0.3, 0, 0.5, 1)'
 
 ==/UserStyle== */
 // Helpers.
@@ -86,7 +86,7 @@ g(x, y = 0, xi = 1, yi = 1) {
 // Border radius mixin.
 rad() { border-radius: arguments }
 // Box-shadow mixin.
-b() { box-shadow: arguments }
+bsh() { box-shadow: arguments }
 tsh() { text-shadow: arguments }
 
 // Color generator.
@@ -265,7 +265,7 @@ tsh() { text-shadow: arguments }
       border-top: 0
       div:first-of-type::after {
         content: '- Styled with: ' + stinfo i
-        text-shadow: 0 1px darken(convert($bg0), 20%)
+        bsh: 0 1px darken(convert($bg0), 20%)
         color: v09
       }
     }
@@ -281,7 +281,7 @@ tsh() { text-shadow: arguments }
   [class*='row'].navigation td {
     div[style='position:absolute'] {
       position: relative i
-      a img[src*="icq"] {
+      a img[src*='icq'] {
         margin-top: -1.633rem
         margin-left: calc(24.355rem - .70rem )
       }
@@ -295,7 +295,7 @@ tsh() { text-shadow: arguments }
   }
   @keyframes pulse {
     0% { transform: scale(1) }
-    50% { transform: scale(1.2) }
+    50% { transform: scale(1.2); filter: brightness(1.6) }
     100% { transform: scale(1) }
   }
   img {
@@ -313,7 +313,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -321,9 +321,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_pm'] {
@@ -339,7 +339,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -347,9 +347,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_www'] {
@@ -365,7 +365,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -373,9 +373,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_email'] {
@@ -391,7 +391,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -399,9 +399,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_yim'] {
@@ -417,7 +417,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -425,9 +425,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_msnm'] {
@@ -443,7 +443,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -451,9 +451,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_aim'] {
@@ -469,7 +469,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -477,9 +477,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_icq'] {
@@ -495,7 +495,7 @@ tsh() { text-shadow: arguments }
       width: 0
       padding-top: 23px
       padding-right: 78px
-      vertical-align: -.2rem
+      vertical-align: -.1rem
       background-size: 150px
       background-repeat: no-repeat
       background-position: center
@@ -503,9 +503,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_quote'] {
@@ -527,9 +527,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_edit'] {
@@ -552,9 +552,9 @@ tsh() { text-shadow: arguments }
       transform: scaleX(-1)
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_delete'] {
@@ -577,9 +577,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_ip'] {
@@ -601,9 +601,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='icon_search'] {
@@ -627,9 +627,9 @@ tsh() { text-shadow: arguments }
       rad: 4px
       float: right
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     // postimages replacements
@@ -654,9 +654,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='english/post'] {
@@ -679,9 +679,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='english/reply'] {
@@ -704,9 +704,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     &[src*='reply-locked'] {
@@ -729,9 +729,9 @@ tsh() { text-shadow: arguments }
       border: 1px solid bg5
       rad: 4px
       &:hover {
-        background-color: bg5
-        border: 1px solid bg5
-        b: 0 0 8px 0 bg4
+        background-color: v04
+        border: 1px solid v05
+        bsh: 0 0 8px 0 v04
       }
     }
     // forum icons new/no new/locked
@@ -751,7 +751,7 @@ tsh() { text-shadow: arguments }
       background-repeat: no-repeat
       background-position: center
     }
-    &[src*='folder_big.gif'][alt="No new posts"] {
+    &[src*='folder_big.gif'][alt='No new posts'] {
       prefix = 'data:image/svg+xml;utf8,'
       path   = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em"'
       path  += ' preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M12 8V2H6a2 2 0 0'
@@ -1801,8 +1801,7 @@ tsh() { text-shadow: arguments }
   // style selection bg/fg with accent color
   ::selection { background-color: v03; color: v99 }
   * {
-    //text-shadow: none
-    box-shadow: none
+    bsh: none
     text-rendering: geometricPrecision
   }
   #header #menu_top li {
@@ -1852,7 +1851,7 @@ tsh() { text-shadow: arguments }
               padding: 3px 10px 4px i
             }
           }
-          &[href*="privacy-policy"] {
+          &[href*='privacy-policy'] {
             margin-top: 1rem i
             position: absolute
             padding: 2px 10px 4px i
@@ -1954,7 +1953,7 @@ tsh() { text-shadow: arguments }
           background-image: none
         }
       }
-      div[style="position: absolute; width: 1000px;"] {
+      div[style='position: absolute; width: 1000px;'] {
         position: relative i
         width: 1155px i
       }
@@ -1985,7 +1984,7 @@ tsh() { text-shadow: arguments }
                 padding: 3px 10px 4px i
               }
             }
-            &[href*="privacy-policy"] {
+            &[href*='privacy-policy'] {
               margin-top: 5.5rem i
               position: absolute
               padding: 2px 10px 4px i
@@ -2037,7 +2036,7 @@ tsh() { text-shadow: arguments }
           margin-top: 2px
         }
       }
-      [style*="width: 1000px"] {
+      [style*='width: 1000px'] {
         width: 1155px i
       }
       &_minimized #menu_sub {
@@ -2067,7 +2066,7 @@ tsh() { text-shadow: arguments }
                 padding: 3px 10px 4px i
               }
             }
-            &[href*="privacy-policy"] {
+            &[href*='privacy-policy'] {
               margin-top: 6rem i
               position: absolute
               padding: 2px 10px 4px i
@@ -2104,10 +2103,10 @@ tsh() { text-shadow: arguments }
     c: v98 v35 v61
     .cookieinfo-close {
       c: v98 v04 v02
-      text-shadow: 0 1px 0 bg0
+      tsh: 0 1px 0 bg0
       &:hover {
         c: v99 v08 v08
-        box-shadow: 0 0 10px 0 v04
+        bsh: 0 0 10px 0 v04
         rad: 4px
       }
     }
@@ -2171,7 +2170,7 @@ tsh() { text-shadow: arguments }
         span {
           color: v98
           padding: 4px 20px 4px 0
-          text-shadow: 0 1px 0 bg0
+          tsh: 0 1px 0 bg0
           &:hover {
             color: v99
             background-image: none i
@@ -2180,19 +2179,19 @@ tsh() { text-shadow: arguments }
         &:hover {
           background-image: linear-gradient(v08, v08)
           border-color: v08
-          text-shadow: 0 1px 0 bg0
-          b: 0 0 10px 0 v04
+          tsh: 0 1px 0 bg0
+          bsh: 0 0 10px 0 v04
         }
       }
       .active {
         background-image: linear-gradient(v08, v08)
         border-color: v08
-        b: 0 0 10px 0 v04
+        bsh: 0 0 10px 0 v04
         rad: 4px
 
         span {
           color: v99
-          text-shadow: 0 1px 0 bg0
+          tsh: 0 1px 0 bg0
           background-image: none
         }
       }
@@ -2237,7 +2236,7 @@ tsh() { text-shadow: arguments }
       }
       &.row2[width='100%'] {
         background: bg3
-        box-shadow: inset 0 0 8px 6px bg0
+        bsh: inset 0 0 8px 6px bg0
         border: 1px solid bg4
         rad: 3px
         padding: 2px
@@ -2246,10 +2245,9 @@ tsh() { text-shadow: arguments }
     fieldset {
       c: 0 bg4 var(--rgba-bg-04)
       rad: 4px
-      &:last-of-type:not(:only-of-type) {
-        margin-top: .5rem
-      }
-      &:first-of-type:not(:only-of-type) {
+      &:last-of-type:not(:only-of-type),
+      &:first-of-type:not(:only-of-type),
+      &:only-of-type  {
         margin-top: .5rem
       }
       // realign this shite bad design
@@ -2270,7 +2268,7 @@ tsh() { text-shadow: arguments }
       }
       .bodyline .row2[width='175'] {
         background: bg3
-        box-shadow: inset 0 0 8px 6px bg0
+        bsh: inset 0 0 8px 6px bg0
         border: 1px solid bg4
         rad: 3px
       }
@@ -2323,12 +2321,12 @@ tsh() { text-shadow: arguments }
               color: v98
               padding: .2rem .5rem
               rad: 4px
-              text-shadow: 0 1px 0 bg0
+              tsh: 0 1px 0 bg0
               text-decoration: none
               &:hover {
                 background: v08
                 border-color: v08
-                b: 0 0 10px 0 v04
+                bsh: 0 0 10px 0 v04
                 color: v99
               }
             }
@@ -2345,7 +2343,7 @@ tsh() { text-shadow: arguments }
                 background: v16
                 border-color: v17
                 color: v99
-                b: 0 0 10px 0 v16
+                bsh: 0 0 10px 0 v16
               }
             }
           }
@@ -2362,17 +2360,29 @@ tsh() { text-shadow: arguments }
         }
       }
     }
-    #forum_content {
-      /iframe[width='930'] {
-        width: 1120px
-        margin: auto 0
-        border-color: v05
-        rad: 4px
-        body.forum, html {
-          max-width: 800px i
-          width: @max-width
-          margin: auto 0
+    if (topic-review) {
+      /[stylus-iframe*='forum.dd-wrt'] {
+        #content {
+          max-width: 1104px
         }
+        .postbody {
+          overflow: hidden i
+        }
+        [width='22%'] {
+          width: 140px i
+        }
+        .quote {
+          overflow: hidden i
+        }
+      }
+    }
+    #forum_content {
+      iframe[width='930'] {
+        width: 1122px
+        height: 400px
+        margin: auto 0
+        border-color: v08
+        rad: 4px
       }
       td {
         a[href*='viewtopic'] {
@@ -2431,18 +2441,18 @@ tsh() { text-shadow: arguments }
       }
     }
     h2 {
-      padding-top: 0px
-      padding-bottom: .7rem;
+      padding-top: 0
+      padding-bottom: .7rem
     }
     form[action*='login'] {
       td {
         background: bg2
-        &[width="45%"], &[align="right"] {
+        &[width='45%'], &[align='right'] {
           .gen {
             margin-right: -.6rem
           }
         }
-        &[colspan="2"] .gen input[name="autologin"] {
+        &[colspan='2'] .gen input[name='autologin'] {
           margin-left: .6rem
           margin-right: -1.6rem
         }
@@ -2636,10 +2646,20 @@ tsh() { text-shadow: arguments }
     }
   }
   //posts for user x reset odd/even bg colors
-  #forum_content.four_columns .posting {
-    table[width='928'] {
-      tr.row1:nth-child(2n) td.row1 {
-        background-color: initial
+  #forum_content {
+    &.four_columns .posting {
+      table[width='928'] {
+        tr.row1:nth-child(2n) td.row1 {
+          background-color: initial
+        }
+        tr[align='right']:first-child {
+          .catHead {
+            div[style*='float: right'] {
+              margin-right: 0
+              margin-bottom: .4rem
+            }
+          }
+        }
       }
     }
   }
@@ -2662,10 +2682,16 @@ tsh() { text-shadow: arguments }
       td.catHead {
         div[style*='float: left'] {
           margin-bottom: .4rem
+          a:not(:first-child):not(:last-child),
+          b:not(:first-child):not(:last-child) {
+            margin-right: -.25rem
+            white-space: nowrap
+            position: relative
+            z-index: 1
+          }
         }
-        div[style*='float: right'] a[href*="view=next"] {
+        div[style*='float: right'] a[href*='view=next'] {
           margin-right: -.62rem
-          margin-bottom: .4rem
         }
       }
     }
@@ -2679,7 +2705,7 @@ tsh() { text-shadow: arguments }
       }
     }
     .catBottom {
-      td[width="25%"]:not([align='right']) {
+      td[width='25%']:not([align='right']) {
         span.nav b:not(:first-child) {
           background: v05
           border: 1px solid v04
@@ -2687,6 +2713,14 @@ tsh() { text-shadow: arguments }
           padding: 3px 6px
           rad: 4px
         }
+      }
+    }
+    .catBottom {
+      a:not(:first-child),
+      b:not(:first-child) {
+        margin-right: -.25rem
+        position: relative
+        z-index: 1
       }
     }
     .catHead, .catBottom {
@@ -2697,20 +2731,22 @@ tsh() { text-shadow: arguments }
         padding: 3px 6px
         rad: 4px
         &:hover {
-          background: v05
-          border: 1px solid v04
+          background: v04
+          border: 1px solid v05
           color: v99 i
           padding: 3px 6px
           rad: 4px
           text-decoration: none
         }
       }
-      div[style*='float: left'] b:not(:first-child) {
-        background: v05
-        border: 1px solid v04
-        color: v99
-        padding: 3px 6px
-        rad: 4px
+      div[style*='float: left'] {
+        b:not(:first-child) {
+          background: v04
+          border: 1px solid v05
+          color: v99
+          padding: 3px 6px
+          rad: 4px
+        }
       }
     }
     .thHead, .thSides,
@@ -2724,7 +2760,7 @@ tsh() { text-shadow: arguments }
       #toggle a {
         color: v99 i
         font-weight: 600
-        text-shadow: 0 1px 0 bg0
+        tsh: 0 1px 0 bg0
         margin-top: .12rem
         margin-left: .3rem
         display: inline-block
@@ -2735,13 +2771,13 @@ tsh() { text-shadow: arguments }
           letter-spacing: -.09em
           margin-right: .6rem
           transform: rotate(90deg)
-          text-shadow: 0 1px 0 bg0
+          tsh: 0 1px 0 bg0
           display: inline-block
         }
         &:hover, &:target {
           color: v09 i
           text-decoration: none
-          text-shadow: 0 1px 0 bg0
+          tsh: 0 1px 0 bg0
           &::before {
             transform: rotate(0deg)
             display: inline-block
@@ -2815,7 +2851,6 @@ tsh() { text-shadow: arguments }
         color: fg1
         &:first-child {
           border-left: 1px solid bg4
-          border-right: 1px solid bg0
           padding-left: .5rem
           rad: 4px 0 0 4px
         }
@@ -2828,6 +2863,20 @@ tsh() { text-shadow: arguments }
         &.thLeft[width='150'], &.thCornerL[width='150'] {
           min-width: 150px
         }
+        &.thTop:nth-child(2) {
+          width: 16rem
+        }
+      }
+      .col1:not(:nth-child(5)), .col2:not(:nth-child(5)) {
+        &[valign='middle'][align='center'] {
+          text-align: left
+          .postdetails {
+            text-align: center
+          }
+        }
+      }
+      td:nth-child(4)[class=''][valign='middle'][align='center'] {
+        text-align: left i
       }
       .info td, .info {
         background: bg1
@@ -2841,7 +2890,7 @@ tsh() { text-shadow: arguments }
           background: bg1
           border-left-color: t
         }
-        &.catHead[colspan="2"] {
+        &.catHead[colspan='2'] {
           background: bg1 i
         }
       }
@@ -2902,7 +2951,7 @@ tsh() { text-shadow: arguments }
     }
     .row1 {
       font-size: 99%
-      &:nth-child(2n) td, &:nth-child(2n) td[valign="middle"]:first-child {
+      &:nth-child(2n) td, &:nth-child(2n) td[valign='middle']:first-child {
         background-color: bg3
       }
       &:nth-child(2n) td {
@@ -2930,12 +2979,15 @@ tsh() { text-shadow: arguments }
       }
     }
   }
-  .thTop, .thCornerR {
-    &[align="center"] {
+  .thTop:not([width='100']), .thCornerR:not(:nth-child(5)) {
+    &[align='center'] {
       text-align: right i
     }
   }
-  .thCornerL[align="center"]  {
+  tr > td:nth-child(6) {
+    text-align: left i
+  }
+  .thCornerL[align='center']  {
     width: 60%
   }
   textarea {
@@ -2946,7 +2998,7 @@ tsh() { text-shadow: arguments }
     resize: vertical
     &:focus, &:focus-visible {
       outline: 1px solid v08
-      b: 0 0 10px 0 v04
+      bsh: 0 0 10px 0 v04
       rad: 4px
     }
     &[name='filecomment'] {
@@ -3135,7 +3187,7 @@ tsh() { text-shadow: arguments }
       position: absolute
       .name { display: none }
     }
-    .inlinead[height='28'][valign="top"] {
+    .inlinead[height='28'][valign='top'] {
       position: fixed
       height: 0
       .ad-tag { display: none }
@@ -3204,29 +3256,83 @@ tsh() { text-shadow: arguments }
   /form {
     // attach-list
     &[action*='uacp.php'] {
-      table[width='100%']:nth-child(1) {
-        td[align="right"] {
-          text-align: right i
+      table[width='100%'] {
+        tr td {
+          height: 35px
         }
-      }
-      table[width='100%']:nth-child(2) {
-        span.gen a, span.gen {
-          max-width: 185px
-          overflow: hidden
-          text-overflow: ellipsis
-          display: inline-block
-          white-space: nowrap
+        &[cellspacing='1'] {
+          border-spacing: 0
         }
-        .row1, .row2 {
-          &:nth-child(3) .gen {
-            max-width: 130px
+        &:nth-child(1) {
+          td[align='right'] {
+            text-align: right i
+          }
+        }
+        &:nth-child(2) {
+          span.gen a, span.gen {
+            max-width: 185px
             overflow: hidden
             text-overflow: ellipsis
             display: inline-block
             white-space: nowrap
           }
-          &:nth-child(4) .gen {
-            max-width: 50px
+          .row1, .row2 {
+            &:nth-child(3) .gen {
+              max-width: 130px
+              overflow: hidden
+              text-overflow: ellipsis
+              display: inline-block
+              white-space: nowrap
+            }
+            &:nth-child(4) .gen {
+              max-width: 50px
+            }
+          }
+        }
+        &:nth-child(5) {
+          span.gensmall {
+            float: right i
+            margin-top: -1.9rem
+            margin-bottom: 1rem
+          }
+        }
+        &[cellspacing='0'] {
+          td[align='left'] {
+            .nav * {
+              margin-top: 2.5rem i
+            }
+            a:not(:first-child):not(:last-child),
+            b:not(:first-child):not(:last-child) {
+              margin-right: -.25rem
+              white-space: nowrap
+              position: relative
+              z-index: 1
+            }
+            b:not(:first-child) {
+              background: v05
+              border: 1px solid v06
+              color: v99
+              padding: 3px 6px
+              border-radius: 4px
+            }
+            a {
+              background: bg4
+              border: 1px solid bg5
+              color: v99
+              padding: 3px 6px
+              border-radius: 4px
+              &:hover {
+                background: v05
+                border: 1px solid v06
+                color: v99
+                padding: 3px 6px
+                border-radius: 4px
+                text-decoration: none
+              }
+            }
+          }
+          td[align='right'] {
+            float: right
           }
         }
       }
@@ -3238,14 +3344,14 @@ tsh() { text-shadow: arguments }
         &[name='move_leave_shadow'] {
           vertical-align: middle
         }
-        &[name*="post_id_list"] {
+        &[name*='post_id_list'] {
           vertical-align: -4rem
         }
       }
       fieldset td {
         background: t i
         border-color: t i
-        input[type="text"] {
+        input[type='text'] {
           margin-left: 0 i
         }
         &.catBottom {
@@ -3287,7 +3393,7 @@ tsh() { text-shadow: arguments }
         }
       }
       // split posts post details styling test
-      td[valign="middle"] {
+      td[valign='middle'] {
         background-color: bg0 i
         height: 2.5rem
         border: 1px dashed bg5 i
@@ -3326,7 +3432,7 @@ tsh() { text-shadow: arguments }
             }
           }
         }
-        tr[bgcolor="#FF0000"] {
+        tr[bgcolor='#FF0000'] {
           background-color: t i
           td {
             background-color: v11 i
@@ -3363,7 +3469,7 @@ tsh() { text-shadow: arguments }
           }
         }
       }
-      &[action='groupcp.php?g=4070'] {
+      &[action*='groupcp.php?g=4070'] {
         tr .catSides {
           background: bg2
         }
@@ -3373,7 +3479,7 @@ tsh() { text-shadow: arguments }
         tr td.row2, td.row1[width] {
           background: bg2 i
         }
-        tr td[align="right"] {
+        tr td[align='right'] {
           .nav {
             margin-left: -26.66rem i
           }
@@ -3420,8 +3526,41 @@ tsh() { text-shadow: arguments }
               rad: 1px 4px 4px 1px
             }
           }
-          &[cellspacing="1"] td.row1  {
+          &[cellspacing='1'] td.row1  {
             background: t
+          }
+          &[cellpadding='3'] {
+            .row1, .row2 {
+              &[width='15%']:not([align='center']) {
+                text-align: left
+              }
+            }
+          }
+          &[width='100%']:nth-child(3) {
+            td[valign='middle'][align='right'] {
+              text-align: right i
+              .gensmall:nth-child(1) {
+                top: -2rem
+                position: relative
+                a {
+                  position: relative
+                  top: 0
+                }
+              }
+            }
+          }
+          &[width='100%'][cellspacing='1'][cellpadding='3'] {
+            .row2[width='55%'] a.topictitle {
+              margin-left: .62em
+            }
+            .row1[width='55%'] a.topictitle {
+              margin-left: .32em
+            }
+            th.thTop {
+              &[width='20%'], &[width='15%'] {
+                text-align: center
+              }
+            }
           }
         }
         .catBottom {
@@ -3432,6 +3571,11 @@ tsh() { text-shadow: arguments }
             text-align: left
             padding-top: 0
             padding-bottom: 1rem
+          }
+        }
+        span.gen:only-child {
+          input.mainoption, input.liteoption {
+            margin-top: 1.5rem
           }
         }
         img {
@@ -3464,7 +3608,7 @@ tsh() { text-shadow: arguments }
             path  += '.484 3.484 0 0 0 .663 2.598l.14.173L9.5 9.94L2.224 6.303a.499.499 0 0 0-.18-.051c.0'
             path  += '52-.45.15-.71.29-.973c.218-.407.538-.727.945-.945c.38-.203.758-.318 1.712-.332ZM16.'
             path  += '5 3a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5Z"'
-            bgc    = 'fill="' + to_hex($v29) + '"/>'
+            bgc    = 'fill="' + to_hex($v09) + '"/>'
             background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path) rq(bgc))
             width: 0 i
             padding: 12px
@@ -3558,7 +3702,7 @@ tsh() { text-shadow: arguments }
           background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
           c: 0 v07 v07
         }
-        &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
+        &:focus, &:hover { c: 0 v09 v04; bsh: 0 0 10px 0 v04 }
       }
 
       &[type='checkbox'] {
@@ -3570,12 +3714,12 @@ tsh() { text-shadow: arguments }
 
         rad: 3px
       }
-      &:focus, &:hover { c: 0 v09 v04; b: 0 0 10px 0 v04 }
+      &:focus, &:hover { c: 0 v09 v04; bsh: 0 0 10px 0 v04 }
       &:indeterminate {
         path = '<rect x="128" y="128" width="256" height="256" fill="' + to_hex($v99) + '"/>'
         background-image: s("url('%s%s</svg>') %s", rq(prefix), rq(path), i)
           c: 0 v08 v09
-          &:hover { c: 0 v09 bg2; b: 0 0 10px 0 v04 }
+          &:hover { c: 0 v09 bg2; bsh: 0 0 10px 0 v04 }
         }
       }
 
@@ -3584,8 +3728,8 @@ tsh() { text-shadow: arguments }
           background-color: bg5
           border: 2px solid bg5
           color: v98
-          box-shadow: 0 1px 0 bg0
-          text-shadow: 0 1px 0 bg0
+          bsh: 0 1px 0 bg0
+          tsh: 0 1px 0 bg0
           rad: 4px
           padding: .1rem .4rem
           cursor: pointer
@@ -3594,15 +3738,15 @@ tsh() { text-shadow: arguments }
             background-color: v08
             border: 2px solid v08
             color: v98
-            b: 0 0 10px 0 v04
+            bsh: 0 0 10px 0 v04
           }
         }
         &::-webkit-file-upload-button {
           background-color: bg5
           border: 2px solid bg5
           color: v98
-          box-shadow: 0 1px 0 bg0
-          text-shadow: 0 1px 0 bg0
+          bsh: 0 1px 0 bg0
+          tsh: 0 1px 0 bg0
           rad: 4px
           padding: .1rem .4rem
           cursor: pointer
@@ -3611,7 +3755,7 @@ tsh() { text-shadow: arguments }
             background-color: v08
             border: 2px solid v08
             color: v98
-            b: 0 0 10px 0 v04
+            bsh: 0 0 10px 0 v04
           }
         }
       }
@@ -3624,7 +3768,7 @@ tsh() { text-shadow: arguments }
         &:active, &:focus-visible {
           border: 1px solid v08
           outline: 0
-          b: 0 0 10px 0 v04
+          bsh: 0 0 10px 0 v04
         }
         &:hover { border: 1px solid v08 }
       }
@@ -3645,7 +3789,7 @@ tsh() { text-shadow: arguments }
           &:active, &:focus-visible {
             border: 1px solid v08
             outline: 0
-            b: 0 0 10px 0 v04
+            bsh: 0 0 10px 0 v04
           }
         }
       }
@@ -3656,28 +3800,28 @@ tsh() { text-shadow: arguments }
         c: v98 0 0
         background: v06
         padding: .19rem .6rem
-        box-shadow: 0 1px 0 bg0
-        text-shadow: 0 1px 0 bg0
+        bsh: 0 1px 0 bg0
+        tsh: 0 1px 0 bg0
         cursor: pointer
         &:active, &:focus-visible, &:hover {
           background: v08
           border: 1px solid v08
           outline: 0
-          b: 0 0 10px 0 v04
+          bsh: 0 0 10px 0 v04
         }
       }
       &[type='submit'][value='Go'] {
         border: 1px solid v06
         padding: .243333rem .2rem
         width: 3rem
-        box-shadow: 0 1px 0 bg0
-        text-shadow: 0 1px 0 bg0
+        bsh: 0 1px 0 bg0
+        tsh: 0 1px 0 bg0
         vertical-align: unset
         &:active, &:focus-visible, &:hover {
           background: v08
           border: 1px solid v08
           outline: 0
-          b: 0 0 10px 0 v04
+          bsh: 0 0 10px 0 v04
         }
       }
       // bottom add attach by submit/preview buttons
@@ -3685,13 +3829,13 @@ tsh() { text-shadow: arguments }
         margin-top: calc(-3.3% + .5rem)
         left: calc(50% - 26.4%)
         position: absolute
-        box-shadow: 0 1px 0 bg0
-        text-shadow: 0 1px 0 bg0
+        bsh: 0 1px 0 bg0
+        tsh: 0 1px 0 bg0
         &:active, &:focus-visible, &:hover {
           background: v08
           border: 1px solid v08
           outline: 0
-          b: 0 0 10px 0 v04
+          bsh: 0 0 10px 0 v04
         }
       }
       &.post[name='fileupload'] {
@@ -3709,13 +3853,13 @@ tsh() { text-shadow: arguments }
         border: 1px solid v05
         c: v98 0 v05
         padding: .1rem .1rem
-        box-shadow: 0 1px 0 bg0
-        text-shadow: 0 1px 0 bg0
+        bsh: 0 1px 0 bg0
+        tsh: 0 1px 0 bg0
         rad: 4px
         &:active, &:focus-visible, &:hover {
           background: v08
           border: 1px solid v08
-          box-shadow: 0 0 10px 0 v04
+          bsh: 0 0 10px 0 v04
           outline: 0
         }
         &[accesskey] {
@@ -3750,7 +3894,7 @@ tsh() { text-shadow: arguments }
         &:hover { c: 0 v08 bg3 }
         &:active { c: 0 0 bg4 }
       }
-      option[value="-1"] {
+      option[value='-1'] {
         background: bg4
         &:nth-child {
           &(2), &(4), &(8), &(10), &(25), &(27), &(35), &(37),
@@ -3767,7 +3911,7 @@ tsh() { text-shadow: arguments }
         &:hover { background-color: v02 i }
         &:checked {
           background-color: v05 i
-          box-shadow: 0 0 10px 100px v06 inset
+          bsh: inset 0 0 10px 100px v06
         }
       }
     }
