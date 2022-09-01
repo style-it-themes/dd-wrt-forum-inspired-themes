@@ -38,6 +38,7 @@
 @var checkbox avatar_soh   'Avatar on hover scale     ' 0
 @var checkbox emoji_new    'Enable emoji override     ' 1
 @var checkbox topic-review 'Topic review fixes note   ' 0
+@var checkbox stable-scrll 'Stable scrollbar gutter   ' 1
 
 @var text     transition   'Define transition value   ' 'all .15s cubic-bezier(0.3, 0, 0.5, 1)'
 
@@ -95,7 +96,7 @@ tsh() { text-shadow: arguments }
   // Generator -> Color-schemes.
   ColorSchemes = {
     'custom-style'   : { BG:   cg_bg, FG:   cg_fg, AC:   cg_ac }
-    'Antigua'        : { BG: #14191f, FG: #f1f6fb, AC: #89a90a }
+    'antigua'        : { BG: #14191f, FG: #f1f6fb, AC: #89a90a }
     'dracula'        : { BG: #282A36, FG: #f8f8f2, AC: #bd93f9 }
     'duo-cocoa'      : { BG: #28231f, FG: #ffdac2, AC: #dfb249 }
     'material'       : { BG: #263238, FG: #eeffff, AC: #89ddff }
@@ -295,7 +296,7 @@ tsh() { text-shadow: arguments }
   }
   @keyframes pulse {
     0% { transform: scale(1) }
-    50% { transform: scale(1.2); filter: brightness(1.6) }
+    50% { transform: scale(1.2); filter: brightness(1.2) }
     100% { transform: scale(1) }
   }
   img {
@@ -1804,6 +1805,11 @@ tsh() { text-shadow: arguments }
     bsh: none
     text-rendering: geometricPrecision
   }
+  if (stable-scrll) {
+    body {
+      scrollbar-gutter: stable
+    }
+  }
   #header #menu_top li {
     a {
       color: v98
@@ -1864,12 +1870,17 @@ tsh() { text-shadow: arguments }
       }
     }
   }
+  @keyframes animate-bg {
+    0% { background-position: 0 0 }
+    100% { background-position: 0 100% }
+  }
   if (new-top-menu) {
     #header_wrap {
       background-image: linear-gradient(darken(convert($v00), 50%) 0%, v00 120%)
       outline: 2px solid bg4
       border-bottom: 2px solid bg0
       height: 150px
+
       #navigation a,
       #navigation_minimized a {
         color: v98
