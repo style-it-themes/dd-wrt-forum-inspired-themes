@@ -25,14 +25,14 @@
   },
   "devDependencies": {
     "eclint": "^2.8.1",
-    "updates": "^13.1.5",
-    "versions": "^9.3.0"
+    "updates": "^13.1.13",
+    "versions": "^10.1.0"
   },
   "scripts": {
     "authors": "bash tools/authors.sh",
-    "patch": "versions -p -C patch dd-wrt-forum-inspired-themes.user.styl && git psh",
-    "minor": "versions -p -C minor dd-wrt-forum-inspired-themes.user.styl && git psh",
-    "major": "versions -p -C major dd-wrt-forum-inspired-themes.user.styl && git psh",
+    "patch": "versions patch -p dd-wrt-forum-inspired-themes.user.styl && git psh",
+    "minor": "versions minor -p dd-wrt-forum-inspired-themes.user.styl && git psh",
+    "major": "versions major -p dd-wrt-forum-inspired-themes.user.styl && git psh",
     "fix": "eclint fix dd-wrt-forum-inspired-themes.user.styl && eclint fix *.md",
     "update": "updates -cuU && npm install"
   }
