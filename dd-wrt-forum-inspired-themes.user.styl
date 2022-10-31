@@ -154,7 +154,7 @@ tsh() { text-shadow: arguments }
   // Generate foreground colors.
   for num in 0..5 {
     $color = $fg.color
-    if num == 1 {} // Skip base FG color.
+    if num == 1 { return } // Skip base FG color.
     else if num == 0 { $color = lighten($color, 10%) }
     else { $color = darken($color, (num + num / 1.25) * 5%) }
 
@@ -679,6 +679,7 @@ tsh() { text-shadow: arguments }
       background-color: bg4
       border: 1px solid bg5
       rad: 4px
+
       &:hover {
         background-color: v04
         border: 1px solid v05
@@ -2712,6 +2713,13 @@ tsh() { text-shadow: arguments }
         div[style*='float'] {
           margin-top: .4rem
           margin-bottom: -.4rem
+          white-space: nowrap
+        }
+        a, b {
+          margin-right: -0.25rem
+          white-space: nowrap
+          position: relative
+          z-index: 1
         }
       }
     }
@@ -2748,6 +2756,13 @@ tsh() { text-shadow: arguments }
           padding: 3px 6px
           rad: 4px
           text-decoration: none
+        }
+        &.topictitle {
+          background: t
+          border: t
+          &:hover {
+            color: v09 i
+          }
         }
       }
       div[style*='float: left'] {
@@ -3224,7 +3239,7 @@ tsh() { text-shadow: arguments }
       // e.g. https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=51486
       // https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=301950
       font-size: 14px
-      line-height: 1.2
+      line-height: 1.22
       max-width: 940px i
       padding: 5px 0 0 10px
       display: block
