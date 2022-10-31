@@ -202,7 +202,7 @@ tsh() { text-shadow: arguments }
     }
   }
 }
-@-moz-document regexp('https?://forum.dd-wrt.com/(?!wiki).*$') {
+@-moz-document regexp('https?://forum.dd-wrt.com/(?!wiki|demo).*$') {
   // global section triggers and variables
   :root {
     // show style name/version/copyright
@@ -1798,7 +1798,7 @@ tsh() { text-shadow: arguments }
     }
   }
 }
-@-moz-document regexp('https?://forum.dd-wrt.com/(?!wiki).*$') {
+@-moz-document regexp('https?://forum.dd-wrt.com/(?!wiki|demo).*$') {
   // style selection bg/fg with accent color
   ::selection { background-color: v03; color: v99 }
   * {
